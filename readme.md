@@ -1,103 +1,50 @@
-# SSAFY 6기 2학기 관통프로젝트
+# 웹/모바일(웹 IoT) 스켈레톤 프로젝트
 
-#### 팀장 : 송다솔
-#### 팀원 : 김영후, 이광진, 이언호, 이효림, 홍종규
+<!-- 필수 항목 -->
 
+## 카테고리
 
-<h4>
-    <a href="https://www.notion.so/PRJ-f8dbf544600d423ea7673fc9f93072a5" target='_blank'>
-        노션 링크
-    </a>
-</h4>
+| Application | Domain | Language | Framework |
+| ---- | ---- | ---- | ---- |
+| :white_check_mark: Desktop Web | :black_square_button: AI | :white_check_mark: JavaScript | :black_square_button: Vue.js |
+| :black_square_button: Mobile Web | :black_square_button: Big Data | :black_square_button: TypeScript | :white_check_mark: React |
+| :white_check_mark: Responsive Web | :black_square_button: Blockchain | :black_square_button: C/C++ | :black_square_button: Angular |
+| :black_square_button: Android App | :white_check_mark: IoT | :black_square_button: C# | :white_check_mark: Node.js |
+| :black_square_button: iOS App | :black_square_button: AR/VR/Metaverse | :black_square_button: ​Python | :black_square_button: Flask/Django |
+| :black_square_button: Desktop App | :black_square_button: Game | :black_square_button: Java | :black_square_button: Spring/Springboot |
+| | | :black_square_button: Kotlin | |
 
-# How
+<!-- 필수 항목 -->
 
-##### - 스크럼 미팅 : 매일 오전 09:30 ~ 10:00(10:30)
-역할 :   Jira - 이효림  
-notion, gitlab - 이광진  
-서기, 예산관리 - 미정  
-        
-## Git - Commit Message Convention
-커밋 메시지를 작성할 때는 원칙을 정하고 일관성 있게 작성해야 한다. 아래는 유다시티의 커밋 메시지 스타일 가이드를 참조한 내용이다.
+## 프로젝트 소개
 
-### 1. Commit Message Structure
+* 프로젝트명: 임베디드 KIT 연동 웹 서비스
+* 서비스 특징: 웹/모바일(웹 IoT) 프로젝트를 위한 스켈레톤 프로젝트
+* 주요 기능
+  - 회원 관리
+  - 카테고리 관리
+  - 투표 관리(키오스크 포함)
+* 주요 기술
+  - Single Page Application
+  - Raspberry Pi
+  - REST API
+* 참조 리소스
+  * Material-UI: React Component Library
+* 배포 환경
+  - URL: // 웹 서비스, 랜딩 페이지, 프로젝트 소개 등의 배포 URL 기입
+  - 테스트 계정: // 로그인이 필요한 경우, 사용 가능한 테스트 계정(ID/PW) 기입
 
-###### 기본적으로 커밋 메시지는 아래와 같이 제목/본문/꼬리말로 구성한다.
-<div class="code-toolbar"><pre md-pos="182-219" class="line-numbers language-none"><code md-pos="186-215" class=" language-none">type : subject  
-  
-body  
-  
-footer
-</code></pre><div class="toolbar"><div class="toolbar-item"></div></div></div>
+<!-- 자유 양식 -->
 
-### 2. Commit Type
+## 팀 소개
+* 김ㅇㅇ: 팀장, 프론트엔드 개발
+* 이ㅇㅇ: 부팀장, 기획 및 와이어프레임 작성, 프론트엔드 개발
+* 박ㅇㅇ: 백엔드 개발 및 QA 담당
+* 홍ㅇㅇ: 백엔드 개발, Swagger API 문서 관리
+* 전ㅇㅇ: 코드 리뷰 및 인프라 담당, CI/CD, HTTPS, Docker 구성
 
-###### 한 번에 git add . 하는 것보다 commit type에 맞게 분리하는 걸 지향한다.
-```
-feat : 새로운 기능 추가
-fix : 버그 수정
-docs : 문서 수정
-style : 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우
-refactor : 코드 리펙토링
-test : 테스트 코드, 리펙토링 테스트 코드 추가
-chore : 빌드 업무 수정, 패키지 매니저 수정
-```
+<!-- 자유 양식 -->
 
-### 3. Subject
-```
-제목은 50자를 넘기지 않고, 대문자로 작성하고 마침표를 붙이지 않는다.
-과거시제를 사용하지 않고 명령어로 작성한다.
-"Fixed" --> "Fix"
-"Added" --> "Add"
-```
+## 프로젝트 상세 설명
 
-### 4. Body
-
-```
-선택사항이기 때문에 모든 커밋에 본문내용을 작성할 필요는 없다.
-부연설명이 필요하거나 커밋의 이유를 설명할 경우 작성해준다.
-72자를 넘기지 않고 제목과 구분되기 위해 한칸을 띄워 작성한다.
-```
-
-### 5. footer
-
-```
-선택사항이기 때문에 모든 커밋에 꼬리말을 작성할 필요는 없다.
-issue tracker id를 작성할 때 사용한다.
-```
-
-### 6. Example
-
-```
-feat: Summarize changes in around 50 characters or less
-
-More detailed explanatory text, if necessary. Wrap it to about 72
-characters or so. In some contexts, the first line is treated as the
-subject of the commit and the rest of the text as the body. The
-blank line separating the summary from the body is critical (unless
-you omit the body entirely); various tools like `log`, `shortlog`
-and `rebase` can get confused if you run the two together.
-
-Explain the problem that this commit is solving. Focus on why you
-are making this change as opposed to how (the code explains that).
-Are there side effects or other unintuitive consequenses of this
-change? Here's the place to explain them.
-
-Further paragraphs come after blank lines.
-
- - Bullet points are okay, too
-
- - Typically a hyphen or asterisk is used for the bullet, preceded
-   by a single space, with blank lines in between, but conventions
-   vary here
-
-If you use an issue tracker, put references to them at the bottom,
-like this:
-
-Resolves: #123
-See also: #456, #789
-```
-
-### 7. Conclusion / Summery
-
-<img src="https://github.com/walbatrossw/TIL/blob/master/01_cs-basic/git/img/before-commit-message.png?raw=true" alt="before-commit-message" md-pos="1846-1973">
+// 개발 환경, 기술 스택, 시스템 구성도, ERD, 기능 상세 설명 등
