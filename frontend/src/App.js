@@ -1,10 +1,9 @@
-import * as React from 'react';
+import React from 'react';
+import Weather from './components/Weather';
 
 function App() {
   return (
-    <div className="App">
-      테스트
-    </div>
+    <Weather />
   );
 }
 
