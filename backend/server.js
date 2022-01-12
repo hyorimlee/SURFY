@@ -14,6 +14,19 @@ const axios = require('axios');
 const app = express();
 const port = 8000;        // 포트 번호
 
+async function getStationByUid(arsId){
+    const url = 'http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid'
+    const serviceKey = 'Agmjdb9CJQ53dFTE4ZgjsZx8zErTIab4IngbZMso8ZNGPZxt5cx0qPWuxgdrTP/rH0kP9Ro0fw03/Yqny+p2Sg=='
+    const resultType = 'json'
+    const data = axios.get(url,{
+        params:{
+            ServiceKey : serviceKey,
+            arsId : arsId,
+            resultType : resultType
+        }
+    })
+    return data
+}
 
 
 async function getCurrentWeather(lat, lon) {
@@ -29,6 +42,18 @@ async function getCurrentWeather(lat, lon) {
     return result;
 }
 
+
+app.get('/businfo/:stationId', async (req, res) => {
+    try{
+        const {stationId} = req.params
+        const data = await getStationByUid(stationId)
+        const item = data['data']['msgBody']['itemList']
+        return res.json({data:item})
+    }
+    catch(error){
+        return res.json({error:error})
+    }
+})
 
 app.get('/weather/:latitude/:longitude',async(req,res)=>{
     try{
