@@ -1,0 +1,54 @@
+# 웹 IoT Backend
+
+<!-- 필수 항목 -->
+
+## 소개
+
+웹 IoT 프로젝트의 Backend 코드
+
+<!-- 필수 항목 -->
+
+## 기술스택 및 라이브러리
+
+| Project        | Version | Description |
+| -------------- | ------- | ----------- |
+| express.js     | 4.17.1  |             |
+
+
+<!-- 필수 항목 -->
+
+## 개발 환경 구성
+
+1. 프로젝트 다운로드
+
+   ```
+   git clone <repo URL> <folder-name>
+   ```
+
+2. backend폴더로 이동
+
+   ```
+   cd <folder-name>/backend
+   ```
+
+3. 패키지 설치
+
+   ```
+   npm install
+   ```
+
+4. 프로젝트 실행
+
+   ```
+   npm start
+   ```
+
+## Routes
+
+```
+GET     http://localhost:8000/
+GET     http://localhost:8000/weather/:latitude/:longitude
+
+
+
+```
