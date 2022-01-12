@@ -1,9 +1,11 @@
 import * as React from 'react';
 
+import Kiosk from './pages/Kiosk/index'
+
 function App() {
   return (
     <div className="App">
-      테스트
+      <Kiosk />
     </div>
   );
 }
