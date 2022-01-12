@@ -1,10 +1,14 @@
 import * as React from 'react';
+import Home from './pages/Kiosk'
 
 function App() {
   return (
-    <div className="App">
-      테스트
-    </div>
+    <>
+    {/* <div className="App"> */}
+      <Home />
+
+    {/* </div> */}
+    </>
   );
 }
 
