@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Grid } from '@material-ui/core';
 import axios from 'axios';
 
-import Layout from '../../layout/layout'
+import Layout from '../../layout/layout';
+import BusInfo from '../../components/Kiosk/BusInfo/index';
+import BusSoon from '../../components/Kiosk/BusSoon/index';
+import GoogleMap from '../../components/Kiosk/GoogleMap/index';
+import StationNameWeather from '../../components/Kiosk/StaionNameWeather/index';
+import Survey from '../../components/Kiosk/Survey/index';
 
-import BusStationName from '../../components/Bus/BusStationName/index';
+import Wrapper from './styles';
 
-// import Container from '../../components/Home/Container'
 
-const HomePage = () => {
-  const [busStationInfo, setBusStationInfo] = useState([{stNm: ''}]);           // 버스 정류장 정보
+const Kiosk = () => {
+  const [busStationInfo, setBusStationInfo] = useState([{stNm: '', getX: '' ,getY: ''}]);           // 버스 정류장 정보
 
   // 서버로부터 버스 정보 수신 / 최초 1회 실행, 일정 시간마다 반복
   useEffect(() => {
@@ -34,10 +39,22 @@ const HomePage = () => {
 
   return (
     <Layout>
-      <BusStationName stationName={busStationInfo[0].stNm} />
-      {/* <Container />       */}
+      <Wrapper>
+        <Grid
+          container
+          direction="column"
+          justifyContent="space-between"
+          alignItems="center"
+        >
+          <StationNameWeather></StationNameWeather>
+          <BusSoon></BusSoon>
+          <BusInfo></BusInfo>
+          <GoogleMap></GoogleMap>
+          <Survey></Survey>
+        </Grid>
+      </Wrapper>
     </Layout>
   )
 }
 
-export default HomePage;
+export default Kiosk;

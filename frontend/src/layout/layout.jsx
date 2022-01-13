@@ -1,19 +1,25 @@
-import styled from 'styled-components'
-import Drawer from './Drawer'
-import Header from './Header'
+import React from 'react';
+import { Container } from '@material-ui/core';
+
+import Header from './Header/index'
+import Wrapper from './styles';
 
 const Layout = (props) => {
   return (
-    <Container>
-        <Header />       
-        <Drawer />  
-    </Container>
-  )
+    <Wrapper>
+      {window.location.pathname === '/web'
+        ? <Header />
+        : null
+      }
+      <Container
+        maxWidth="xl"
+      >
+        <div className='container'>
+          {props.children}
+        </div>
+      </Container>
+    </Wrapper>
+  );
 };
-
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-`;
 
 export default Layout;
