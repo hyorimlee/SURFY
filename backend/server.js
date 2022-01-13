@@ -10,9 +10,21 @@
 
 const express = require('express');
 const axios = require('axios');
-
+const cors = require('cors');
 const app = express();
 const port = 8000;        // 포트 번호
+
+// cors 오류 방지
+app.use(
+    cors({
+        origin: "*",
+        optionsSuccessStatus: 200,
+    })
+);
+
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
 
 async function getStationByUid(arsId){
     const url = 'http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid'
@@ -31,7 +43,11 @@ async function getStationByUid(arsId){
 
 async function getCurrentWeather(lat, lon) {
     // 0200 0500 0800 1100 1400 1700 2000 2300 에 기상정보 초기화
-    const key = "eGOWobdvhiVbILb3e0GemxAvUi5XzyZE71h6PpAppFBb8hoZGxne6NW7vtUMMSAvwXx1Aib28LVoF6PdEHTgyQ%3D%3D";
+    const url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst'
+    // 인코딩 인증키
+    const Key = "eGOWobdvhiVbILb3e0GemxAvUi5XzyZE71h6PpAppFBb8hoZGxne6NW7vtUMMSAvwXx1Aib28LVoF6PdEHTgyQ%3D%3D";
+    // 디코딩 인증키
+    const serviceKey = 'Agmjdb9CJQ53dFTE4ZgjsZx8zErTIab4IngbZMso8ZNGPZxt5cx0qPWuxgdrTP/rH0kP9Ro0fw03/Yqny+p2Sg=='
     var now = new Date();
 
     // 현재 날짜 가져오기
@@ -63,8 +79,20 @@ async function getCurrentWeather(lat, lon) {
         hours = '20'
     }
     const baseTime = hours + '00'
-    let result;
-    result = await axios.get(`http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey=${key}&numOfRows=12&dataType=JSON&pageNo=1&base_date=${baseDate}&base_time=${baseTime}&nx=${lat}&ny=${lon}`);
+    let result
+    result = await axios.get(url,{
+        params:{
+            serviceKey : serviceKey,
+            numOfRows : 12,
+            pageNo : 1,
+            dataType : 'JSON',
+            base_date : baseDate,
+            base_time : baseTime,
+            nx : lat,
+            ny : lon
+        }
+    })
+
     const apidata = result.data.response.body.items
     return apidata;
 }
@@ -75,7 +103,7 @@ app.get('/businfo/:stationId', async (req, res) => {
         const {stationId} = req.params
         const data = await getStationByUid(stationId)
         const item = data['data']['msgBody']['itemList']
-        return res.json({data:item})
+        return res.json(item)
     }
     catch(error){
         return res.json({error:error})
@@ -83,7 +111,6 @@ app.get('/businfo/:stationId', async (req, res) => {
 })
 
 app.get('/weather/:latitude/:longitude',async(req,res)=>{
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000")
     try{ 
         const {latitude,longitude} = req.params
         const data = await getCurrentWeather(latitude,longitude)
