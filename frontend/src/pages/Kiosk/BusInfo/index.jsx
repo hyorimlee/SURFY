@@ -3,7 +3,9 @@ import { Grid } from '@material-ui/core';
 
 import Wrapper from './styles';
 
-const BusInfo = () => {
+const BusInfo = (props) => {
+  const { busInfo } = props;
+
   return (
     <Wrapper>
       <Grid
@@ -12,7 +14,7 @@ const BusInfo = () => {
         justifyContent="space-evenly"
         alignItems="center"
       >
-        버스들 리스트 나오는 영역, 여기에 컴포넌트 삽입
+        
       </Grid>
     </Wrapper>
   );
