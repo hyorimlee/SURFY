@@ -17,7 +17,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
->>>>>>> a56dbeb3ba37dc22f20941ed21d3bc8db90fd179
 }
 
 export default App;
