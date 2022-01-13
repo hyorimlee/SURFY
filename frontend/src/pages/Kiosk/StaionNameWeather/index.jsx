@@ -1,8 +1,8 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 
-import TextBoxItem from '../../Bus/TextBoxItem/index';
-import Weather from '../../Weather/index';
+import TextBoxItem from '../../../components/Bus/TextBoxItem/index';
+import Weather from '../../../components/Weather/index';
 import Wrapper from './styles';
 
 const StationNameWeather = () => {

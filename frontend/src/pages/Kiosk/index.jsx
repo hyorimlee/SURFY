@@ -3,16 +3,17 @@ import { Grid } from '@material-ui/core';
 import axios from 'axios';
 
 import Layout from '../../layout/layout';
-import BusInfo from '../../components/Kiosk/BusInfo/index';
-import BusSoon from '../../components/Kiosk/BusSoon/index';
-import GoogleMap from '../../components/Kiosk/GoogleMap/index';
-import StationNameWeather from '../../components/Kiosk/StaionNameWeather/index';
-import Survey from '../../components/Kiosk/Survey/index';
+import BusInfo from './BusInfo/index';
+import BusSoon from './BusSoon/index';
+import GoogleMap from './GoogleMap/index';
+import StationNameWeather from './StaionNameWeather/index';
+import Survey from './Survey/index';
 
 import Wrapper from './styles';
 
 
 const Kiosk = () => {
+  const [busStationId] = useState('19005');
   const [busStationInfo, setBusStationInfo] = useState([{stNm: '', getX: '' ,getY: ''}]);           // 버스 정류장 정보
 
   // 서버로부터 버스 정보 수신 / 최초 1회 실행, 일정 시간마다 반복
@@ -20,7 +21,7 @@ const Kiosk = () => {
     const getBusStationInfo = setInterval(() => {
       axios({
         method: 'GET',
-        url: 'http://localhost:8000/api',
+        url: `http://localhost:8000/businfo/${busStationId}`,
       })
       .then((response) => {
         setBusStationInfo(response.data);
