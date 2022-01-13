@@ -13,6 +13,7 @@
 | Project        | Version | Description |
 | -------------- | ------- | ----------- |
 | express.js     | 4.17.1  |             |
+| axios          | 0.24.0  |             |
 
 
 <!-- 필수 항목 -->
