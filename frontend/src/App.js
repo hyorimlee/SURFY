@@ -1,15 +1,3 @@
-import * as React from 'react';
-<<<<<<< HEAD
-import Home from './pages/Kiosk'
-function App() {
-  return (
-    <>
-    {/* <div className="App"> */}
-      <Home />
-    {/* </div> */}
-    </>
-  )
-=======
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import Kiosk from './pages/Kiosk/';
