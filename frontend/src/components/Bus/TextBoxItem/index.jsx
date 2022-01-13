@@ -3,12 +3,12 @@ import { Chip } from '@material-ui/core';
 
 import Wrapper from './styles'
 
-const BusStationName = (props) => {
+const TextBoxItem = (props) => {
   return (
     <Wrapper>
-      <Chip label={props.stationName} />
+      <Chip label="영등포역" />
     </Wrapper>
   );
 }
 
-export default BusStationName;
+export default TextBoxItem;
