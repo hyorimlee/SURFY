@@ -1,17 +1,17 @@
-import Wrapper from './styles';
-import styled from 'styled-components';
+import React from 'react';
 import Weather from '../../components/Weather/';
 import BusStationName from '../../components/Bus/BusStationName';
+import CardComponent from '../../components/Box';
+import Wrapper from './styles';
 
 const Header = (props) => {
   return (
-    <header>
+    <Wrapper>
       <Weather />
       <BusStationName />
-      <h2>시간</h2>
-    </header>
+      <CardComponent />
+    </Wrapper>
   )
 }
 
-
-export default Header
+export default Header;
