@@ -6,6 +6,7 @@ import WbCloudyIcon from '@material-ui/icons/WbCloudy'; // 흐림
 import AcUnitIcon from '@material-ui/icons/AcUnit'; // 눈
 import NightsStayIcon from '@material-ui/icons/NightsStay'; // 밤
 import BeachAccessIcon from '@material-ui/icons/BeachAccess'; // 비
+
 const Weather = () =>{
   // 0200 0500 0800 1100 1400 1700 2000 2300 에 기상정보 초기화
 
@@ -16,7 +17,7 @@ const Weather = () =>{
   const [error, setError] = useState(null);
 
   // 실험용 local url
-  const url = 'http://localhost:8000/api'
+  const url = 'http://localhost:8000/weather/37/127'
   
   
   useEffect(() => {
@@ -39,7 +40,6 @@ const Weather = () =>{
   if (!api) return null;
   var icon = ''
   var temperature = ''
-  console.log(api['item'])
   for (const a of api['item']){
     if (a.category === 'TMP'){
       temperature = a.fcstValue + "℃"

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Grid } from '@material-ui/core';
 
 import TextBoxItem from '../../../components/Bus/TextBoxItem/index';
-import Weather from '../../../components/Weather/index';
+import Weather from '../../../components/Weather';
 import Wrapper from './styles';
 
 const StationNameWeather = (props) => {
