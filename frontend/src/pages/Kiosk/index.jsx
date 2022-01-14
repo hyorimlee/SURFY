@@ -28,7 +28,7 @@ const Kiosk = () => {
         setBusStationInfo(response.data);
         setBusSoon(() => {
           return response.data.filter((bus) => {
-            return bus.arrmsg1 === '운행종료';
+            return bus.arrmsg1 === '곧 도착';
           })
         })
       })

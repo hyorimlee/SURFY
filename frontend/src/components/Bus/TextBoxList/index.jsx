@@ -1,8 +1,9 @@
 import React from 'react';
 import { Grid } from '@material-ui/core';
 
-import Wrapper from './styles';
 import TextBoxItem from '../TextBoxItem/index';
+
+import Wrapper from './styles';
 
 
 const TextBoxList = (props) => {

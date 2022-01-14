@@ -6,7 +6,6 @@ import SwiperCore, { Autoplay } from 'swiper';
 import TextBoxList from '../../../components/Bus/TextBoxList/index';
 
 import 'swiper/css';
-import "swiper/css/effect-fade"
 import Wrapper from './styles';
 
 
@@ -54,6 +53,7 @@ const BusSoon = (props) => {
               "disableOnInteraction": false
             }}
             loop={true}
+            className="mySwiper"
           >
             {items}
           </Swiper>
