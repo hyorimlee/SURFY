@@ -13,8 +13,9 @@ import Wrapper from './styles';
 
 
 const Kiosk = () => {
-  const [busStationId] = useState('19005');
-  const [busStationInfo, setBusStationInfo] = useState([{stNm: '', getX: '' ,getY: ''}]);           // 버스 정류장 정보
+  const [busStationId, setBusStationId] = useState('19005');
+  const [busStationInfo, setBusStationInfo] = useState([{stNm: '', gpsX: '' ,gpsY: ''}]);           // 버스 정류장 정보 (초기값: stNm - 정류장 이름, getX - 정류장 경도, getY - 정류장 위도)
+  const [busSoon, setBusSoon] = useState([]);
 
   // 서버로부터 버스 정보 수신 / 최초 1회 실행, 일정 시간마다 반복
   useEffect(() => {
@@ -25,6 +26,11 @@ const Kiosk = () => {
       })
       .then((response) => {
         setBusStationInfo(response.data);
+        setBusSoon(() => {
+          return response.data.filter((bus) => {
+            return bus.arrmsg1 === '곧 도착';
+          })
+        })
       })
       .catch(() => {
         console.error('버스 정보 수신 에러');
@@ -35,7 +41,7 @@ const Kiosk = () => {
       clearInterval(getBusStationInfo);
     }
 
-  }, []);
+  }, [busStationId]);
 
 
   return (
@@ -47,9 +53,16 @@ const Kiosk = () => {
           justifyContent="space-between"
           alignItems="center"
         >
-          <StationNameWeather></StationNameWeather>
-          <BusSoon></BusSoon>
-          <BusInfo></BusInfo>
+          {busStationInfo[0].stNm === ''
+            ? null
+            : (
+              <>
+                <StationNameWeather stationName={busStationInfo[0].stNm} latitude={busStationInfo[0].gpsY} longitude={busStationInfo[0].gpsX}></StationNameWeather>
+                <BusSoon busSoon={busSoon}></BusSoon>
+                <BusInfo busInfo={busStationInfo}></BusInfo>
+              </>
+            )
+          }
           <GoogleMap></GoogleMap>
           <Survey></Survey>
         </Grid>

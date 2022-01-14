@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Grid } from '@material-ui/core';
 
 import TextBoxItem from '../../../components/Bus/TextBoxItem/index';
-import Weather from '../../../components/Weather/index';
+import Weather from '../../../components/Weather';
 import Wrapper from './styles';
 
-const StationNameWeather = () => {
+const StationNameWeather = (props) => {
+  const { stationName, latitude, logitude } = props;
+
   return (
     <Wrapper>
       <Grid
@@ -14,7 +16,7 @@ const StationNameWeather = () => {
           justifyContent="space-between"
           alignItems="center"
       >
-        <TextBoxItem stationName="영등포역" />
+        <TextBoxItem text={stationName} />
         <Weather />
       </Grid>
     </Wrapper>

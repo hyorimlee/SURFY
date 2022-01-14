@@ -4,9 +4,11 @@ import { Chip } from '@material-ui/core';
 import Wrapper from './styles'
 
 const TextBoxItem = (props) => {
+  const { text } = props;
+
   return (
     <Wrapper>
-      <Chip label="영등포역" />
+      <Chip label={text} />
     </Wrapper>
   );
 }
