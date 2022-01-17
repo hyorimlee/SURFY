@@ -16,6 +16,19 @@
 | axios          | 0.24.0  |             |
 
 
+## 폴더 구조
+
+backend
+│   server.js          # 미들웨어 설정
+│   package.json       # 프로젝트 관리
+└───src                # 폴더 모음
+   └───bin             # 실제 서버가 실행 
+   └───views           # html, jade, ejs 같은 웹페이지 관리
+   └───models          # 데이터베이스 모델 관리
+   └───public          # image, js, css파일과 같은 정적 파일 관리
+   └───config          # RDB, AWSconfig 관리
+   └───routes          # 라우터 
+
 <!-- 필수 항목 -->
 
 ## 개발 환경 구성
