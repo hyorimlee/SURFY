@@ -18,7 +18,7 @@
 
 ## 폴더 구조
 
-backend
+backend  
 │   server.js          # 미들웨어 설정  
 │   package.json       # 프로젝트 관리  
 └───src                # 폴더 모음  
