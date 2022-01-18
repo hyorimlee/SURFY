@@ -10,9 +10,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Kiosk />}/>
-        <Route path="/web" element={<Web />}>
-          {/* <Route index element={}/> */}
-        </Route>
+        <Route path="/web" element={<Web />} />
+        <Route path="/web/signin" element={<h1>테스트중</h1>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

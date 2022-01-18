@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid } from '@material-ui/core';
 
 import NowSurvey from './NowSurvey/index';
@@ -8,8 +8,10 @@ import Layout from '../../layout/layout';
 import Wrapper from './styles';
 
 const Web = (props) => {
+  const [isLogin, setIsLogin] = useState(localStorage.getItem('login') ? true : false);
+
   return (
-    <Layout>
+    <Layout isLogin={isLogin}>
       <Wrapper>
         <Grid
           container

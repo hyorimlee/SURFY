@@ -7,8 +7,8 @@ import Wrapper from './styles';
 const Layout = (props) => {
   return (
     <Wrapper>
-      {window.location.pathname === '/web'
-        ? <Header />
+      {window.location.pathname.includes('/web')
+        ? <Header isLogin={props.isLogin}/>
         : null
       }
       <Container
