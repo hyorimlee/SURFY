@@ -28,6 +28,7 @@ backend
    └───public          # image, js, css파일과 같은 정적 파일 관리  
    └───config          # RDB, AWSconfig 관리  
    └───routes          # 라우터   
+   └───controller          # mvc 패턴을 위한 controller 관리 폴더 추가   
  
 <!-- 필수 항목 -->
 
