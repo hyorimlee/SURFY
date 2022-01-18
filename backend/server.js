@@ -13,7 +13,9 @@ const axios = require('axios');
 const cors = require('cors');
 const app = express();
 const port = 8000;        // 포트 번호
-
+const morgan = require('morgan');//for log
+const {stream} = require("./src/config/winston.config")
+app.use(morgan("conbined",{stream}));
 // cors 오류 방지
 app.use(
     cors({
