@@ -2,7 +2,7 @@ import React from 'react';
 // import Card from '@mui/material/Card';
 // import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea, Grid, CardMedia, Card } from '@mui/material';
-
+import { Link } from 'react-router-dom';
 
 export default function CardComponent() {
   return (
@@ -10,13 +10,14 @@ export default function CardComponent() {
       <Grid>
         <Card sx={{ maxWidth: 100 }}>
           <CardActionArea>
+            <Link to="web">
             <CardMedia
               component="img"
               height = "100"
               image = "/images/민초.JPG"
-              onClick= {() => {console.log('민초단!!');}}
             >
             </CardMedia>
+            </Link>
           </CardActionArea>
         </Card> 
       </Grid>
@@ -33,13 +34,15 @@ export default function CardComponent() {
       <Grid>
         <Card sx={{ maxWidth: 100 }}>
         <CardActionArea>
+          <Link to="web">
           <CardMedia
             component="img"
             height = "100"
             image = "/images/반민초.JPG"
-            onClick= {() => {console.log('반민초단!!');}}
+            onClick= {() => {<Link to="web"/>}}
           >
           </CardMedia>
+          </Link>
         </CardActionArea>
         </Card>
       </Grid>
