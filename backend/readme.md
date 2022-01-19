@@ -62,8 +62,8 @@ backend
 
 ```
 GET     http://localhost:8000/
-GET     http://localhost:8000/weather/:latitude/:longitude
-GET     http://localhost:8000/businfo/:stationId
+GET     http://localhost:8000/api/weather/:latitude/:longitude
+GET     http://localhost:8000/api/businfo/:stationId
 
 
 
