@@ -1,32 +1,38 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { Paper, Typography, useMediaQuery } from '@material-ui/core';
-import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
-import Rating from '@material-ui/lab';
-
+import Marker from '../Marker';
 import Wrapper from './styles';
 
-const Map = () => {
-  const isMobile = useMediaQuery('(min-width:600px)');
+const Map = (props) => {
+  const getMapOptions = (maps) => {
+    return {
+      disableDefaultUI: true,
+      mapTypeControl: true,
+      streetViewControl: true,
+      styles: [{ featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'on' }] }],
+    };
+  };
 
-  const coordinates = { lat: 37.5160119113, lng: 126.9056181532 };
+    const [center, setCenter] = useState({ lat: 37.5160119113, lng: 126.9056181532 });
+    const [zoom, setZoom] = useState(11);
 
-  return (
-    <Wrapper>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: 'AIzaSyCTN3OB3D4Z-lYh-jR20UWHeoezNcpkQKQ' }}
-        defaultCenter={coordinates}
-        center={coordinates}
-        defaultZoom={14}
-        // margin={[50, 50, 50, 50]}
-        // options={''}
-        // onChange={''}
-        // onChildClick={''}
-      >
-
-      </GoogleMapReact>
-    </Wrapper>
-  )
+    return (
+      <Wrapper>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: 'AIzaSyCTN3OB3D4Z-lYh-jR20UWHeoezNcpkQKQ' }}
+          defaultCenter={center}
+          defaultZoom={15}
+          options={getMapOptions}
+        >
+          <Marker
+            lat={37.5160119112}
+            lng={126.9056181531}
+            text="My Marker"
+            color="red"
+          />
+        </GoogleMapReact>
+      </Wrapper>
+    );
 }
 
 export default Map;
