@@ -6,6 +6,7 @@ import Layout from '../../layout/layout';
 import BusInfo from './BusInfo/index';
 import BusSoon from './BusSoon/index';
 import GoogleMap from './GoogleMap/index';
+import TimeInfo from './TimeInfo/index';
 import StationNameWeather from './StaionNameWeather/index';
 import Survey from './Survey/index';
 
@@ -63,6 +64,7 @@ const Kiosk = () => {
               </>
             )
           }
+          <TimeInfo></TimeInfo>
           <GoogleMap></GoogleMap>
           <Survey></Survey>
         </Grid>
