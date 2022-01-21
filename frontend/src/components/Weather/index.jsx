@@ -7,7 +7,8 @@ import AcUnitIcon from '@material-ui/icons/AcUnit'; // 눈
 import NightsStayIcon from '@material-ui/icons/NightsStay'; // 밤
 import BeachAccessIcon from '@material-ui/icons/BeachAccess'; // 비
 
-const Weather = () =>{
+const Weather = (props) =>{
+  const { latitude, longitude } = props;
   // 0200 0500 0800 1100 1400 1700 2000 2300 에 기상정보 초기화
 
   // api 정보를 담아두는 State
@@ -17,7 +18,7 @@ const Weather = () =>{
   const [error, setError] = useState(null);
 
   // 실험용 local url
-  const url = 'http://localhost:8000/weather/37/127'
+  const url = `http://localhost:8000/api/weather/59/126`
   
   
   useEffect(() => {
