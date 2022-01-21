@@ -1,35 +1,26 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('surveys', {
+    await queryInterface.createTable('test_rewards', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
+      probability: {
+        type: Sequelize.DOUBLE
+      },
+      reward: {
         type: Sequelize.STRING
       },
-      host: {
-        type: Sequelize.STRING
-      },
-      target: {
-        type: Sequelize.STRING
-      },
-      start_date: {
-        type: Sequelize.DATE
-      },
-      end_date: {
-        type: Sequelize.DATE
-      },
-      reg_date: {
-        type: Sequelize.DATE
-      },
-      is_VS: {
+      remain: {
         type: Sequelize.INTEGER
       },
-      fk_reward: {
+      cnt: {
+        type: Sequelize.INTEGER
+      },
+      fk_surveys: {
         type: Sequelize.INTEGER
       },
       createdAt: {
@@ -43,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('surveys');
+    await queryInterface.dropTable('test_rewards');
   }
 };

@@ -1,30 +1,32 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('questions', {
+    await queryInterface.createTable('test_questions', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fk_survey: {
-        type: Sequelize.INTEGER
-      },
       number: {
-        type: Sequelize.INTEGER
-      },
-      type: {
-        type: Sequelize.INTEGER
-      },
-      required: {
-        type: Sequelize.INTEGER
-      },
-      maxChoice: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
       content: {
+        allowNull: false,
         type: Sequelize.STRING
+      },
+      required: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      maxChoice: {
+        allowNull: false,
+        type: Sequelize.INTEGER
+      },
+      fk_surveys: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -37,6 +39,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('questions');
+    await queryInterface.dropTable('test_questions');
   }
 };

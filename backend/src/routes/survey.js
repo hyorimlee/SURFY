@@ -1,22 +1,25 @@
 const express = require('express');
+const { Sequelize } = require('../models');
 const app = express.Router()
 const db = require('../models')
+const fs = require('fs');
+const {verifyToken} = require('../utils/jwt');
 
-//모든 설문조사 조회
+//모든 설문조사 조회(랜덤 조회)
 app.get('/',async(req,res)=>{
     try{
-        const result = await db['survey'].findAll({
-            attributes: [
-                "survey_idx",
-                "title",
-                "host",
-                "target",
-                "start_date",
-                "end_date",
-                "reg_date",
-                "is_VS"
-            ]
+        let {versus,count} = req.query
+        count = Number(count)
+        if(!versus) versus = 0
+        if(!count) count = 5
+        const result = await db['test_survey'].findAll({
+            where:{
+                is_VS : versus
+            },
+            order: Sequelize.literal('rand()'),
+            limit: Number(count)
         })
+
         console.log(result)
         return res.json(result)
     }
@@ -25,25 +28,43 @@ app.get('/',async(req,res)=>{
     }
 })
 
+
 //해당 설문조사 조회
 app.get('/:surveyId',async(req,res)=>{
     try{
         const {surveyId} = req.params
-        const result = await db['survey'].findOne({
+        const result = await db['test_survey'].findOne({
+            include: [{
+                model : db['test_question'],
+                attributes: [
+                    "id",
+                    "number",
+                    "content",
+                    "required",
+                    "maxChoice",
+                ],
+                include : {
+                    model : db['test_option'],
+                    attributes: [
+                        "id",
+                        "value",
+                        "type",
+                        "img_path"
+                    ]
+                }
+            },{
+                model : db['test_reward'],
+                attributes:[
+                    'id',
+                    'probability',
+                    'reward',
+                    'remain',
+                    'cnt'
+                ]
+            }],
             where:{
-                survey_idx : surveyId,
+                id : surveyId,
             },
-            attributes: [
-                "survey_idx",
-                "title",
-                "host",
-                "target",
-                "start_date",
-                "end_date",
-                "reg_date",
-                "is_VS"
-            ]
-            
         })
         
         return res.json(result)
@@ -55,23 +76,20 @@ app.get('/:surveyId',async(req,res)=>{
 
 
 //해당 설문 모든 질문 조회
-app.get('/:surveyId/question',async(req,res)=>{
+app.get('/question/:surveyId',async(req,res)=>{
     try{
         const {surveyId} = req.params
-        const result = await db['question'].findAll({
+        const result = await db['test_question'].findAll({
             where:{
-                fk_survey : surveyId,
+                fk_surveys : surveyId,
             },
-            attributes: [
-                "question_idx",
-                "fk_survey",
+            attributes :[
+                "id",
                 "number",
-                "type",
+                "content",
                 "required",
                 "maxChoice",
-                "content",
             ]
-            
         })
         
         return res.json(result)
@@ -82,29 +100,63 @@ app.get('/:surveyId/question',async(req,res)=>{
 })
 
 //해당 설문 리워드 조회
-app.get('/:surveyId/rewords',async(req,res)=>{
+app.get('/reward/:surveyId',async(req,res)=>{
+    try{
+        const {surveyId} = req.params
+        const result = await db['test_reward'].findAll({
+            where:{
+                fk_surveys : surveyId,
+            },
+            attributes :[
+                'id',
+                'probability',
+                'reward',
+                'remain',
+                'cnt'
+            ]
+        })
+        
+        return res.json(result)
+    }
+    catch(error){
+        return res.status(400).json({msg:"error"})
+    }
+})
 
+//해당 선택지 이미지 조회
+app.get('/image/:optionId', async(req,res)=>{
+    try{
+        const optionImage = await db['test_option'].findOne({
+            where:{
+                id : req.params.id
+            }
+        })
+        if(optionImage&&optionImage['img_path']){
+            res.set('Content-Disposition',`inline; filename=profile.png`);
+            res.set('Content-Type',`image/jpg`);
+            // fs.readFile(`C:\\Users\\SSAFY\\Documents\\2학기 공통프로젝트\\S06P12A204\\backend\\src\\images\\${optionImage['img_path']}`,(err,data)=>{
+            //     res.write(data)
+            //     res.end()
+            // })
+            const file = fs.createReadStream(`./src/images/${optionImage['img_path']}`)
+            // const file = fs.createReadStream(`./src/images/WIN_20211216_09_27_47_Pro.jpg`)
+            return file.pipe(res)
+        }
+        else{
+            return res.status(400).json({msg:"error"})
+        }
+    }
+    catch(error){
+        return res.status(404).json({msg:"error"})
+    }
 })
 
 
 
-app.get('/:surveyId/:questionId',async(req,res)=>{
-    const option = [
-        {
-            select_idx : 1,
-            type: "",
-            label : "민초파",
-            value : 1,
-            img_path : "./image1.jpg"
-        },{
-            select_idx : 2,
-            type: "",
-            label : "반민초파",
-            value : 2,
-            img_path : "./image2.jpg"
-        }
-    ]
+app.get('/option/:questionId',async(req,res)=>{
     try{
+        const {questionId} = req.params
+
         return res.json(option)
     }
     catch{
@@ -129,22 +181,32 @@ app.get('/:surveyId/:questionId/example',async(req,res)=>{
     }
 })
 
-app.post('/survey/:surveyId',async(req,res)=>{
+
+//설문조사 등록
+app.post('/',async(req,res)=>{
     try{
-        
+        const {
+            title,
+            host,
+            target,
+            is_VS,
+            updatedAt,
+            deleteAt,
+            questions,
+        } = req.body
+        console.log(req.body)
+        console.log(questions[0])
+        // quest = JSON.parse(questions)
+        console.log(JSON.parse(questions[1])['option'][0])
+        res.json()
     }
     catch{
-        
+        res.status(400).json({
+            msg : "error"
+        })
     }
 })
 
-app.get('/survey/versus/:surveyId',async(req,res)=>{
-    try{
-        
-    }
-    catch{
 
-    }
-})
 
 module.exports = app
