@@ -6,7 +6,7 @@ import Weather from '../../../components/Weather';
 import Wrapper from './styles';
 
 const StationNameWeather = (props) => {
-  const { stationName, latitude, logitude } = props;
+  const { stationName, latitude, longitude } = props;
 
   return (
     <Wrapper>
@@ -17,7 +17,7 @@ const StationNameWeather = (props) => {
           alignItems="center"
       >
         <TextBoxItem text={stationName} />
-        <Weather />
+        <Weather latitude={latitude} longitude={longitude} />
       </Grid>
     </Wrapper>
   );
