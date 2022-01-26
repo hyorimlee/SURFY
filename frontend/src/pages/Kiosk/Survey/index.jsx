@@ -41,11 +41,21 @@ const Survey = () => {
 
   return (
     <Wrapper>
-      {
-        voted
-        ? <Vote surveyTitle={surveyTitle} voted={voted} voteData={voteData}></Vote>
-        : <CardComponent onVote={vote} surveyContent={surveyContent} />
-      }
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-evenly"
+        alignItems="center"
+      >
+        <div className="qstn">
+          당신은 민초파? 반민초파?         
+        </div>
+        {
+          voted
+          ? <Vote surveyTitle={surveyTitle} voted={voted} voteData={voteData}></Vote>
+          : <CardComponent onVote={vote} surveyContent={surveyContent} />
+        }
+      </Grid>
     </Wrapper>
   );
 }
