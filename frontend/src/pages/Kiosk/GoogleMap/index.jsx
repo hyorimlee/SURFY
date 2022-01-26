@@ -7,8 +7,8 @@ import Wrapper from './styles';
 const GoogleMap = () => {
   return (
     <Wrapper>
-      <Grid container spacing={3} style={{ width: '100%' }}>
-        <Grid item xs={12} md={8}>
+      <Grid>
+        <Grid>
           <Map />
         </Grid>
       </Grid>
