@@ -3,7 +3,8 @@ import { Grid } from '@material-ui/core';
 
 import TextBoxItem from '../TextBoxItem/index';
 
-import Wrapper from './styles';
+import Wrapper, { CustomGrid } from './styles';
+import { ClassNames } from '@emotion/react';
 
 
 const TextBoxList = (props) => {
@@ -12,8 +13,8 @@ const TextBoxList = (props) => {
   let item = [];
 
   item.push(
-    items.map((e) => {
-      return <TextBoxItem key={e.rtNm} text={e.rtNm}></TextBoxItem>
+    items.map((e, idx) => {
+      return <CustomGrid item xs={2} key={e.rtNm}>{e.rtNm}</CustomGrid>
     })
   )
 
@@ -21,6 +22,7 @@ const TextBoxList = (props) => {
     <Wrapper>
       <Grid
         container
+        spacing={3}
         direction="row"
         justifyContent="flex-start"
         alignItems="center"

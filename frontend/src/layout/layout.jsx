@@ -11,13 +11,9 @@ const Layout = (props) => {
         ? <Header isLogin={props.isLogin}/>
         : null
       }
-      <Container
-        maxWidth="xl"
-      >
-        <div className='container'>
-          {props.children}
-        </div>
-      </Container>
+      <div className='container'>
+        {props.children}
+      </div>
     </Wrapper>
   );
 };

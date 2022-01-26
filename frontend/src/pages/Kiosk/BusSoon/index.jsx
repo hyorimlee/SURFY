@@ -1,7 +1,4 @@
-import React, { useState } from 'react';
-import { Grid } from '@material-ui/core';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay } from 'swiper';
+import React, { useState, useEffect } from 'react';
 
 import TextBoxList from '../../../components/Bus/TextBoxList/index';
 
@@ -9,11 +6,10 @@ import 'swiper/css';
 import Wrapper from './styles';
 
 
-SwiperCore.use([Autoplay]);
-
-
 const BusSoon = (props) => {
-  const [showNumber, setShowNumber] = useState(4);
+  const [showNumber, setShowNumber] = useState(6);
+  const [showIdx, setShowIdx] = useState(0);
+  // const [busSoon] = useState([{rtNm: '25안산'}, {rtNm: '20안산'}, {rtNm: '250안산'}, {rtNm: '2500안산'}, {rtNm: '2500안산'}, {rtNm: '2500안산'}, {rtNm: '25안산'}, {rtNm: '250안산'}, {rtNm: '2500안산'}])
   const { busSoon } = props;
 
   let items = [];
@@ -21,44 +17,31 @@ const BusSoon = (props) => {
 
   do {
     items.push(
-      <SwiperSlide key={idx}>
-        <TextBoxList
-          items={[].concat(busSoon.slice(showNumber * idx, showNumber * (idx+1)))}
-        >
-        </TextBoxList>
-      </SwiperSlide>
+      <TextBoxList
+        items={[].concat(busSoon.slice(showNumber * idx, showNumber * (idx+1)))}
+        key={idx}
+      >
+      </TextBoxList>
     )
     idx += 1;
   } while (idx * showNumber < busSoon.length);
 
+  useEffect(() => {
+    const nextIdx = setInterval(() => {
+      setShowIdx((showIdx+1) % items.length);
+    }, 5000);
+    
+    return () => {
+      clearInterval(nextIdx);
+    }
+  })
+
   return (
     <Wrapper>
-      <Grid
-        container
-        direction="column"
-        justifyContent="space-evenly"
-        alignItems="center"
-      >
-        곧 도착하는 버스 목록
-        <Grid
-          container
-          direction="row"
-          justifyContent="space-evenly"
-          alignItems="center"
-        >
-          <Swiper
-            cssMode={true}
-            autoplay={{
-              "delay": 2500,
-              "disableOnInteraction": false
-            }}
-            loop={true}
-            className="mySwiper"
-          >
-            {items}
-          </Swiper>
-        </Grid>
-      </Grid>
+      <p>잠시 후 도착</p>
+      <div className="bus-soon--list">
+        {items[showIdx]}
+      </div>
     </Wrapper>
   );
 }
