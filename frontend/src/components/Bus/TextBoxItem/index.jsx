@@ -1,15 +1,12 @@
 import React from 'react';
-import { Chip } from '@material-ui/core';
 
-import Wrapper from './styles'
+import { CustomChip } from './styles'
 
 const TextBoxItem = (props) => {
   const { text } = props;
 
   return (
-    <Wrapper>
-      <Chip label={text} />
-    </Wrapper>
+    <CustomChip label={text} />
   );
 }
 

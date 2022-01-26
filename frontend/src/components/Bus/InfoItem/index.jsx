@@ -1,7 +1,7 @@
 import React from 'react';
-import { Card, CardHeader, CardContent, Grid, Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 
-import Wrapper from './styles';
+import Wrapper, { CustomGrid } from './styles';
 
 const InfoItem = (props) => {
   const { info } = props;
@@ -9,19 +9,24 @@ const InfoItem = (props) => {
   // isFullFlag1 - 0: 만차 아님, 1: 만차
   return (
     <Wrapper>
-      <Card>
-        <Grid
-          container
-          direction="row"
-        >
-          <CardHeader title={info.rtNm}>
-          </CardHeader>
-          <CardContent>
-            <Typography >{info.arrmsg1}</Typography>
-            <Typography >{info.isFullFlag1}</Typography>
-          </CardContent>
-        </Grid>
-      </Card>
+      <CustomGrid
+        container
+        direction="row"
+        alignItems="center"
+      >
+        <div className="header">
+          {info.rtNm}
+        </div>
+        <div className="remain">
+          <p>{info.arrmsg1.replace()}</p>
+        </div>
+        <div className="locate">
+          <p>{info.arrmsg1}</p>
+        </div>
+        <div className="full">
+          <p>{info.isFullFlag1 ? "여유" : "혼잡"}</p>
+        </div>
+      </CustomGrid>
     </Wrapper>
   )
 }

@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-size: 3rem;
 `;
 
 export default Wrapper;
