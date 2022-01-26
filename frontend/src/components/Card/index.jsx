@@ -1,8 +1,8 @@
 import React from 'react';
-// import Card from '@mui/material/Card';
-// import CardMedia from '@mui/material/CardMedia';
-import { CardActionArea, Grid, CardMedia, Card } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Grid, CardMedia, Card } from '@mui/material';
+
+export default function CardComponent(props) {
+  const { onVote, surveyContent } = props;
 
 export default function CardComponent() {
 
