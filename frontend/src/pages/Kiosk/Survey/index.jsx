@@ -8,11 +8,14 @@ const Survey = () => {
     <Wrapper>
       <Grid
         container
-        direction="column"
+        direction="row"
         justifyContent="space-evenly"
         alignItems="center"
       >
-          <CardComponent />
+        <div className="qstn">
+          당신은 민초파? 반민초파?         
+        </div>
+        <CardComponent />
       </Grid>
     </Wrapper>
   );
