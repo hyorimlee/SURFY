@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { Grid } from '@material-ui/core';
 
-const Wrapper = styled.div`
-
+const CustomGrid = styled(Grid)`
+  width: 1440px !important;
 `;
 
-export default Wrapper;
+export { CustomGrid };

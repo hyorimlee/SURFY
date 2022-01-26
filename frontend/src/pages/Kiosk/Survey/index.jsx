@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { Grid } from '@material-ui/core';
 import axios from 'axios';
 
 import CardComponent from '../../../components/Card';
 import Vote from '../../../components/Vote/index';
 
-import Wrapper from './styles';
+import { CustomGrid, CustomCircularProgress } from './styles';
+
 
 const Survey = () => {
-  const [surveyTitle, setSurveyTitle] = useState('baskinRobbins');                           // 설문조사 타이틀
+  const [surveyTitle, setSurveyTitle] = useState('baskinRobbins');              // 설문조사 타이틀
   const [surveyContent, setSurveyContent] = useState(['민초', '반민초']);       // 설문 내용
   const [voted, setVoted] = useState('');                                       // 설문 투표 됬는지 여부
   const [voteData, setVoteData] = useState({
@@ -23,7 +25,9 @@ const Survey = () => {
       }
     ]
   });
+  const [timerDone, setTimerDone] = useState(false);
 
+  // 투표 실행
   const vote = (event) => {
     // axios({
     //   method: 'post',
@@ -36,27 +40,40 @@ const Survey = () => {
     // .catch((error) => {
     //   console.error(error);
     // })
+
+    setTimeout(() => {
+      setTimerDone(true);
+    }, 2000);
+
     setVoted(event.target.name);
   }
 
+  const resetVote = () => {
+    setVoted('');
+    setTimerDone(false);
+    // setVoteData({});
+  }
+
   return (
-    <Wrapper>
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-evenly"
-        alignItems="center"
-      >
-        <div className="qstn">
-          당신은 민초파? 반민초파?         
-        </div>
-        {
-          voted
-          ? <Vote surveyTitle={surveyTitle} voted={voted} voteData={voteData}></Vote>
-          : <CardComponent onVote={vote} surveyContent={surveyContent} />
-        }
-      </Grid>
-    </Wrapper>
+    <CustomGrid
+      container
+      direction="row"
+      justifyContent="space-evenly"
+      alignItems="center"
+    >
+      {
+        voted
+        ? !voteData || !timerDone ? <CustomCircularProgress size={130} /> : <Vote surveyTitle={surveyTitle} onTime={resetVote} voteData={voteData}></Vote>
+        : (
+            <>
+              <div className="qstn">
+                당신은 민초파? 반민초파?         
+              </div>
+              <CardComponent onVote={vote} surveyContent={surveyContent} />
+            </>
+          )
+      }
+    </CustomGrid>
   );
 }
 

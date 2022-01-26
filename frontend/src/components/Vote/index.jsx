@@ -1,9 +1,8 @@
-import React from 'react';
-import { Grid } from '@material-ui/core';
+import React, { useEffect } from 'react';
 import QRCode from "react-qr-code";
 import { PieChart } from '@toast-ui/react-chart';
 
-import Wrapper from './styles';
+import { CustomGrid } from './styles';
 import '@toast-ui/chart/dist/toastui-chart.min.css';
 
 
@@ -15,14 +14,17 @@ const VoteResult = (props) => {
         backgroundColor: '#00ff0000'
       },
       series: {
+        hover: {
+          lineWidth: 0
+        },
         dataLabels: {
           callout: {
-            lineWidth: 5,
+            lineWidth: 3,
           },
           pieSeriesName: {
             useSeriesColor: false,
-            fontSize: 30,
-            color: '#ff4433',
+            fontSize: 25,
+            color: '#ffffff',
           }
         },
       }
@@ -30,21 +32,23 @@ const VoteResult = (props) => {
     series: {
       dataLabels: {
         visible: true,
+        anchor: 'outer',
         pieSeriesName: {
           visible: true,
-          anchor: 'outer'
+          anchor: 'center'
         }
       }
     },
     chart: {
-      width: 500,
-      height: 500,
+      width: 400,
+      height: 400,
     },
+
     exportMenu: {
       visible: false
     },
     legend: {
-      visible: false,
+      visible: false
     },
   };
 
@@ -56,23 +60,31 @@ const VoteResult = (props) => {
 }
 
 const Vote = (props) => {
-  const { surveyTitle, voted, voteData } = props;
+  const { surveyTitle, voteData, onTime } = props;
   
   const webUrl = `http://localhost:3000/web?title=${surveyTitle}`;
-  const qrcodeSize = 125;
+  const qrcodeSize = 250;
+
+  useEffect(() => {
+    const back = setTimeout(() => {
+      onTime();
+    }, 5000);
+
+    return () => {
+      clearTimeout(back);
+    }
+  }, [onTime])
 
   return (
-    <Wrapper>
-      <Grid
-        container
-        direction="row"
-        justifyContent="space-evenly"
-        alignItems="center"
-      >
-        <VoteResult voteData={voteData}></VoteResult>
-        <QRCode size={qrcodeSize} value={webUrl}></QRCode>
-      </Grid>
-    </Wrapper>
+    <CustomGrid
+      container
+      direction="row"
+      justifyContent="space-evenly"
+      alignItems="center"
+    >
+      <VoteResult voteData={voteData}></VoteResult>
+      <QRCode size={qrcodeSize} value={webUrl}></QRCode>
+    </CustomGrid>
   );
 }
 
