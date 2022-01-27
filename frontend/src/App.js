@@ -22,7 +22,6 @@ function App() {
         <Route path="/web/mypage" element={<UserInfo/>}/>
         <Route path="/web/mypage/passwordedit" element={<PasswordEdit/>}/>
         <Route path="/web/mypage/withdraw" element={<WithDraw/>}/>
-        <Route path="/web/mypage/survey" element={<WithDraw/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
