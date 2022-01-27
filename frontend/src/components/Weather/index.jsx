@@ -1,14 +1,16 @@
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 
+
 import WbSunnyIcon from '@material-ui/icons/WbSunny'; // 맑음
 import WbCloudyIcon from '@material-ui/icons/WbCloudy'; // 흐림
 import AcUnitIcon from '@material-ui/icons/AcUnit'; // 눈
 import NightsStayIcon from '@material-ui/icons/NightsStay'; // 밤
 import BeachAccessIcon from '@material-ui/icons/BeachAccess'; // 비
 
+import { Wrapper, WeatherIcon, WeatherTemperature } from './styles';
+
 const Weather = (props) =>{
-  const { latitude, longitude } = props;
   // 0200 0500 0800 1100 1400 1700 2000 2300 에 기상정보 초기화
 
   // api 정보를 담아두는 State
@@ -75,30 +77,35 @@ const Weather = (props) =>{
   // const imgurl = "/images/" + icon + ".JPG"
   // <img src={imgurl}/>
   return (
-    <div>
-      {
-        icon === '1' && <WbSunnyIcon/>
-      }
-      {
-        icon === '2' && <WbCloudyIcon/>
-      }
-      {
-        icon === '3' && <WbCloudyIcon/>
-      }
-      {
-        icon === '4' && <NightsStayIcon/>
-      }
-      {
-        icon === '5' && <WbCloudyIcon/>
-      }
-      {
-        icon === '6' && <BeachAccessIcon/>
-      }
-      {
-        icon === '7' && <AcUnitIcon/>
-      }
-      {temperature}
-    </div>
+    <Wrapper>
+      <WeatherIcon>
+        {
+          icon === '1' && <WbSunnyIcon fontSize="inherit"/>
+        }
+        {
+          icon === '2' && <WbCloudyIcon fontSize="inherit"/>
+        }
+        {
+          icon === '3' && <WbCloudyIcon fontSize="inherit"/>
+        }
+        {
+          icon === '4' && <NightsStayIcon fontSize="inherit"/>
+        }
+        {
+          icon === '5' && <WbCloudyIcon fontSize="inherit"/>
+        }
+        {
+          icon === '6' && <BeachAccessIcon fontSize="inherit"/>
+        }
+        {
+          icon === '7' && <AcUnitIcon fontSize="inherit"/>
+        }
+      </WeatherIcon>
+      <WeatherTemperature>
+        {temperature}
+        <p>습도</p>
+      </WeatherTemperature>
+    </Wrapper>
   );
 };
 

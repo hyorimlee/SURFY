@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
-import { Grid } from '@material-ui/core';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay } from 'swiper';
+import React, { useState, useEffect } from 'react';
 
 import InfoList from '../../../components/Bus/InfoList/index';
 
 import 'swiper/css';
-import Wrapper from './styles';
+import Wrapper, { InfoHeader, InfoContent } from './styles';
 
-
-SwiperCore.use([Autoplay]);
 
 
 const BusInfo = (props) => {
   const [showNumber, setShowNumber] = useState(6);
+  const [showIdx, setShowIdx] = useState(0);
   const { busInfo } = props;
 
 
@@ -22,44 +18,36 @@ const BusInfo = (props) => {
 
   do {
     items.push(
-      <SwiperSlide key={idx}>
-        <InfoList
-          items={[].concat(busInfo.slice(showNumber * idx, showNumber * (idx+1)))}
-        >
-        </InfoList>
-      </SwiperSlide>
+      <InfoList
+        key={idx}
+        items={[].concat(busInfo.slice(showNumber * idx, showNumber * (idx+1)))}
+      >
+      </InfoList>
     )
     idx += 1;
   } while (idx * showNumber < busInfo.length);
 
+  useEffect(() => {
+    const nextIdx = setInterval(() => {
+      setShowIdx((showIdx+1) % items.length)
+    }, 5000);
+
+    return () => {
+      clearInterval(nextIdx);
+    }
+  })
+
   return (
     <Wrapper>
-      <Grid
-        container
-        direction="column"
-        justifyContent="space-evenly"
-        alignItems="center"
-      >
-        도착 예정
-        <Grid
-          container
-          direction="row"
-          justifyContent="space-evenly"
-          alignItems="center"
-        >
-          <Swiper
-            cssMode={true}
-            autoplay={{
-              "delay": 7000,
-              "disableOnInteraction": false
-            }}
-            loop={true}
-            className="mySwiper"
-          >
-            {items}
-          </Swiper>
-        </Grid>
-      </Grid>
+      <InfoHeader>
+        <p>노선 번호</p>
+        <p>대기 시간</p>
+        <p>현재 버스 위치</p>
+        <p>혼잡 여부</p>
+      </InfoHeader>
+      <InfoContent>
+        {items[showIdx]}
+      </InfoContent>
     </Wrapper>
   );
 }

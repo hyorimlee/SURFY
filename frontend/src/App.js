@@ -8,6 +8,7 @@ import Auth_SignUp from './pages/Auth/SignUp'
 import UserInfo from './pages/Web/UserInfo'
 import PasswordEdit from './pages/Web/PasswordEdit'
 import WithDraw from './pages/Web/Withdraw'
+import Survey from './pages/Web/Survey'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/web/mypage" element={<UserInfo/>}/>
         <Route path="/web/mypage/passwordedit" element={<PasswordEdit/>}/>
         <Route path="/web/mypage/withdraw" element={<WithDraw/>}/>
+        <Route path="/web/mypage/survey" element={<WithDraw/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

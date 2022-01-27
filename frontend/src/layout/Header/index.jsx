@@ -14,6 +14,7 @@ const Header = (props) => {
         direction="row"
         justifyContent="space-between"
         alignItems="center"
+        className="header"
       >
         <p>Logo</p>
         {
@@ -26,8 +27,8 @@ const Header = (props) => {
               justifyContent="flex-end"
               alignItems="center"
             >
-              <Link to="signin">로그인</Link>
-              <Link to="signup">회원가입</Link>
+              <Link to="signin" className="auth">로그인</Link>
+              <Link to="signup" className="auth">회원가입</Link>
               <Link to="mypage">마이페이지</Link>
             </Grid>
           )

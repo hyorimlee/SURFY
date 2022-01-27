@@ -3,22 +3,22 @@ import { Grid } from '@material-ui/core';
 
 import TextBoxItem from '../../../components/Bus/TextBoxItem/index';
 import Weather from '../../../components/Weather';
+import TimeInfo from '../../../components/Time/index';
 import Wrapper from './styles';
 
 const StationNameWeather = (props) => {
-  const { stationName, latitude, longitude } = props;
+  const { stationName } = props;
 
   return (
-    <Wrapper>
-      <Grid
-          container
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-      >
-        <TextBoxItem text={stationName} />
-        <Weather latitude={latitude} longitude={longitude} />
-      </Grid>
+    <Wrapper
+        container
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+    >
+      <TimeInfo></TimeInfo>
+      <TextBoxItem text={stationName} />
+      <Weather/>
     </Wrapper>
   );
 }

@@ -14,7 +14,7 @@ function Time() {
     <Wrapper>
       <h1>{dateString}</h1>
       <div>
-        <Clock format={'h시 mm분 ss초 A'} ticking={true} timezone={'Asia/Seoul'}/>
+        <Clock format={'h시 mm분 A'} ticking={true} timezone={'Asia/Seoul'}/>
       </div>
     </Wrapper>
   )
