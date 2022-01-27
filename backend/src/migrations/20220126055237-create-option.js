@@ -1,27 +1,31 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('test_surveys', {
+    await queryInterface.createTable('options', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      title: {
+      value: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      host: {
+      type: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      target: {
+      img_path: {
         type: Sequelize.STRING
       },
-      is_VS: {
+      fk_surveys: {
+        allowNull: false,
         type: Sequelize.INTEGER
       },
-      deleteAt: {
-        type: Sequelize.DATE
+      fk_questions: {
+        allowNull: false,
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -34,6 +38,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('test_surveys');
+    await queryInterface.dropTable('options');
   }
 };

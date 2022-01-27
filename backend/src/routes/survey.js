@@ -1,9 +1,11 @@
 const express = require('express');
-const { Sequelize } = require('../models');
+const { Sequelize, sequelize } = require('../models');
 const app = express.Router()
 const db = require('../models')
 const fs = require('fs');
 const {verifyToken} = require('../utils/jwt');
+
+
 
 //모든 설문조사 조회(랜덤 조회)
 app.get('/',async(req,res)=>{
@@ -12,7 +14,7 @@ app.get('/',async(req,res)=>{
         count = Number(count)
         if(!versus) versus = 0
         if(!count) count = 5
-        const result = await db['test_survey'].findAll({
+        const result = await db['survey'].findAll({
             where:{
                 is_VS : versus
             },
@@ -31,11 +33,13 @@ app.get('/',async(req,res)=>{
 
 //해당 설문조사 조회
 app.get('/:surveyId',async(req,res)=>{
+    const makeImageUrl = (id) =>
+    `${req.protocol}://${req.get("host")}/api/survey/image/${id}`;
     try{
         const {surveyId} = req.params
-        const result = await db['test_survey'].findOne({
+        const result = await db['survey'].findOne({
             include: [{
-                model : db['test_question'],
+                model : db['question'],
                 attributes: [
                     "id",
                     "number",
@@ -44,7 +48,7 @@ app.get('/:surveyId',async(req,res)=>{
                     "maxChoice",
                 ],
                 include : {
-                    model : db['test_option'],
+                    model : db['option'],
                     attributes: [
                         "id",
                         "value",
@@ -53,7 +57,7 @@ app.get('/:surveyId',async(req,res)=>{
                     ]
                 }
             },{
-                model : db['test_reward'],
+                model : db['reward'],
                 attributes:[
                     'id',
                     'probability',
@@ -67,6 +71,17 @@ app.get('/:surveyId',async(req,res)=>{
             },
         })
         
+
+        for(let i = 0; i<result['questions'].length;i++){
+            for(let k=0;k<result['questions'][i]['options'].length;k++){
+                if(result['questions'][i]['options'][k]['img_path']){
+                    result['questions'][i]['options'][k]['img_path'] = makeImageUrl(result['test_questions'][i]['test_options'][k]['id'])
+                }
+            }
+        }
+        // result['test_questions'][0]['test_options']
+
+
         return res.json(result)
     }
     catch(error){
@@ -74,12 +89,11 @@ app.get('/:surveyId',async(req,res)=>{
     }
 })
 
-
 //해당 설문 모든 질문 조회
 app.get('/question/:surveyId',async(req,res)=>{
     try{
         const {surveyId} = req.params
-        const result = await db['test_question'].findAll({
+        const result = await db['question'].findAll({
             where:{
                 fk_surveys : surveyId,
             },
@@ -103,7 +117,7 @@ app.get('/question/:surveyId',async(req,res)=>{
 app.get('/reward/:surveyId',async(req,res)=>{
     try{
         const {surveyId} = req.params
-        const result = await db['test_reward'].findAll({
+        const result = await db['reward'].findAll({
             where:{
                 fk_surveys : surveyId,
             },
@@ -126,20 +140,15 @@ app.get('/reward/:surveyId',async(req,res)=>{
 //해당 선택지 이미지 조회
 app.get('/image/:optionId', async(req,res)=>{
     try{
-        const optionImage = await db['test_option'].findOne({
+        const optionImage = await db['option'].findOne({
             where:{
-                id : req.params.id
+                id : req.params.optionId
             }
         })
         if(optionImage&&optionImage['img_path']){
             res.set('Content-Disposition',`inline; filename=profile.png`);
-            res.set('Content-Type',`image/jpg`);
-            // fs.readFile(`C:\\Users\\SSAFY\\Documents\\2학기 공통프로젝트\\S06P12A204\\backend\\src\\images\\${optionImage['img_path']}`,(err,data)=>{
-            //     res.write(data)
-            //     res.end()
-            // })
+            res.set('Content-Type',`image/*`);
             const file = fs.createReadStream(`./src/images/${optionImage['img_path']}`)
-            // const file = fs.createReadStream(`./src/images/WIN_20211216_09_27_47_Pro.jpg`)
             return file.pipe(res)
         }
         else{
@@ -151,54 +160,117 @@ app.get('/image/:optionId', async(req,res)=>{
     }
 })
 
-
-
 app.get('/option/:questionId',async(req,res)=>{
+    const makeImageUrl = (id) =>
+    `${req.protocol}://${req.get("host")}/api/survey/image/${id}`;
     try{
         const {questionId} = req.params
-
-        return res.json(option)
-    }
-    catch{
-        
-    }
-})
-
-app.get('/:surveyId/:questionId/example',async(req,res)=>{
-    try{
-        const {surveyId,questionId} = req.params
         console.log(questionId)
-        const result = await db['example'].findAll({
+        const result = await db['option'].findAll({
+            include : [{
+                model : db['answer'],
+                attributes : [
+                    'id',
+                ]
+            }],
             where:{
-                question_id : questionId,
+                fk_questions : Number(questionId)
             },
+            attributes :[
+                "id",
+                "value",
+                "type",
+                "img_path"
+            ]
         })
+        for(let i = 0; i<result.length;i++){
+            if(result[i]['img_path']){
+                result[i]['img_path'] = makeImageUrl(result[i]['id'])
+            }
+            result[i].dataValues['count'] = result[i].dataValues['answers'].length
+            delete result[i].dataValues['answers']
+        }
         return res.json(result)
     }
     catch{
         return res.status(400).json({msg:"error"})
-        
     }
 })
 
 
-//설문조사 등록
-app.post('/',async(req,res)=>{
+app.post('/versus',async(req,res)=>{
     try{
         const {
+            member_id,
+            survey_id,
+            question_id,
+            option_id,
+            value
+        } = req.body
+        const result = await db["answer"].create(
+            {
+                // finished: 1,
+                value : value,
+                fk_members: Number(member_id),
+                fk_surveys: Number(survey_id),
+                fk_questions: Number(question_id),
+                fk_options : Number(option_id),
+            }
+        )
+        return res.json(result)
+    }
+    catch(error){
+        return res.json({msg:"error"})
+    }
+})
+
+//설문조사 등록
+app.post('/',async(req,res)=>{
+    const transaction = await db.sequelize.transaction();
+    try{
+        let {
             title,
             host,
             target,
             is_VS,
             updatedAt,
-            deleteAt,
+            deletedAt,
             questions,
         } = req.body
-        console.log(req.body)
-        console.log(questions[0])
-        // quest = JSON.parse(questions)
-        console.log(JSON.parse(questions[1])['option'][0])
-        res.json()
+        questions = await JSON.parse('[' + questions + ']')
+    
+        const survey = await db['survey'].create({
+            title: title,
+            host: host,
+            target: target,
+            is_VS : is_VS,
+            updatedAt,
+            deletedAt
+        },{transaction: transaction})
+
+        for(let i=0;i<questions.length;i++){
+            console.log(questions[i])
+            const question = await db['question'].create({
+                number: i+1,
+                content: questions[i].content,
+                required: questions[i].required,
+                maxChoice: questions[i].maxChoice,
+                fk_surveys: survey['id']
+            },{transaction: transaction})
+
+            for(let j=0;j<questions[i]['options'].length;j++){
+                const option = await db['option'].create({
+                    value : questions[i]['options'][j]['value'],
+                    type: questions[i]['options'][j]['type'],
+                    fk_surveys: survey['id'],
+                    fk_questions: question['id']
+                },{transaction: transaction})
+            }
+        }
+
+        transaction.commit()
+
+        res.json({msg:'success'})
     }
     catch{
         res.status(400).json({
