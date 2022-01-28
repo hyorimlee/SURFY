@@ -43,6 +43,7 @@ const Weather = (props) =>{
   if (!api) return null;
   var icon = ''
   var temperature = ''
+  var humidity = '' 
   for (const a of api['item']){
     if (a.category === 'TMP'){
       temperature = a.fcstValue + "℃"
@@ -72,6 +73,8 @@ const Weather = (props) =>{
       if (a.fcstValue !== '적설없음'){
         icon = '7'
       }
+    } else if (a.category === 'REH'){
+      humidity = a.fcstValue + "%"
     }
   }
   // const imgurl = "/images/" + icon + ".JPG"
@@ -103,7 +106,8 @@ const Weather = (props) =>{
       </WeatherIcon>
       <WeatherTemperature>
         {temperature}
-        <p>습도</p>
+        <br />
+        {humidity}
       </WeatherTemperature>
     </Wrapper>
   );
