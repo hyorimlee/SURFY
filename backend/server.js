@@ -19,7 +19,7 @@ const routes = require('./src/routes');
 
 
 
-app.use(morgan("conbined",{stream}));
+// app.use(morgan("conbined",{stream}));
 // cors 오류 방지
 app.use(
     cors({
