@@ -25,7 +25,8 @@ app.get('/',async(req,res)=>{
         console.log(result)
         return res.json(result)
     }
-    catch{
+    catch(err){
+        console.log(err);
         return res.status(400).json({msg:"error"})
     }
 })
@@ -53,7 +54,7 @@ app.get('/:surveyId',async(req,res)=>{
                         "id",
                         "value",
                         "type",
-                        "img_path"
+                        "img_path",
                     ]
                 }
             },{
@@ -74,17 +75,20 @@ app.get('/:surveyId',async(req,res)=>{
 
         for(let i = 0; i<result['questions'].length;i++){
             for(let k=0;k<result['questions'][i]['options'].length;k++){
+                
                 if(result['questions'][i]['options'][k]['img_path']){
-                    result['questions'][i]['options'][k]['img_path'] = makeImageUrl(result['test_questions'][i]['test_options'][k]['id'])
+                    result['questions'][i]['options'][k]['img_path'] = "exist"
                 }
             }
         }
-        // result['test_questions'][0]['test_options']
+
+        
 
 
         return res.json(result)
     }
     catch(error){
+        console.log(error)
         return res.status(400).json({msg:"error"})
     }
 })
