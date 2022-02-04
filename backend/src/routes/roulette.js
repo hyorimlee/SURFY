@@ -33,7 +33,7 @@ app.get('/:surveyId',async(req,res)=>{
                 'need_phone',
             ]
         })
-        const result={"rewards":[],"result":await getRandom(rewards)}
+        const result={"rewards":[],"result":getRandom(rewards)}
         rewards.forEach((i)=>{
             result['rewards'].push({
                 'id':i['id'],
@@ -74,17 +74,26 @@ async function mileageEnroll(memberId,rewardId,stateId){
             },{transaction:transaction})
 
             transaction.commit()
-            console.log({msg:"success insert to mileage table"})
+            // console.log({msg:"success insert to mileage table"})
             return mileage.id
 
         } catch (error) {
             console.log(error)
             await transaction.rollback();
-            // return {msg:"error on mileage insert"}
+            return {msg:"error on mileage insert"}
         }
 }
-async function rewardUpdate(rewardId,nxt){
-    
+async function rewardUpdate(rewardId){
+    // const transaction = await db.sequelize.transaction()
+    try {
+        if(await db['reward'].findOne({where:{id:rewardId}})<1) return;
+        const mileage = await db['reward'].increment({remain:-1},{where:{id:rewardId}})
+        // console.log("reward updated!!")
+    } catch (error) {
+        console.log(error);
+        return;
+        // return 
+    }
 }
 
 //인증된 회원이 리워드를 받음 (enroll reward results)
