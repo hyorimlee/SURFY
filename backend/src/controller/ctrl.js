@@ -47,8 +47,8 @@ async function getCurrentWeather(lat, lon) {
             dataType : 'JSON',
             base_date : baseDate,
             base_time : baseTime,
-            nx : lat,
-            ny : lon
+            nx : Number(lat),
+            ny : Number(lon)
         }
     })
 
