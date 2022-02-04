@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       models.survey.hasMany(models['question'],{foreignKey:"fk_surveys"});
       models.survey.hasMany(models['reward'],{foreignKey:"fk_surveys"});
       models.survey.hasMany(models['option'],{foreignKey:'fk_surveys'});
-
+      models.survey.hasMany(models['roulette_result'],{foreignKey:'fk_surveys'});
     }
   }
   survey.init({
