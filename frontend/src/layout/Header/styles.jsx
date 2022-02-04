@@ -1,13 +1,26 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 600px;
+  width: 390px;
   height: 50px;
-  background-color: #FF9364;
+  background-color: #64AAFF;
 
-  .auth {
+  .lg {
+    height: 50px;
+    padding-right: 6px;
     color: white;
-    padding-right: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .su {
+    height: 50px;
+    padding-right: 6px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
 `;
