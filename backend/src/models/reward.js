@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.reward.belongsTo(models['survey'],{foreignKey:"fk_surveys"});
-      models.survey.hasMany(models['roulette_result'],{foreignKey:'fk_rewards'});
+      // models.survey.hasMany(models['roulette_result'],{foreignKey:'fk_rewards'});
     }
   }
   reward.init({
