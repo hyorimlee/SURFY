@@ -28,7 +28,8 @@ app.get('/:surveyId',async(req,res)=>{
                 'id',
                 'probability',
                 'reward',
-                'remain'
+                'remain',
+                'need_phone',
             ]
         })
         const result={"rewards":[],"result":getRandom(rewards)}
@@ -36,7 +37,8 @@ app.get('/:surveyId',async(req,res)=>{
             result['rewards'].push({
                 'id':i['id'],
                 'probability':i['probability'],
-                'rewared':i['reward']
+                'rewared':i['reward'],
+                'need_phone':i['need_phone']
             })
         })
         
@@ -47,6 +49,14 @@ app.get('/:surveyId',async(req,res)=>{
         return res.status(400).json({msg:"error"})
     }
 })
-
+//인증된 회원이 리워드를 받음
+app.post('/:surveyId',async(req,res)=>{
+    try {
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({msg:"error"})
+    }
+})
 
 module.exports = app

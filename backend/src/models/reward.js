@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     reward: DataTypes.STRING,
     remain: DataTypes.INTEGER,
     cnt: DataTypes.INTEGER,
-    fk_surveys: DataTypes.INTEGER
+    fk_surveys: DataTypes.INTEGER,
+    need_phone:DataTypes.BOOLEAN,
   }, {
     sequelize,
     modelName: 'reward',
