@@ -3,7 +3,7 @@ import { Grid, CardMedia, Card } from '@material-ui/core';
 
 
 export default function CardComponent(props) {
-  const { onVote, surveyContent } = props;
+  const { onVote, surveyContent, image } = props;
 
   const vsStyle = {
     fontSize: "150px",
@@ -24,7 +24,7 @@ export default function CardComponent(props) {
         <CardMedia
           component="img"
           height = "250"
-          image = "/images/민초.JPG"
+          image = {image[0] || "/images/민초.JPG"}
           name={surveyContent[0]}
           onClick={onVote}
         >
@@ -43,7 +43,7 @@ export default function CardComponent(props) {
         <CardMedia
           component="img"
           height = "250"
-          image = "/images/반민초.JPG"
+          image = {image[1] || "/images/반민초.JPG"}
           name={surveyContent[1]}
           onClick={onVote}
         >

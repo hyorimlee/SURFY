@@ -20,7 +20,7 @@ const Weather = (props) =>{
   const [error, setError] = useState(null);
 
   // 실험용 local url
-  const url = `http://localhost:8000/api/weather/59/126`
+  const url = `http://i6a204.p.ssafy.io:8000/api/weather/59/126`
   
   
   useEffect(() => {

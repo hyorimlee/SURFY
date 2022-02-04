@@ -3,6 +3,7 @@ import { Grid } from '@material-ui/core';
 
 // import NowSurvey from './NowSurvey/index';
 import OtherSurvey from './OtherSurvey/index';
+import Login from '../../components/Auth/Login/index';
 
 import Layout from '../../layout/layout';
 import Wrapper from './styles';
@@ -25,6 +26,7 @@ const Web = (props) => {
           {/* 다른 진행 설문조사 */}
           <OtherSurvey>
           </OtherSurvey>
+          <Login></Login>
         </Grid>
       </Wrapper>
     </Layout>

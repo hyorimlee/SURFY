@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^13.5.0",
     "@toast-ui/react-chart": "^4.4.1",
     "axios": "^0.24.0",
+    "firebase": "^9.6.5",
     "google-map-react": "^2.1.10",
     "material-ui-image": "^3.3.2",
     "moment-timezone": "^0.5.34",

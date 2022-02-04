@@ -22,7 +22,7 @@ const Kiosk = () => {
     const getBusStationInfo = setInterval(() => {
       axios({
         method: 'GET',
-        url: `http://localhost:8000/api/businfo/${busStationId}`,
+        url: `http://i6a204.p.ssafy.io:8000/api/businfo/${busStationId}`,
       })
       .then((response) => {
         setBusStationInfo(response.data);
@@ -42,7 +42,6 @@ const Kiosk = () => {
     }
 
   }, [busStationId]);
-
 
   return (
     <Layout>
