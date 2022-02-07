@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.mileage.belongsTo(models['member'],{foreignKey:"fk_members"});
       // models.mileage.belongsTo(models['mileage_state'],{foreignKey:"fk_states"});
+      models.mileage.hasMany(models['roulette_result'],{foreignKey:"fk_mileages"})
     }
   }
   mileage.init({
@@ -20,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     fk_states: DataTypes.INTEGER,
     amount: DataTypes.INTEGER,
     timestamp: DataTypes.DATE,
+    mileage: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'mileage',
