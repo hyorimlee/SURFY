@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-    //   models.roulette_result.belongsTo(models['member'],{foreignKey:"fk_members"});
+      models.roulette_result.belongsTo(models['member'],{foreignKey:"fk_members"});
       models.roulette_result.belongsTo(models['survey'],{foreignKey:"fk_surveys"});
       // models.roulette_result.belongsTo(models['reward'],{foreignKey:"fk_rewards"});
     //   models.roulette_result.belongsTo(models['mileage'],{foreignKey:"fk_mileages"});

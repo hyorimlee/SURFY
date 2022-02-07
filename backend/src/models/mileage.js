@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-    //   models.mileage.belongsTo(models['member'],{foreignKey:"fk_members"});
-    //   models.mileage.belongsTo(models['mileage_state'],{foreignKey:"fk_states"});
+      models.mileage.belongsTo(models['member'],{foreignKey:"fk_members"});
+      // models.mileage.belongsTo(models['mileage_state'],{foreignKey:"fk_states"});
     }
   }
   mileage.init({
