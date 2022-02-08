@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MileageReturn = (props) => {
-  const [isLogin, setIsLogin] = useState(localStorage.getItem('login') ? true : false);
+  const [isLogin, setIsLogin] = useState(localStorage.getItem('id') ? true : false);
   const classes = useStyles();
   const [age, setAge] = React.useState('');
   const handleChange = (event) => {
