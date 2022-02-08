@@ -26,11 +26,12 @@ export default function AlertDialog() {
         window.Kakao.API.request({
           url: '/v2/user/me',
           success: function(response) {
-              console.log(response);
-              console.log(response.id);
+            handleClose();
+            localStorage.setItem('code', `K${response.id}`);
+            CustomLogin();
           },
           fail: function(error) {
-              console.log(error);
+              alert('로그인 오류 발생');
           }
       });
       },
@@ -51,13 +52,42 @@ export default function AlertDialog() {
       measurementId: "G-4CRRTDEYGW"
     };
 
-    const app = initializeApp(firebaseConfig);
+    initializeApp(firebaseConfig);
     const provider = new GoogleAuthProvider();
     
     const auth = getAuth();
     signInWithPopup(auth, provider)
       .then((result) => {
-        console.log(result.user.uid)
+        handleClose();
+        localStorage.setItem('code', `G${result.user.uid}`);
+        CustomLogin();
+      })
+  }
+
+  const CustomLogin = () => {
+    fetch(`http://i6a204.p.ssafy.io:8000/api/member/code/${localStorage.getItem('code')}`)
+      .then(response => {
+        return response.json();
+      })
+      .then(response => {
+        console.log(response);
+        
+        if (!response) {
+          fetch('http://i6a204.p.ssafy.io:8000/api/member/', {
+            method: 'POST',
+            body: JSON.stringify({
+              'memberCode': localStorage.getItem('code'),
+              'sns': localStorage.getItem('code').slice(0, 1) === 'G' ? 'google' : 'kakao'
+            }),
+            headers:{
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => {
+            return response.json()
+          })
+          .then(response => console.log(response))
+        }
       })
   }
 

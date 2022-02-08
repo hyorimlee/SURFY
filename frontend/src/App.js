@@ -8,7 +8,6 @@ import Auth_SignUp from './pages/Auth/SignUp'
 import UserInfo from './pages/Web/UserInfo'
 import PasswordEdit from './pages/Web/PasswordEdit'
 import WithDraw from './pages/Web/Withdraw'
-import Survey from './pages/Web/Survey'
 
 function App() {
   return (
