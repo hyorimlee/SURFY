@@ -9,7 +9,8 @@ import UserInfo from './pages/Web/UserInfo'
 import PasswordEdit from './pages/Web/PasswordEdit'
 import WithDraw from './pages/Web/Withdraw'
 import Roulette from './pages/Web/Roulette'
-// import Survey from './pages/Web/Survey'
+import MileageSave from './pages/Web/MileageSave';
+import MileageReturn from './pages/Web/MileageReturn';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Kiosk />}/>
         <Route path="/web" element={<Web />} />
+        <Route path="/web/mileagesave" element={<MileageSave />} />
+        <Route path="/web/mileagereturn" element={<MileageReturn />} />
         <Route path="/web/roulette" element={<Roulette />} />
         <Route path="/web/signin" element={<Auth_SignIn/>}/>
         <Route path="/web/signup" element={<Auth_SignUp/>}/>
