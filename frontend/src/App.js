@@ -8,7 +8,8 @@ import Auth_SignUp from './pages/Auth/SignUp'
 import UserInfo from './pages/Web/UserInfo'
 import PasswordEdit from './pages/Web/PasswordEdit'
 import WithDraw from './pages/Web/Withdraw'
-import Survey from './pages/Web/Survey'
+import Roulette from './pages/Web/Roulette'
+// import Survey from './pages/Web/Survey'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Kiosk />}/>
         <Route path="/web" element={<Web />} />
+        <Route path="/web/roulette" element={<Roulette />} />
         <Route path="/web/signin" element={<Auth_SignIn/>}/>
         <Route path="/web/signup" element={<Auth_SignUp/>}/>
         <Route path="/web/mypage" element={<UserInfo/>}/>
