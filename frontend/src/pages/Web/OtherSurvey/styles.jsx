@@ -1,20 +1,25 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 500px;
-  height: 768px;
-  background-color: #EBAA5F;
+  width: 360px;
+  height: 784px;
+  background-color: white;
   border-radius: 16px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 24px;
+
+  .ques {
+    font-size: 20px;
+  }
 
   .oSvy {
-    width: 400px;
+    width: 312px;
     height: 60px;
-    margin-top: 10px;
-    background-color: #FFE0C6;
+    margin-top: 16px;
+    background-color: #C8C8FF;
     text-align: center;
     border-radius: 16px;
   }
