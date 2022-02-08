@@ -70,40 +70,18 @@ app.post('/save',async(req,res)=>{
         return res.status(400).json({msg:"error"})
     }
 })
-//post member
-// app.post('/',async(req,res)=>{
-//     const transaction = await db.sequelize.transaction()
-//     try {
-//         let {memberCode,sns} = req.body;
-//         const record = await db['mileage'].create({
-//             member_code:memberCode,
-//             sns:sns
-//         },{transaction:transaction})
-//         transaction.commit()
-//         return res.json({msg:"success",id:record.id})
-        
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(400).json(error)
-//         return res.status(400).json({msg:"error"})
-//     }
-// })
-// //회원 탈퇴
-// app.put('/withdraw/:memberId',async(req,res)=>{
-//     try {
-//         let {memberId} = req.params;
-//         const record = await db['member'].update({is_withdraw:true},{
-//             where:{id:memberId}
-//         })
-        
-//         return res.json({msg:`success to withdraw ${memberId}`})
-        
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(400).json(error)
-//         return res.status(400).json({msg:"error"})
-//     }
-// })
+
+app.post('/refund',async(req,res)=>{
+    try {
+        let {amount, memberId} = req.body
+        let mileage = Number(await getMileage(memberId));
+        const record = await enrollMileage(memberId,-amount,mileage,0);
+        return res.json({msg:"success",mileage:record.mileage})
+    } catch (error) {
+        console.log(error)
+        return res.status(400).json({msg:"error"})
+    }
+})
 
 
 module.exports = app
