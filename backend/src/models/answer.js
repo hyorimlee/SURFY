@@ -12,10 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.answer.belongsTo(models['option'],{foreignKey:"fk_options"});
-<<<<<<< HEAD
-=======
       models.answer.belongsTo(models['member'],{foreignKey:"fk_members"});
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
     }
   }
   answer.init({

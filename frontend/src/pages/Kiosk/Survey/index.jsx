@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import { Grid } from '@material-ui/core';
-=======
 import React, { useState, useEffect } from 'react';
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
 import axios from 'axios';
 
 import CardComponent from '../../../components/Card';
@@ -12,44 +7,6 @@ import Vote from '../../../components/Vote/index';
 import { CustomGrid, CustomCircularProgress } from './styles';
 
 
-<<<<<<< HEAD
-const Survey = () => {
-  const [surveyTitle, setSurveyTitle] = useState('baskinRobbins');              // 설문조사 타이틀
-  const [surveyContent, setSurveyContent] = useState(['민초', '반민초']);       // 설문 내용
-  const [voted, setVoted] = useState('');                                       // 설문 투표 됬는지 여부
-  const [voteData, setVoteData] = useState({
-    categories: [surveyTitle],
-    series: [
-      {
-        name: '민초',
-        data: 27,
-      },
-      {
-        name: '반민초',
-        data: 12,
-      }
-    ]
-  });
-  const [timerDone, setTimerDone] = useState(false);
-
-  // 투표 실행
-  const vote = (event) => {
-    // axios({
-    //   method: 'post',
-    //   url: 'http://localhost:8000/api/',
-    //   data: {
-    //     surveyTitle,
-    //     voted,
-    //   }
-    // })
-    // .catch((error) => {
-    //   console.error(error);
-    // })
-
-    setTimeout(() => {
-      setTimerDone(true);
-    }, 2000);
-=======
 const useGetVersus = (voted) => {
   const [versusData, setVersusData] = useState({id: '', questions: [{options: [{value: '민초'}, {value: '반민초'}]}]});
   const [image, setImage] = useState([]);
@@ -143,7 +100,6 @@ const Survey = () => {
     setTimeout(() => {
       setTimerDone(true);
     }, (Math.random() * 1000) + 1000);
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
 
     setVoted(event.target.name);
   }
@@ -151,13 +107,9 @@ const Survey = () => {
   const resetVote = () => {
     setVoted('');
     setTimerDone(false);
-<<<<<<< HEAD
-    // setVoteData({});
-=======
     versusData = {}
     image = {}
     console.log(image)
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
   }
 
   return (
@@ -169,15 +121,6 @@ const Survey = () => {
     >
       {
         voted
-<<<<<<< HEAD
-        ? !voteData || !timerDone ? <CustomCircularProgress size={130} /> : <Vote surveyTitle={surveyTitle} onTime={resetVote} voteData={voteData}></Vote>
-        : (
-            <>
-              <div className="qstn">
-                당신은 민초파? 반민초파?         
-              </div>
-              <CardComponent onVote={vote} surveyContent={surveyContent} />
-=======
         ? !voteData || !timerDone ? <CustomCircularProgress size={130} /> : <Vote onTime={resetVote} voteData={voteData}></Vote>
         : (
             <>
@@ -186,7 +129,6 @@ const Survey = () => {
                 <p>당신의 선택은?!</p>
               </div>
               <CardComponent onVote={vote} surveyContent={[versusData.questions[0].options[0].id, versusData.questions[0].options[1].id]} image={image} />
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
             </>
           )
       }

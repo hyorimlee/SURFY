@@ -12,10 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.reward.belongsTo(models['survey'],{foreignKey:"fk_surveys"});
-<<<<<<< HEAD
-=======
       // models.survey.hasMany(models['roulette_result'],{foreignKey:'fk_rewards'});
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
     }
   }
   reward.init({
@@ -23,12 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     reward: DataTypes.STRING,
     remain: DataTypes.INTEGER,
     cnt: DataTypes.INTEGER,
-<<<<<<< HEAD
-    fk_surveys: DataTypes.INTEGER
-=======
     fk_surveys: DataTypes.INTEGER,
     need_phone:DataTypes.BOOLEAN,
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
   }, {
     sequelize,
     modelName: 'reward',

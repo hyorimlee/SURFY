@@ -7,12 +7,8 @@ const CustomGrid = styled(Grid)`
   .qstn {
     color: white;
     font-size: 50px;
-<<<<<<< HEAD
-    margin: 30px 0;
-=======
     margin: 10px 0;
     text-align: center;
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
   }
 `;
 

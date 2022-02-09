@@ -89,13 +89,10 @@ const Wrapper = styled.div`
       transform: translateY(0) rotate(-45deg);
     }
   }
-<<<<<<< HEAD
   .infowindow{
     background-color: white;
     font-style: italic;
   }
-=======
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
 `;
 
 export default Wrapper;

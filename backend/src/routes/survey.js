@@ -25,12 +25,8 @@ app.get('/',async(req,res)=>{
         console.log(result)
         return res.json(result)
     }
-<<<<<<< HEAD
-    catch{
-=======
     catch(err){
         console.log(err);
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
         return res.status(400).json({msg:"error"})
     }
 })
@@ -58,11 +54,7 @@ app.get('/:surveyId',async(req,res)=>{
                         "id",
                         "value",
                         "type",
-<<<<<<< HEAD
-                        "img_path"
-=======
                         "img_path",
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
                     ]
                 }
             },{
@@ -83,14 +75,6 @@ app.get('/:surveyId',async(req,res)=>{
 
         for(let i = 0; i<result['questions'].length;i++){
             for(let k=0;k<result['questions'][i]['options'].length;k++){
-<<<<<<< HEAD
-                if(result['questions'][i]['options'][k]['img_path']){
-                    result['questions'][i]['options'][k]['img_path'] = makeImageUrl(result['test_questions'][i]['test_options'][k]['id'])
-                }
-            }
-        }
-        // result['test_questions'][0]['test_options']
-=======
                 
                 if(result['questions'][i]['options'][k]['img_path']){
                     result['questions'][i]['options'][k]['img_path'] = "exist"
@@ -99,16 +83,12 @@ app.get('/:surveyId',async(req,res)=>{
         }
 
         
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
 
 
         return res.json(result)
     }
     catch(error){
-<<<<<<< HEAD
-=======
         console.log(error)
->>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
         return res.status(400).json({msg:"error"})
     }
 })
