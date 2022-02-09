@@ -3,6 +3,8 @@ import { Wheel } from "react-custom-roulette";
 import { Modal } from "@material-ui/core";
 import Wrapper from './styles';
 
+import Header from '../../../layout/Header/index';
+
 
 const data = [
   { id: 1, option: "꽝" },
@@ -35,9 +37,7 @@ const Roulette = (props) => {
   return (
     <Wrapper>
       <div align="center">
-        <div className="rHead">
-          행운의 결과는?
-        </div>        
+        <Header isLogin={localStorage.getItem('id')}/>
         <br/><br/><br/><br/><br/><br/><br/>
         <Wheel
           mustStartSpinning={mustSpin}
