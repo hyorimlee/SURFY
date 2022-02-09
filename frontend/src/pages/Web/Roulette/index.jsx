@@ -1,43 +1,92 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { Wheel } from "react-custom-roulette";
 import Login from '../../../components/Auth/Login/index';
+import { makeStyles, Modal } from '@material-ui/core/';
 import Wrapper from './styles';
 
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+
+  paper: {
+    position: 'absolute',
+    width: '70%',
+    textAlign: 'center',
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 const data = [
-  { id: 1, option: "꽝" },
+  { id: 1, option: "100마일리지" },
   { id: 2, option: "200마일리지" },
-  { id: 3, option: "꽝" },
-  { id: 4, option: "500마일리지" },
-  { id: 5, option: "꽝" },
-  { id: 6, option: "800마일리지" }
+  { id: 3, option: "300마일리지" },
+  { id: 4, option: "400마일리지" },
+  { id: 5, option: "500마일리지" },
+  { id: 6, option: "600마일리지" }
 ];
 
-const Roulette = (props) => {
+export default function Roulette() {
+  const classes = useStyles();
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(1);
-  // const [open, setOpen] = useState(false);
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
+  const [color, setColor] = useState('green');  
 
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-  
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const handleSpinClick = () => {
     const newPrizeNumber = Math.floor(Math.random() * data.length);
     setPrizeNumber(newPrizeNumber);
     setMustSpin(true);
   };
-  
+
+  const onClick = () => {
+    color === 'green' ? setColor('grey') : setColor('green');
+  };
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title">당첨을 축하합니다!</h2>
+      <p id="simple-modal-description">{data[prizeNumber].option}</p>
+      <Login></Login>
+    </div>
+  );
+
   return (
     <Wrapper>
-      <div align="center">
-        <div className="rHead">
-          행운의 결과는?
-        </div>        
+      <div className='rHead' align="center">
+        <br/><br/><br/><br/><br/><br/><br/>
+        <h1>룰렛은 설문당 1번만 사용이 가능합니다.</h1>
+        <br/><br/>
+        <h2>마일리지 100% 당첨</h2>
         <br/><br/><br/><br/><br/><br/><br/>
         <Wheel
           mustStartSpinning={mustSpin}
@@ -62,28 +111,26 @@ const Roulette = (props) => {
           ]}
           onStopSpinning={() => {
             setMustSpin(false);
-            // handleOpen();
+            handleOpen();
           }}
         />
-        <br/><br/>< br/><br/><br/><br/><br/>
-        {/* <div className="btn"> */}
-        <button className="spinBtn" onClick={handleSpinClick}>
+        <br/><br/><br/><br/><br/><br/><br/>
+
+        <button 
+          color={color}
+          className="spinBtn" 
+          onClick={(e) => {
+            handleSpinClick(e);
+            e.currentTarget.disabled = true;
+          }}
+        >
           룰렛 돌리기
         </button>
-        <br />
-        <div>
-          { 
-            data[prizeNumber].option === "꽝"
-              ? (<div>"{!mustSpin ? data[prizeNumber].option : "0"}"입니다.</div>)
-              : (<div>"{!mustSpin ? data[prizeNumber].option : "0"}"이 당첨되었습니다."</div>)          
-          }
-        </div>
-        <Login></Login>
-        
 
+        <Modal open={open} onClose={handleClose} className={classes.modal}>
+          {body}
+        </Modal>
       </div>
     </Wrapper>
   );
 }
-
-export default Roulette;
