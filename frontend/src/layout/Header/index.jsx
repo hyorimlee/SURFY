@@ -28,7 +28,7 @@ const Header = (props) => {
       return response.json();
     })
     .then(response => {
-      setNickname(response.member_code);
+      setNickname(response.name);
 
       fetch(`http://i6a204.p.ssafy.io:8000/api/mileage/${response.id}`)
       .then(response => {
@@ -70,13 +70,8 @@ const Header = (props) => {
       {
         isLogin
         ? (
-          <div
-            container
-            direction="row"
-            justifyContent="flex-end"
-            alignItems="center"
-          >
-            <p>{nickname.slice(0, 6)} 님</p>
+          <div>
+            <p>{nickname} 님</p>
             <p>{mileage} 마일리지</p>
             <MoreVert onClick={handleClick}/>
             <Menu
