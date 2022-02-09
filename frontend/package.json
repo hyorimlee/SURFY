@@ -9,18 +9,35 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@mui/icons-material": "^5.3.0",
+<<<<<<< HEAD
     "@mui/material": "^5.4.0",
     "@mui/styled-engine-sc": "^5.3.0",
+=======
+    "@mui/material": "^5.2.8",
+    "@mui/styled-engine-sc": "^5.1.0",
+>>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@toast-ui/react-chart": "^4.4.1",
     "axios": "^0.24.0",
+<<<<<<< HEAD
     "google-map-react": "^2.1.10",
     "material-ui-image": "^3.3.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-live-clock": "^5.5.1",
+=======
+    "firebase": "^9.6.5",
+    "google-map-react": "^2.1.10",
+    "material-ui-image": "^3.3.2",
+    "moment-timezone": "^0.5.34",
+    "react": "^17.0.2",
+    "react-custom-roulette": "^1.1.8",
+    "react-dom": "^17.0.2",
+    "react-live-clock": "^5.5.1",
+    "react-moment": "^1.1.1",
+>>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
     "react-qr-code": "^2.0.3",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",

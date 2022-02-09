@@ -54,7 +54,11 @@ const listItems = [
   {
     listIcon: <PaidIcon />,
     listText: "내 지갑 보기",
+<<<<<<< HEAD
     path:'/web/mypage/survey'
+=======
+    path:'/web/mypage/passwordedit'
+>>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
   },
   {
     listIcon: <PersonOffIcon />,

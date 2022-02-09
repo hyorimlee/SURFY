@@ -69,8 +69,6 @@ async function getStationByUid(arsId){
     })
     return data
 }
-
-
 async function getmapdata(){
     console.log('hi')
     const fs = require('fs');
@@ -99,7 +97,6 @@ async function getmapdata(){
         }
     });
 }
-
 const output = {
     home : (req, res) => {
         res.render("index");

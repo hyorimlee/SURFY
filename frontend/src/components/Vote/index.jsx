@@ -60,6 +60,7 @@ const VoteResult = (props) => {
 }
 
 const Vote = (props) => {
+<<<<<<< HEAD
   const { surveyTitle, voteData, onTime } = props;
   
   const webUrl = `http://localhost:3000/web?title=${surveyTitle}`;
@@ -69,6 +70,15 @@ const Vote = (props) => {
     const back = setTimeout(() => {
       onTime();
     }, 5000);
+=======
+  const { voteData, onTime } = props;
+  
+  const webUrl = `http://localhost:3000/web?`;
+  const qrcodeSize = 250;
+  
+  useEffect(() => {
+    const back = setTimeout(onTime, 7000);
+>>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
 
     return () => {
       clearTimeout(back);

@@ -17,6 +17,7 @@ const morgan = require('morgan');//for log
 const {stream} = require("./src/config/winston.config")
 const routes = require('./src/routes');
 
+<<<<<<< HEAD
 // 디비 연결부분
 // const maria = require('./src/database/index')
 // const bodyParser = require('body-parser');
@@ -34,12 +35,19 @@ const connection = mysql.createConnection({
 })
 connection.connect();
 
+=======
+
+
+// app.use(morgan("conbined",{stream}));
+// cors 오류 방지
+>>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
 app.use(
     cors({
         origin: "*",
         optionsSuccessStatus: 200,
     })
 );
+<<<<<<< HEAD
 
 app.get('/data',(req,res) =>{
     connection.query(
@@ -55,6 +63,8 @@ app.get('/data',(req,res) =>{
 // app.use(morgan("conbined",{stream}));
 // cors 오류 방지
 
+=======
+>>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
@@ -62,6 +72,12 @@ app.use(express.urlencoded({extended: true}))
 //routes
 app.use('/', routes)
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 3358d5da2d1497dad0fa2609603ebae57cf25562
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
