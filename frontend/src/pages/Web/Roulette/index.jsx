@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Wheel } from "react-custom-roulette";
-import { Modal } from "@material-ui/core";
+import Login from '../../../components/Auth/Login/index';
 import Wrapper from './styles';
 
 
@@ -16,15 +16,15 @@ const data = [
 const Roulette = (props) => {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(1);
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  // const handleOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
   
   const handleSpinClick = () => {
     const newPrizeNumber = Math.floor(Math.random() * data.length);
@@ -62,7 +62,7 @@ const Roulette = (props) => {
           ]}
           onStopSpinning={() => {
             setMustSpin(false);
-            handleOpen();
+            // handleOpen();
           }}
         />
         <br/><br/>< br/><br/><br/><br/><br/>
@@ -70,21 +70,17 @@ const Roulette = (props) => {
         <button className="spinBtn" onClick={handleSpinClick}>
           룰렛 돌리기
         </button>
-        <Modal open={open} onClose={handleClose} className="modal">
-          <div className="paper">
-            <p>{data[prizeNumber]}</p>
-          </div>
-          {/* <button className="loginBtn" onClick={""}>
-            상품받기
-          </button> */}
-        </Modal>
+        <br />
+        <div>
+          { 
+            data[prizeNumber].option === "꽝"
+              ? (<div>"{!mustSpin ? data[prizeNumber].option : "0"}"입니다.</div>)
+              : (<div>"{!mustSpin ? data[prizeNumber].option : "0"}"이 당첨되었습니다."</div>)          
+          }
+        </div>
+        <Login></Login>
+        
 
-        {/* </div> */}
-
-
-        {/* {!mustSpin ? data[prizeNumber].option : "0"} */}
-
-        {/* 로그인 화면으로 넘어가는 버튼 위치 */}
       </div>
     </Wrapper>
   );

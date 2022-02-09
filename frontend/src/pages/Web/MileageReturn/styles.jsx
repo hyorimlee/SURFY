@@ -9,9 +9,18 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
+  .selectBtn {
+    width: 280px;
+  }
+
+  .inputLabel {
+    width: 280px;
+    height: 41px; !important
+  }
+
   .btnClick {
-    width: 110px;
-    height: 40px;
+    width: 280px;
+    height: 41px;
     background-color: #96E0CE;
   }
 `;
