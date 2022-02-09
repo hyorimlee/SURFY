@@ -89,6 +89,10 @@ const Wrapper = styled.div`
       transform: translateY(0) rotate(-45deg);
     }
   }
+  .infowindow{
+    background-color: white;
+    font-style: italic;
+  }
 `;
 
 export default Wrapper;

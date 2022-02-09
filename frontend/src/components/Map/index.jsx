@@ -13,10 +13,12 @@ const Map = (props) => {
       styles: [{ featureType: 'poi', elementType: 'labels', stylers: [{ visibility: 'on' }] }],
     };
   };
-  const [mapdata, setmapdata] = useState([]);
   const [center, setCenter] = useState({ lat: 37.5160119113, lng: 126.9056181532 });
   const [zoom, setZoom] = useState(11);
-
+  const [markerdata, setmarkerdata] = useState(null);
+  const [target, setTarget] = useState(null);
+  
+  const [mapdata, setmapdata] = useState([]);
   useEffect(() => {
     const test = () =>{
       axios({
@@ -32,7 +34,10 @@ const Map = (props) => {
     };
     test();
   }, []);
-  
+  const markerClicked = (key) => {
+    setTarget(key);
+  }
+
   return (
     <Wrapper>
       <GoogleMapReact
@@ -40,12 +45,18 @@ const Map = (props) => {
         defaultCenter={center}
         defaultZoom={15}
         options={getMapOptions}
+        onChildClick={markerClicked}
       >
         {mapdata.map((data, index) => (
-          <Marker key={index}
+          <Marker 
+          key = {data.id}
           lat = {data.x}
           lng = {data.y}
           text = {data.name}
+          op_time = {data.operating_time}
+          color = "blue"
+          target_v = {data.id == target}
+          place={data}
           />
         ))}
         <Marker

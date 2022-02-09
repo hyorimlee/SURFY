@@ -73,7 +73,7 @@ async function getStationByUid(arsId){
 
 async function getmapdata(){
     console.log('hi')
-    const fs = require('../../package.json/fs');
+    const fs = require('fs');
     const data = fs.readFileSync('../database.json')
     console.log('여기는?-1')
     const conf = JSON.parse(data)
