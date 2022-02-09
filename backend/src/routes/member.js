@@ -13,11 +13,6 @@ app.get('/code/:memberCode',async(req,res)=>{
         const {memberCode} = req.params
         const result = await db['member'].findOne({
             where:{'member_code':memberCode},
-            attributes :[
-                ['id','member_pk'],
-                'member_code',
-                'sns',
-            ]
         })
         return res.json(result)
     } catch (error) {
