@@ -4,16 +4,13 @@ import InfoWindow from './Infowindow'
 const Marker = (props) => {
     // const { color, name, id } = props;
     return (
-      <div>
-      {props.target_v && <InfoWindow place={props}/>}
-      <Wrapper
-      alt={props.text}
-      >
-        {/* {props.target_v && <InfoWindow place={props}/>} */}
+      <Wrapper>
+          {props.target_v && <InfoWindow place={props}/>}
         <div className="pin bounce"
-        style={{ backgroundColor: props.color, cursor: 'pointer'}} />
+          style={{ backgroundColor: props.color, cursor: 'pointer'}} />
+        <div className='pulse' />
       </Wrapper>
-      </div>
+      
     );
   };
 
