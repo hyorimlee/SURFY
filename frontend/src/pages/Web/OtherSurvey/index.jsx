@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { List, ListItem, ListItemText, Avatar } from '@material-ui/core/';
+import { List, ListItem, ListItemText } from '@material-ui/core/';
+
+import SurveyFormList from '../../../components/SurveyForm/SurveyFormList';
+
 import Wrapper from './styles';
 
 
 const OtherSurvey = () => {
   const [surveys, setSurveys] = useState([]);
+  const [isNowSurvey, setIsNowSurvey] = useState(0);
+  const [selectedSurveyId, setSelectedSurveyId] = useState('0');
 
   useEffect(() => {
     const query = { 'versus': 0, 'count': 100 }
@@ -27,7 +32,7 @@ const OtherSurvey = () => {
             className="oSvy"
             key={res.id}
           >
-            <ListItemText primary={res.title} />
+            <ListItemText primary={res.title} onClick={clickedSurvey(res.id)} />
           </ListItem>
         );
       })
@@ -38,14 +43,34 @@ const OtherSurvey = () => {
   }, [])
   
 
-  console.log(surveys);
+  const clickedSurvey = (id) => () => {
+    setIsNowSurvey(1);
+    setSelectedSurveyId(id);
+  }
+
+  const endSurvey = () => {
+    setIsNowSurvey(0);
+    setSelectedSurveyId(0);
+  }
+
+
   return (
     <Wrapper>
       <div align="center">
-        <List component="nav" aria-label="mailbox folders">
-          <p className="ques">추가 설문을 하시겠습니까?</p>
-          {surveys}
-        </List>
+        {
+          isNowSurvey
+          ?
+          (
+            <SurveyFormList surveyId={selectedSurveyId} endSurvey={endSurvey}></SurveyFormList>
+          )
+          :
+          (
+            <List component="nav" aria-label="mailbox folders">
+              <p className="ques">추가 설문을 하시겠습니까?</p>
+              {surveys}
+            </List>
+          )
+        }
       </div>
     </Wrapper>
   )
