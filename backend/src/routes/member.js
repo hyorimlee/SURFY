@@ -5,7 +5,19 @@ const db = require('../models')
 const fs = require('fs');
 const {verifyToken} = require('../utils/jwt');
 // const { DATE } = require('sequelize/dist');
-
+app.get('/survey/:memberId',async(req,res)=>{
+    try {
+        const {memberId} = req.params
+        const result = await db['roulette_result'].findAll({
+            where:{fk_members:memberId},
+            attributes:[['fk_surveys','surveysId']],
+        })
+        return res.json(result)
+    } catch (error) {
+        console.log(error)
+        return res.status(400,json({mas:error}))
+    }
+})
 
 //get pk by member's id
 app.get('/code/:memberCode',async(req,res)=>{
@@ -20,6 +32,7 @@ app.get('/code/:memberCode',async(req,res)=>{
         return res.status(400,json({mas:error}))
     }
 })
+
 //get member information by pk
 app.get('/:memberId',async(req,res)=>{
     try {
@@ -31,6 +44,7 @@ app.get('/:memberId',async(req,res)=>{
         return res.status(400,json({mas:error}))
     }
 })
+
 //get all members
 app.get('/',async(req,res)=>{
     try {
