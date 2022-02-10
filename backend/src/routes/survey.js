@@ -169,7 +169,7 @@ app.get('/image/:optionId', async(req,res)=>{
         if(optionImage&&optionImage['img_path']){
             res.set('Content-Disposition',`inline; filename=profile.png`);
             res.set('Content-Type',`image/*`);
-            const file = fs.createReadStream(`./backend/src/images/${optionImage['img_path']}`)
+            const file = fs.createReadStream(`${__dirname}/../images/${optionImage['img_path']}`)
             return file.pipe(res)
         }
         else{
