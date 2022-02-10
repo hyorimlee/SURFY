@@ -9,7 +9,8 @@ app.get('/survey/:memberId',async(req,res)=>{
     try {
         const {memberId} = req.params
         const result = await db['roulette_result'].findAll({
-            where:{fk_members:memberId}
+            where:{fk_members:memberId},
+            attributes:[['fk_surveys','surveysId']],
         })
         return res.json(result)
     } catch (error) {
