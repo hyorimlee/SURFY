@@ -1,29 +1,22 @@
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  width: 390px;
+import { Grid } from '@material-ui/core';
+
+const OuterGrid = styled(Grid)`
+  width: 390px !important;
   height: 50px;
   background-color: #64AAFF;
 
-  .lg {
-    height: 50px;
-    padding-right: 6px;
-    color: white;
+  & div {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
   }
 
-  .su {
-    height: 50px;
-    padding-right: 6px;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  & p {
+    margin: 5px;
   }
-
 `;
 
-
-export default Wrapper;
+export { OuterGrid };

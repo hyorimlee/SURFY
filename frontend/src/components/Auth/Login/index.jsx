@@ -27,8 +27,8 @@ export default function AlertDialog() {
           url: '/v2/user/me',
           success: function(response) {
             handleClose();
-            localStorage.setItem('code', `K${response.id}`);
-            CustomLogin();
+            localStorage.setItem('id', `K${response.id}`);
+            CustomLogin(response.kakao_account.profile.nickname);
           },
           fail: function(error) {
               alert('로그인 오류 발생');
@@ -59,13 +59,13 @@ export default function AlertDialog() {
     signInWithPopup(auth, provider)
       .then((result) => {
         handleClose();
-        localStorage.setItem('code', `G${result.user.uid}`);
-        CustomLogin();
+        localStorage.setItem('id', `G${result.user.uid}`);
+        CustomLogin(result.user.displayName);
       })
   }
 
-  const CustomLogin = () => {
-    fetch(`http://i6a204.p.ssafy.io:8000/api/member/code/${localStorage.getItem('code')}`)
+  const CustomLogin = (name) => {
+    fetch(`http://i6a204.p.ssafy.io:8000/api/member/code/${localStorage.getItem('id')}`)
       .then(response => {
         return response.json();
       })
@@ -76,8 +76,9 @@ export default function AlertDialog() {
           fetch('http://i6a204.p.ssafy.io:8000/api/member/', {
             method: 'POST',
             body: JSON.stringify({
-              'memberCode': localStorage.getItem('code'),
-              'sns': localStorage.getItem('code').slice(0, 1) === 'G' ? 'google' : 'kakao'
+              'memberCode': localStorage.getItem('id'),
+              'sns': localStorage.getItem('id').slice(0, 1) === 'G' ? 'google' : 'kakao',
+              'name': name,
             }),
             headers:{
               'Content-Type': 'application/json'

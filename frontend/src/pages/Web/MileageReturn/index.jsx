@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MileageReturn = (props) => {
-  const [isLogin, setIsLogin] = useState(localStorage.getItem('login') ? true : false);
+  const [isLogin, setIsLogin] = useState(localStorage.getItem('id') ? true : false);
   const classes = useStyles();
   const [num, setNum] = React.useState('');
   let [ value, setValue ] = useState('');

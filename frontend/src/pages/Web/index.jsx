@@ -5,7 +5,7 @@ import Layout from '../../layout/layout';
 import Wrapper from './styles';
 
 const Web = (props) => {
-  const [isLogin, setIsLogin] = useState(localStorage.getItem('login') ? true : false);
+  const [isLogin, setIsLogin] = useState(localStorage.getItem('id') ? true : false);
 
   return (
     <Layout isLogin={isLogin}>
