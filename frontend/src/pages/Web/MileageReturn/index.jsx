@@ -95,20 +95,7 @@ const MileageReturn = (props) => {
             </Select>
             <FormHelperText>필수 선택</FormHelperText>
           </FormControl>
-          {/* <FormControl className={classes.margin}>
-            <InputLabel htmlFor="demo-customized-select-native">Age</InputLabel>
-            <NativeSelect
-              id="demo-customized-select-native"
-              value={age}
-              onChange={handleChange}
-              input={<BootstrapInput />}
-            >
-              <option aria-label="None" value="" />
-              <option value={10}>Ten</option>
-              <option value={20}>Twenty</option>
-              <option value={30}>Thirty</option>
-            </NativeSelect>
-          </FormControl> */}
+
           <Link to = "/" style={{textDecoration: 'none' }} className="lnk">
             <Button variant="contained" size="medium" className="btnClick">
               송금

@@ -1,24 +1,59 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { Wheel } from "react-custom-roulette";
-import { Modal } from "@material-ui/core";
+import Login from '../../../components/Auth/Login/index';
+import { makeStyles, Modal } from '@material-ui/core/';
+import Layout from '../../../layout/layout';
 import Wrapper from './styles';
 
-import Header from '../../../layout/Header/index';
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
 
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+
+  paper: {
+    position: 'absolute',
+    width: '70%',
+    textAlign: 'center',
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 const data = [
-  { id: 1, option: "꽝" },
+  { id: 1, option: "100마일리지" },
   { id: 2, option: "200마일리지" },
-  { id: 3, option: "꽝" },
-  { id: 4, option: "500마일리지" },
-  { id: 5, option: "꽝" },
-  { id: 6, option: "800마일리지" }
+  { id: 3, option: "300마일리지" },
+  { id: 4, option: "400마일리지" },
+  { id: 5, option: "500마일리지" },
+  { id: 6, option: "600마일리지" }
 ];
 
-const Roulette = (props) => {
+export default function Roulette() {
+  const [isLogin, setIsLogin] = useState(localStorage.getItem('id') ? true : false);
+  const classes = useStyles();
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(1);
-  const [open, setOpen] = useState(false);
+  const [modalStyle] = React.useState(getModalStyle);
+  const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -27,67 +62,73 @@ const Roulette = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-  
+
   const handleSpinClick = () => {
     const newPrizeNumber = Math.floor(Math.random() * data.length);
     setPrizeNumber(newPrizeNumber);
     setMustSpin(true);
   };
-  
+
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title">당첨을 축하합니다!</h2>
+      <p id="simple-modal-description">{data[prizeNumber].option}</p>
+      <Login></Login>
+    </div>
+  );
+
   return (
-    <Wrapper>
-      <div align="center">
-        <Header isLogin={localStorage.getItem('id')}/>
-        <br/><br/><br/><br/><br/><br/><br/>
-        <Wheel
-          mustStartSpinning={mustSpin}
-          prizeNumber={prizeNumber}
-          data={data}
-          outerBorderColor={["#f2f2f2"]}
-          outerBorderWidth={[3]}
-          innerBorderColor={["#f2f2f2"]}
-          radiusLineColor={["#dedede"]}
-          radiusLineWidth={[3]}
-          textColors={["#ffffff"]}
-          fontSize={[15]}
-          textDistance={65}
-          perpendicularText={[true]}
-          backgroundColors={[
-            "#F22B35",
-            "#F99533",
-            "#24CA69",
-            "#514E50",
-            "#46AEFF",
-            "#9145B7"
-          ]}
-          onStopSpinning={() => {
-            setMustSpin(false);
-            handleOpen();
-          }}
-        />
-        <br/><br/>< br/><br/><br/><br/><br/>
-        {/* <div className="btn"> */}
-        <button className="spinBtn" onClick={handleSpinClick}>
-          룰렛 돌리기
-        </button>
-        <Modal open={open} onClose={handleClose} className="modal">
-          <div className="paper">
-            <p>{data[prizeNumber]}</p>
-          </div>
-          {/* <button className="loginBtn" onClick={""}>
-            상품받기
-          </button> */}
-        </Modal>
+    <Layout isLogin={isLogin}>
+      <Wrapper>
+        <div align="center">
+          <br/><br/><br/><br/>
+          <img className="rewardImage" alt="" src="/images/rewardimg.png"/>
+          <p className="rewardFont">※ 룰렛은 설문당 1번만 가능합니다.</p>
+          <br/><br/><br/><br/><br/>
+          <Wheel
+            mustStartSpinning={mustSpin}
+            prizeNumber={prizeNumber}
+            data={data}
+            outerBorderColor={["#f2f2f2"]}
+            outerBorderWidth={[3]}
+            innerBorderColor={["#f2f2f2"]}
+            radiusLineColor={["#dedede"]}
+            radiusLineWidth={[3]}
+            textColors={["#ffffff"]}
+            fontSize={[15]}
+            textDistance={65}
+            perpendicularText={[true]}
+            backgroundColors={[
+              "#F22B35",
+              "#F99533",
+              "#24CA69",
+              "#514E50",
+              "#46AEFF",
+              "#9145B7"
+            ]}
+            onStopSpinning={() => {
+              setMustSpin(false);
+              handleOpen();
+            }}
+          />
+          <br/><br/><br/><br/><br/><br/>
 
-        {/* </div> */}
+          <button 
+            className="spinBtn" 
+            onClick={(e) => {
+              handleSpinClick(e);
+              e.currentTarget.disabled = true;
+            }}
+          >
+            마일리지 룰렛 돌리기
+          </button>
 
-
-        {/* {!mustSpin ? data[prizeNumber].option : "0"} */}
-
-        {/* 로그인 화면으로 넘어가는 버튼 위치 */}
-      </div>
-    </Wrapper>
+          <Modal open={open} onClose={handleClose} className={classes.modal}>
+            {body}
+          </Modal>
+        </div>
+      </Wrapper>
+    </Layout>
   );
 }
-
-export default Roulette;

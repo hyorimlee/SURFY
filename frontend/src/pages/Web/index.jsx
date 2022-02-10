@@ -3,7 +3,6 @@ import { Grid } from '@material-ui/core';
 
 // import NowSurvey from './NowSurvey/index';
 import OtherSurvey from './OtherSurvey/index';
-import MileageSave from './MileageSave/index';
 import Login from '../../components/Auth/Login/index';
 
 import Layout from '../../layout/layout';
@@ -23,7 +22,6 @@ const Web = (props) => {
         >
           <OtherSurvey>
           </OtherSurvey>
-          <Login></Login>
         </Grid>
       </Wrapper>
     </Layout>
