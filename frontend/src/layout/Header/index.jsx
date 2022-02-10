@@ -7,22 +7,26 @@ import { OuterGrid } from './styles';
 
 
 const Header = (props) => {
-  const { isLogin } = props;
+  // const { isLogin } = props;
   let navigate = useNavigate();
 
+  const [isLogin, setIsLogin] = useState('');
   const [nickname, setNickname] = useState('');
   const [mileage, setMileage] = useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
+  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
+  
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  
   useEffect(() => {
+    setIsLogin(localStorage.getItem('id'));
+    
     fetch(`http://i6a204.p.ssafy.io:8000/api/member/code/${localStorage.getItem('id')}`)
     .then(response => {
       return response.json();

@@ -19,28 +19,43 @@ const Kiosk = () => {
 
   // 서버로부터 버스 정보 수신 / 최초 1회 실행, 일정 시간마다 반복
   useEffect(() => {
-    const getBusStationInfo = setInterval(() => {
-      axios({
-        method: 'GET',
-        url: `http://i6a204.p.ssafy.io:8000/api/businfo/${busStationId}`,
-      })
-      .then((response) => {
-        setBusStationInfo(response.data);
-        setBusSoon(() => {
-          return response.data.filter((bus) => {
-            return bus.arrmsg1 === '곧 도착';
-          })
+    axios({
+      method: 'GET',
+      url: `http://i6a204.p.ssafy.io:8000/api/businfo/${busStationId}`,
+    })
+    .then((response) => {
+      setBusStationInfo(response.data);
+      setBusSoon(() => {
+        return response.data.filter((bus) => {
+          return bus.arrmsg1 === '곧 도착';
         })
       })
-      .catch(() => {
-        console.error('버스 정보 수신 에러');
-      })
-    }, 10000);
+    })
+    .catch(() => {
+      console.error('버스 정보 수신 에러');
+    })
+    // const getBusStationInfo = setInterval(() => {
+    //   axios({
+    //     method: 'GET',
+    //     url: `http://i6a204.p.ssafy.io:8000/api/businfo/${busStationId}`,
+    //   })
+    //   .then((response) => {
+    //     console.log('good');
+    //     setBusStationInfo(response.data);
+    //     setBusSoon(() => {
+    //       return response.data.filter((bus) => {
+    //         return bus.arrmsg1 === '곧 도착';
+    //       })
+    //     })
+    //   })
+    //   .catch(() => {
+    //     console.error('버스 정보 수신 에러');
+    //   })
+    // }, 10000);
 
-    return () => {
-      clearInterval(getBusStationInfo);
-    }
-
+    // return () => {
+    //   clearInterval(getBusStationInfo);
+    // }
   }, [busStationId]);
 
   return (
