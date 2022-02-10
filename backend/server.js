@@ -33,7 +33,7 @@ connection.connect();
 
 
 
-// app.use(morgan("conbined",{stream}));
+app.use(morgan("combined",{stream}));
 // cors 오류 방지
 app.use(
     cors({
