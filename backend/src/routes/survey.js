@@ -4,6 +4,7 @@ const app = express.Router()
 const db = require('../models')
 const fs = require('fs');
 const {verifyToken} = require('../utils/jwt');
+const { getSurveyed } = require('./functions');
 
 
 
@@ -66,6 +67,11 @@ app.get('/:surveyId',async(req,res)=>{
                     'remain',
                     'cnt'
                 ]
+            },{
+                model : db['roulette_result'],
+                attributes: [
+                    ["fk_members","memberId"],
+                ],
             }],
             where:{
                 id : surveyId,
@@ -75,16 +81,11 @@ app.get('/:surveyId',async(req,res)=>{
 
         for(let i = 0; i<result['questions'].length;i++){
             for(let k=0;k<result['questions'][i]['options'].length;k++){
-                
                 if(result['questions'][i]['options'][k]['img_path']){
                     result['questions'][i]['options'][k]['img_path'] = "exist"
                 }
             }
         }
-
-        
-
-
         return res.json(result)
     }
     catch(error){
