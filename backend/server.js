@@ -17,22 +17,6 @@ const morgan = require('morgan');//for log
 const {stream} = require("./src/config/winston.config")
 const routes = require('./src/routes');
 
-// 디비 연결부분
-const fs = require('fs');
-const {development} = require('./src/config/config.json')
-const mysql = require('mysql')
-const connection = mysql.createConnection({
-    host: development.host,
-    user: development.username,
-    password : development.password,
-    port : 3306,
-    database: development.database
-})
-
-connection.connect();
-
-
-
 app.use(morgan("combined",{stream}));
 // cors 오류 방지
 app.use(
@@ -53,7 +37,6 @@ app.get('/data',(req,res) =>{
             }
         });
 });
-// app.use(morgan("conbined",{stream}));
 // cors 오류 방지
 
 app.use(express.json())
@@ -63,7 +46,7 @@ app.use(express.urlencoded({extended: true}))
 //routes
 app.use('/', routes)
 
-
+app.on('error',function() {});
 
 
 app.listen(port, () => {
