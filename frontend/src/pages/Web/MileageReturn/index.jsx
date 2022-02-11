@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Wrapper from './styles';
 import { Link } from 'react-router-dom';
 import { Grid, Button, FormHelperText } from '@material-ui/core/';
 import Layout from '../../../layout/layout';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import InputBase from '@material-ui/core/InputBase';
 
@@ -25,7 +23,6 @@ const BootstrapInput = withStyles((theme) => ({
     fontSize: 16,
     padding: '10px 26px 10px 12px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
-    // Use the system font instead of the default Roboto font.
     fontFamily: [
       '-apple-system',
       'BlinkMacSystemFont',
@@ -55,10 +52,33 @@ const useStyles = makeStyles((theme) => ({
 const MileageReturn = (props) => {
   const [isLogin, setIsLogin] = useState(localStorage.getItem('id') ? true : false);
   const classes = useStyles();
-  const [age, setAge] = React.useState('');
+  const [num, setNum] = React.useState('');
+  let [ value, setValue ] = useState('');
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setNum(event.target.value);
   };
+
+  useEffect(() => {
+    numberCheck(value)
+  }, [value])
+
+  const onChange = e => {
+    numberCheck(e.target.value)
+  }
+
+  const numberCheck = (v) => {
+    let num = v || 0
+
+    if (!isFinite(num)) return
+    num = num.toString()
+
+    if ( num !== '0' && !num.includes('.')) {
+      num = num.replace(/[^0-9]/g,'')
+    }
+
+    setValue(num)
+  }
+
 
   return (
     <Layout isLogin={isLogin}>
@@ -69,39 +89,41 @@ const MileageReturn = (props) => {
           justifyContent="center"
           alignItems="center"
         >
-        <div>
           <FormControl className={classes.margin}>
-            <InputLabel htmlFor="demo-customized-textbox">계좌번호 입력</InputLabel>
-            <BootstrapInput id="demo-customized-textbox" />
-            <FormHelperText>필수 입력</FormHelperText>
-          </FormControl>
-          <FormControl className={classes.margin}>
-            <InputLabel 
-              id="demo-customized-select-label">은행</InputLabel>
-            <Select
-              labelId="demo-customized-select-label"
-              id="demo-customized-select"
-              value={age}
+            <InputLabel htmlFor="demo-customized-select-native">은행</InputLabel>
+            <NativeSelect
+              id="demo-customized-select-native"
+              value={num}
               onChange={handleChange}
+              className="selectBtn"
               input={<BootstrapInput />}
             >
-              <MenuItem value={10}>카카오뱅크</MenuItem>
-              <MenuItem value={20}>농협은행</MenuItem>
-              <MenuItem value={30}>기업은행</MenuItem>
-              <MenuItem value={30}>신한은행</MenuItem>
-              <MenuItem value={30}>우리은행</MenuItem>
-              <MenuItem value={30}>하나은행</MenuItem>
-              <MenuItem value={30}>국민은행</MenuItem>
-            </Select>
+              <option aria-label="은행선택" value="" />
+              <option value={1}>카카오뱅크</option>
+              <option value={2}>농협은행</option>
+              <option value={3}>기업은행</option>
+              <option value={4}>신한은행</option>
+              <option value={5}>우리은행</option>
+              <option value={6}>하나은행</option>
+              <option value={7}>국민은행</option>
+            </NativeSelect>
             <FormHelperText>필수 선택</FormHelperText>
           </FormControl>
-
+          <FormControl className={classes.margin}>
+            <BootstrapInput 
+              id="demo-customized-textbox" 
+              className="inputLabel" 
+              placeholder="계좌번호 입력"
+              value={value}
+              onChange={onChange}
+            />
+            <FormHelperText>필수 입력</FormHelperText>
+          </FormControl>
           <Link to = "/" style={{textDecoration: 'none' }} className="lnk">
             <Button variant="contained" size="medium" className="btnClick">
               송금
             </Button>        
           </Link>
-        </div>
         </Grid>
       </Wrapper>
     </Layout>
