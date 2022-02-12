@@ -74,7 +74,7 @@ const SurveyFormList = ({ surveyId, endSurvey }) => {
           value: datas[k]
         })
       })
-      .then(response => {
+      .then(() => {
         cnt--;
       })
     })
@@ -87,7 +87,7 @@ const SurveyFormList = ({ surveyId, endSurvey }) => {
         handleClickOpen();
         setDialogText('알수없는 오류가 발생했습니다.');
       }
-    }, 1000);
+    }, 300);
   }
 
   const finished = () => {

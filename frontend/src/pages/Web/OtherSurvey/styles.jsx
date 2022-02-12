@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 360px !important;
+  width: 100% !important;
   height: 784px !important;
   background-color: white;
   border-radius: 16px;
@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   }
 
   .oSvy {
-    width: 312px;
+    width: 80vw;
     height: 60px;
     margin-top: 16px;
     background-color: #C8C8FF;

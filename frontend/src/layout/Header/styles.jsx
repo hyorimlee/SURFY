@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 
 const OuterGrid = styled(Grid)`
-  width: 390px !important;
   height: 40px;
   background-color: #64AAFF;
 

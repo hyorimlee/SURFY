@@ -36,7 +36,7 @@ const OtherSurvey = () => {
             className="oSvy"
             key={res.id}
           >
-            <ListItemText primary={res.title} onClick={clickedSurvey(res.id)} />
+            <ListItemText className="surveyBtn" primary={res.title} onClick={clickedSurvey(res.id)} />
           </ListItem>
         );
       })

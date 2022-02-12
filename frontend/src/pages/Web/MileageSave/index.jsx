@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText, Button, Grid } from '@material-ui/core/';
 import Layout from '../../../layout/layout';
-import Wrapper from './styles';
+import Wrapper, { CustomGrid } from './styles';
 
 const MileageSave = (props) => {
   const [isLogin, setIsLogin] = useState(localStorage.getItem('id') ? true : false);
@@ -45,24 +45,13 @@ const MileageSave = (props) => {
   return (
     <Layout isLogin={isLogin}>
       <Wrapper>
-        <Grid
+        <CustomGrid
           container
           direction="column"
           justifyContent="center"
           alignItems="center"
         >
-          <div align="center">
-
-          {/* <Link to = "/web/mileagereturn" style={{textDecoration: 'none' }} className="lnk">
-            <Button variant="contained" size="medium" className="btnClick">
-              환급 받기
-            </Button>        
-          </Link> */}
           <List component="nav" aria-label="mailbox folders">
-            {/* <Routes>
-              <Route path="/web/mileagesave" element={<MileageReturn />} />
-            </Routes> */}
-
             <p className="bdT">마일리지 내역</p>
             {
               mileageHistory.length === 0
@@ -70,8 +59,7 @@ const MileageSave = (props) => {
               : mileageHistory
             }
           </List>
-          </div>
-        </Grid>
+        </CustomGrid>
       </Wrapper>
     </Layout>
   )
