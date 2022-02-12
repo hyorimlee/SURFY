@@ -23,7 +23,6 @@ const Web = (props) => {
         >
           <OtherSurvey>
           </OtherSurvey>
-          <Login></Login>
         </Grid>
       </Wrapper>
     </Layout>

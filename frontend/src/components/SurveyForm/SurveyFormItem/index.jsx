@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField } from '@material-ui/core';
 
 import { CustomGrid } from './styles';
 
-const SurveyFormItem = ({ question, answer }) => {
-  console.log(question);
+const SurveyFormItem = ({ question, changed }) => {
+  // const [answer, setAnswer] = useState('');
   
+  const valueChage = (event) => {
+    // setAnswer(event.target.value);
+    changed(event.target.value, question.id);
+  }
+
   return (
     <CustomGrid
       container      
@@ -21,7 +26,8 @@ const SurveyFormItem = ({ question, answer }) => {
         rows={8}
         placeholder="답변을 입력해주세요."
         variant="outlined"
-        onChange={answer}
+        // value={answer}
+        onChange={valueChage}
       />
     </CustomGrid>
   );

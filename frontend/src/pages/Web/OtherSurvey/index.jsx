@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { List, ListItem, ListItemText } from '@material-ui/core/';
+import { useNavigate } from 'react-router-dom';
 
 import SurveyFormList from '../../../components/SurveyForm/SurveyFormList';
 
@@ -7,9 +8,12 @@ import Wrapper from './styles';
 
 
 const OtherSurvey = () => {
+  let navigate = useNavigate();
+
   const [surveys, setSurveys] = useState([]);
   const [isNowSurvey, setIsNowSurvey] = useState(0);
   const [selectedSurveyId, setSelectedSurveyId] = useState('0');
+  const [answers, setAnswers] = useState({});
 
   useEffect(() => {
     const query = { 'versus': 0, 'count': 100 }
@@ -42,7 +46,6 @@ const OtherSurvey = () => {
     console.log('inner')
   }, [])
   
-
   const clickedSurvey = (id) => () => {
     setIsNowSurvey(1);
     setSelectedSurveyId(id);
@@ -51,6 +54,7 @@ const OtherSurvey = () => {
   const endSurvey = () => {
     setIsNowSurvey(0);
     setSelectedSurveyId(0);
+    navigate('roulette');
   }
 
 
