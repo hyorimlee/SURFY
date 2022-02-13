@@ -17,12 +17,11 @@ const InfoWindow = ({place}) => {
   return (
     <Wrapper>
       <div style={infoWindowStyle}>
+        <img src={place.img_path} width='100' height='100' alt='place_img' />
         <div style={{fontSize: 12}} >{place.text}</div>
         <hr/>
         <div style={{fontSize: 10}} >{place.op_time}</div>
       </div>
-      {/* <textarea value={place.text + '\n' + place.op_time} cols="30" rows="10">
-      </textarea> */}
     </Wrapper>
   )
 }

@@ -56,6 +56,7 @@ const Map = (props) => {
           op_time = {data.operating_time}
           color = "blue"
           target_v = {data.id == target}
+          img_path = {data.img_path}
           place={data}
           />
         ))}
