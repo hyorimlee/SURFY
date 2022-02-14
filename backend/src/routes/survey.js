@@ -144,10 +144,7 @@ app.get('/reward/:surveyId',async(req,res)=>{
             },
             attributes :[
                 'id',
-                'probability',
                 'reward',
-                'remain',
-                'cnt'
             ]
         })
         
