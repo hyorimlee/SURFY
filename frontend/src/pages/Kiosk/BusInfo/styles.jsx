@@ -18,9 +18,9 @@ const Wrapper = styled.div`
 
 const InfoHeader = styled.div`
   width: 100%;
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: white;
-  margin: 10px 0 40px 0;
+  margin: 10px 0 20px 0;
 
   display: flex;
   flex-direction: row;
@@ -34,7 +34,7 @@ const InfoHeader = styled.div`
 
 const InfoContent = styled.div`
   width: 100%;
-  height: 840px;
+  height: 640px;
 `;
 
 export { InfoHeader, InfoContent }
