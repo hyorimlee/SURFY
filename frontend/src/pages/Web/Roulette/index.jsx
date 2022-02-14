@@ -79,7 +79,7 @@ export default function Roulette() {
 
     fetch(url).then(response => response.json())
     .then(response => {
-      if (response.surveyed) {
+      if (response.surveyed && localStorage.getItem('pk')) {
         setIsAlready(true);
         handleOpen();
       } else {
@@ -91,19 +91,33 @@ export default function Roulette() {
   };
 
   const saveMileage = () => {
-    fetch('http://i6a204.p.ssafy.io:8000/api/roulette', {
-      method: 'POST',
-      headers: {
-        'Content-Type' : 'application/json'
-      },
-      body: JSON.stringify({
-        'memberId': Number(localStorage.getItem('pk')),
-        'rewardId': data[prizeNumber].id,
-        'surveyId': Number(params.surveyId),
-      })
+    const query = { 'surveyId': params.surveyId, 'memberId': localStorage.getItem('pk') };
+    const url = new URL('http://i6a204.p.ssafy.io:8000/api/survey/member');
+    Object.keys(query).forEach(q => {
+      url.searchParams.append(q, query[q]);
     })
 
-    navigate('/web/');
+    fetch(url).then(response => response.json())
+    .then(response => {
+      if (response.surveyed) {
+        setIsAlready(true);
+        handleOpen();
+      } else {
+        fetch('http://i6a204.p.ssafy.io:8000/api/roulette', {
+          method: 'POST',
+          headers: {
+            'Content-Type' : 'application/json'
+          },
+          body: JSON.stringify({
+            'memberId': Number(localStorage.getItem('pk')),
+            'rewardId': data[prizeNumber].id,
+            'surveyId': Number(params.surveyId),
+          })
+        })
+        
+        navigate('/web/');
+      }
+    })
   }
 
   const body = (
@@ -113,7 +127,7 @@ export default function Roulette() {
       {
         isLogin
         ? <CustomButton onClick={saveMileage}>적립 받기</CustomButton>
-        : <Login></Login>
+        : <Login logined={saveMileage}></Login>
       }
     </div>
   );

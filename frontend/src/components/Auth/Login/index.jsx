@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
@@ -7,7 +7,8 @@ import { CustomButton, CustomDialog, CustomDialogTitle, CustomDialogContent } fr
 import kakao_img from '../../../images/kakao_login.png';
 import google_img from '../../../images/google_login.png';
 
-export default function AlertDialog() {
+export default function AlertDialog(props) {
+  const { logined } = props;
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -29,6 +30,7 @@ export default function AlertDialog() {
             handleClose();
             localStorage.setItem('id', `K${response.id}`);
             CustomLogin(response.kakao_account.profile.nickname);
+            logined();
           },
           fail: function(error) {
               alert('로그인 오류 발생');
@@ -61,6 +63,7 @@ export default function AlertDialog() {
         handleClose();
         localStorage.setItem('id', `G${result.user.uid}`);
         CustomLogin(result.user.displayName);
+        logined();
       })
   }
 
