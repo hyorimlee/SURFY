@@ -4,7 +4,11 @@ import { Grid } from '@material-ui/core';
 
 const OuterGrid = styled(Grid)`
   height: 40px;
-  background-color: #64AAFF;
+  background-color: rgb(139, 222, 255);
+
+  .logoImage {
+    height: 40px;
+  }
 
   & div {
     display: flex;

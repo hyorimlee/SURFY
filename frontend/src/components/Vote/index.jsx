@@ -40,8 +40,8 @@ const VoteResult = (props) => {
       }
     },
     chart: {
-      width: 400,
-      height: 400,
+      width: 320,
+      height: 320,
     },
 
     exportMenu: {
@@ -63,7 +63,7 @@ const Vote = (props) => {
   const { voteData, onTime } = props;
   
   const webUrl = `http://localhost:3000/web?`;
-  const qrcodeSize = 250;
+  const qrcodeSize = 200;
   
   useEffect(() => {
     const back = setTimeout(onTime, 7000);
