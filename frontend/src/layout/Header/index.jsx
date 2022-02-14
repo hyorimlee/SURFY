@@ -26,23 +26,24 @@ const Header = (props) => {
   useEffect(() => {
     setIsLogin(localStorage.getItem('id'));
     
-    fetch(`http://i6a204.p.ssafy.io:8000/api/member/code/${localStorage.getItem('id')}`)
-    .then(response => {
-      return response.json();
-    })
-    .then(response => {
-      localStorage.setItem('pk', response.id);
-      setNickname(response.member_code);
-
-      fetch(`http://i6a204.p.ssafy.io:8000/api/mileage/${response.id}`)
+    if (localStorage.getItem('id')) {
+      fetch(`http://i6a204.p.ssafy.io:8000/api/member/code/${localStorage.getItem('id')}`)
       .then(response => {
         return response.json();
       })
       .then(response => {
-        setMileage(response);
+        localStorage.setItem('pk', response.id);
+        setNickname(response.member_code);
+  
+        fetch(`http://i6a204.p.ssafy.io:8000/api/mileage/${response.id}`)
+        .then(response => {
+          return response.json();
+        })
+        .then(response => {
+          setMileage(response);
+        })
       })
-    })
-
+    }
   });
 
   const history = () => {
@@ -55,12 +56,12 @@ const Header = (props) => {
     handleClose();
   }
 
-  const logout = () => {
-    localStorage.removeItem('id');
-    setNickname('');
-    setMileage(0);
-    handleClose();
-  }
+  // const logout = () => {
+  //   localStorage.removeItem('id');
+  //   setNickname('');
+  //   setMileage(0);
+  //   handleClose();
+  // }
 
   return (
     <OuterGrid

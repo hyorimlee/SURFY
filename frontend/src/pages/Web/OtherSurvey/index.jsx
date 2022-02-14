@@ -44,7 +44,6 @@ const OtherSurvey = () => {
 
       setSurveys(items);
     })
-    console.log('inner')
   }, [])
   
   const clickedSurvey = (id) => () => {
