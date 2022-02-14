@@ -17,7 +17,7 @@ const InfoWindow = ({place}) => {
   return (
     <Wrapper>
       <div style={infoWindowStyle}>
-        <img src={`http://i6a204.p.ssafy.io:8013/${place.id}.JPG`} width='100' height='100' alt='place_img' />
+        <img src={`http://i6a204.p.ssafy.io:8000/${place.id}.JPG`} width='100' height='100' alt='place_img' />
         <div style={{fontSize: 12}} >{place.text}</div>
         <hr/>
         <div style={{fontSize: 10}} >{place.op_time}</div>
