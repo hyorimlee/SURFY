@@ -23,7 +23,7 @@ const Map = (props) => {
     const test = () =>{
       axios({
         method:'GET',
-        url : `https://i6a204.p.ssafy.io:8011/data`,
+        url : `http://i6a204.p.ssafy.io:8013/data`,
       })
       .then((response)=>{
         setmapdata(response.data);
@@ -50,6 +50,7 @@ const Map = (props) => {
         {mapdata.map((data, index) => (
           <Marker 
           key = {data.id}
+          id = {data.id}
           lat = {data.x}
           lng = {data.y}
           text = {data.name}
