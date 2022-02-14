@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 {
   "name": "backend",
   "version": "1.0.0",
@@ -28,7 +28,6 @@
     "winston-daily-rotate-file": "^4.5.5"
   }
 }
-=======
 {
   "name": "backend",
   "version": "1.0.0",
@@ -58,4 +57,3 @@
     "winston-daily-rotate-file": "^4.5.5"
   }
 }
->>>>>>> feature/infowindow
