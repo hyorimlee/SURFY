@@ -2,34 +2,37 @@ import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 
 const Wrapper = styled.div`
-  height: 128px;
+  height: 96px;
   margin: 0 0 10px 0;
   background-color: #ffffff;
   border-radius: 15px;
 
   & .header, .remain, .locate, .full {
-    width: 260px;
-    height: 128px;
-    font-size: 3rem;
+    width: 200px;
+    height: 96px;
+    font-size: 2.5rem;
     text-align: center;
-    line-height: 128px;
+    line-height: 100px;
     background-color: #ffffff;
     border-radius: 15px;
+    // margin-left: 30px;
   }
 
   & .remain {
-    width: 330px;
-    margin-left: 47px;
+    width: 220px;
+    margin-right: 30px;
+    margin-left: 30px;
   }
 
   & .locate {
-    width: 380px;
-    margin-left: 42px;
+    width: 220px;
+    margin-right: 50px;
+    margin-left: 50px;
   }
 
   & .full {
-    width: 260px;
-    margin-left: 70px;
+    width: 180px;
+    margin-left: 42px;
 
     display: flex;
     flex-direction: row;

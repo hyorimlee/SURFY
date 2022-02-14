@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   font-family: 'Roboto';
   width: 98%;
-  height: 200px;
+  height: 112px;
   
   background-color: #456173;
   border-top-left-radius: 10px;
@@ -16,14 +16,14 @@ const Wrapper = styled.div`
 
   & > p {
     color: white;
-    font-size: 3rem;
-    margin: 0 30px;
+    font-size: 2.5rem;
+    margin: 0 20px;
   }
 
   & .bus-soon--list {
-    width: 1005px;
+    width: 754px;
     height: 80%;
-    margin: 0 30px;
+    margin: 0 20px;
     border-radius: 10px;
     background-color: white;
 

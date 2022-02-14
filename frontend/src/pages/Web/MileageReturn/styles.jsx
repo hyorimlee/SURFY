@@ -1,18 +1,28 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 390px;
-  height: 844px;
+  width: 100%;
+  height: 100%;
   background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 
+  .selectBtn {
+    width: 280px;
+  }
+
+  .inputLabel {
+    width: 280px;
+    height: 41px; !important
+  }
+
   .btnClick {
-    width: 110px;
-    height: 40px;
-    background-color: #96E0CE;
+    width: 280px;
+    height: 41px;
+
+    background-color: #64AAFF;
   }
 `;
 

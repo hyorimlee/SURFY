@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 390px;
-  height: 844px;
+  width: 100%;
+  height: 100%;
   background-color: white;
 
   .rewardImage {
-    width: 300px;
+    width: 90%;
   }
 
   .rewardFont {

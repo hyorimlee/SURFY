@@ -22,9 +22,11 @@ function getModalStyle() {
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+    width: '100vw',
+    height: '100vh',
+    display: "flex !import",
+    alignItems: "center !important",
+    justifyContent: "center !important",
   },
 
   paper: {
