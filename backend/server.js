@@ -37,13 +37,6 @@ app.get('/data',(req,res) =>{
             }
         });
 });
-<<<<<<< HEAD
-=======
-
-
-
-// app.use(morgan("conbined",{stream}));
->>>>>>> feature/infowindow
 // cors 오류 방지
 
 app.use(express.json())
