@@ -12,7 +12,7 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const app = express();
-const port = 8000;        // 포트 번호
+const port = 8013;        // 포트 번호기존 8000 8011
 const morgan = require('morgan');//for log
 const {stream} = require("./src/config/winston.config")
 const routes = require('./src/routes');
@@ -37,11 +37,18 @@ app.get('/data',(req,res) =>{
             }
         });
 });
+<<<<<<< HEAD
+=======
+
+
+
+// app.use(morgan("conbined",{stream}));
+>>>>>>> feature/infowindow
 // cors 오류 방지
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-
+app.use(express.static('./backend/src/images'))
 
 //routes
 app.use('/', routes)
