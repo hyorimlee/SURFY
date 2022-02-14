@@ -23,7 +23,7 @@ const Map = (props) => {
     const test = () =>{
       axios({
         method:'GET',
-        url : `http://localhost:8000/data`,
+        url : `https://i6a204.p.ssafy.io:8011/data`,
       })
       .then((response)=>{
         setmapdata(response.data);
