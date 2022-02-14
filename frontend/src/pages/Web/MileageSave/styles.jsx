@@ -38,7 +38,6 @@ const Wrapper = styled.div`
 
 const CustomGrid = styled(Grid)`
   width: 100%;
-  height: 80vh;
 
   & p {
     text-align: center;
