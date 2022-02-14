@@ -17,9 +17,7 @@ const morgan = require('morgan');//for log
 const {stream} = require("./src/config/winston.config")
 const routes = require('./src/routes');
 
-
-
-// app.use(morgan("conbined",{stream}));
+app.use(morgan("combined",{stream}));
 // cors 오류 방지
 app.use(
     cors({
@@ -27,6 +25,20 @@ app.use(
         optionsSuccessStatus: 200,
     })
 );
+
+app.get('/data',(req,res) =>{
+    connection.query(
+        "SELECT * FROM maptest", (err, data) =>{
+            if(!err){
+                res.send(data);
+            } else {
+                console.log(err);
+                res.send(err);
+            }
+        });
+});
+// cors 오류 방지
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
@@ -34,7 +46,7 @@ app.use(express.urlencoded({extended: true}))
 //routes
 app.use('/', routes)
 
-
+app.on('error',function() {});
 
 
 app.listen(port, () => {

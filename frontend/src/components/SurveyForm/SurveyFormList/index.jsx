@@ -12,7 +12,7 @@ const SurveyFormList = ({ surveyId, endSurvey }) => {
   const [answers, setAnswers] = useState({});
   const [open, setOpen] = useState(false);
   const [dialogText, setDialogText] = useState('');
-  
+
   useEffect(() => {
     let items = [];
     
@@ -53,45 +53,61 @@ const SurveyFormList = ({ surveyId, endSurvey }) => {
 
   const submit = () => {
     let datas = {};
-    
+    let need;
+
     setAnswers((preState) => {
       datas = {...preState};
       return preState;
-    })    
-    
-    let cnt = Object.keys(datas).length;
-    Object.keys(datas).forEach(k => {
-      fetch(`http://i6a204.p.ssafy.io:8000/api/survey/versus`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          member_id: Number(localStorage.getItem('pk')),
-          survey_id: Number(surveyId),
-          question_id: Number(k),
-          option_id: 0,
-          value: datas[k]
-        })
-      })
-      .then(() => {
-        cnt--;
-      })
+    })
+    setQuestions(preState => {
+      need = Object.keys({...preState}).length - 1;
+      return preState;
     })
     
-    setTimeout(() => {
-      if (cnt <= 0) {
-        setDialogText('설문이 정상적으로 종료되었습니다.');
-        handleClickOpen();
-      } else {
-        handleClickOpen();
-        setDialogText('알수없는 오류가 발생했습니다.');
-      }
-    }, 300);
+    let cnt = Object.keys(datas).length;
+    
+    if (need !== Object.keys(datas).length) {
+      setDialogText('모든 설문을 입력해주세요.');
+      handleClickOpen();
+    } else {
+      Object.keys(datas).forEach(k => {
+        fetch(`http://i6a204.p.ssafy.io:8000/api/survey/versus`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            member_id: Number(localStorage.getItem('pk')),
+            survey_id: Number(surveyId),
+            question_id: Number(k),
+            option_id: 0,
+            value: datas[k]
+          })
+        })
+        .then(() => {
+          cnt--;
+        })
+      })
+      
+      setTimeout(() => {
+        if (cnt <= 0) {
+          setDialogText('설문이 정상적으로 종료되었습니다.');
+          handleClickOpen();
+        } else {
+          setDialogText('오류가 발생했습니다. 다시 시도해주세요.');
+          handleClickOpen();
+        }
+      }, 300);
+    }
+
   }
 
   const finished = () => {
-    endSurvey();
+    if (dialogText === '설문이 정상적으로 종료되었습니다.') {
+      endSurvey();
+    } else {
+      handleClose();
+    }
   }
 
   return (

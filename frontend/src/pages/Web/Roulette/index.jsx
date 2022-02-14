@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { Wheel } from "react-custom-roulette";
-import Login from '../../../components/Auth/Login/index';
 import { makeStyles, Modal } from '@material-ui/core/';
-import Layout from '../../../layout/layout';
-import Wrapper from './styles';
+import { useNavigate, useParams } from 'react-router-dom';
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
+import Layout from '../../../layout/layout';
+import Login from '../../../components/Auth/Login/index';
+import Wrapper, { CustomButton } from './styles';
+import { useEffect } from 'react';
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -22,11 +21,9 @@ function getModalStyle() {
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    width: '100vw',
-    height: '100vh',
-    display: "flex !import",
-    alignItems: "center !important",
-    justifyContent: "center !important",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   },
 
   paper: {
@@ -40,15 +37,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const data = [
-  { id: 1, option: "100마일리지" },
-  { id: 2, option: "200마일리지" },
-  { id: 3, option: "300마일리지" },
-  { id: 4, option: "400마일리지" },
-  { id: 5, option: "500마일리지" },
-  { id: 6, option: "600마일리지" }
-];
-
 export default function Roulette() {
   const [isLogin, setIsLogin] = useState(localStorage.getItem('id') ? true : false);
   const classes = useStyles();
@@ -56,7 +44,24 @@ export default function Roulette() {
   const [prizeNumber, setPrizeNumber] = useState(1);
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
+  const [data, setData] = useState([]);
+  const [isAlready, setIsAlready] = useState(false);
 
+  let navigate = useNavigate();
+  let params = useParams();
+
+  useEffect(() => {
+    fetch(`http://i6a204.p.ssafy.io:8000/api/survey/reward/${params.surveyId}`)
+    .then(response => response.json())
+    .then(response => {
+      const rewards = response.map(res => {
+        return { 'id': res.id, 'option': `${res.reward} 마일리지` };
+      })
+
+      setData(rewards);
+    })
+  }, [])
+  
   const handleOpen = () => {
     setOpen(true);
   };
@@ -66,17 +71,56 @@ export default function Roulette() {
   };
 
   const handleSpinClick = () => {
-    const newPrizeNumber = Math.floor(Math.random() * data.length);
-    setPrizeNumber(newPrizeNumber);
-    setMustSpin(true);
+    const query = { 'surveyId': params.surveyId, 'memberId': localStorage.getItem('pk') };
+    const url = new URL('http://i6a204.p.ssafy.io:8000/api/survey/member');
+    Object.keys(query).forEach(q => {
+      url.searchParams.append(q, query[q]);
+    })
+
+    fetch(url).then(response => response.json())
+    .then(response => {
+      if (response.surveyed) {
+        setIsAlready(true);
+        handleOpen();
+      } else {
+        const newPrizeNumber = Math.floor(Math.random() * data.length);
+        setPrizeNumber(newPrizeNumber);
+        setMustSpin(true);
+      }
+    })
   };
 
+  const saveMileage = () => {
+    fetch('http://i6a204.p.ssafy.io:8000/api/roulette', {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({
+        'memberId': Number(localStorage.getItem('pk')),
+        'rewardId': data[prizeNumber].id,
+        'surveyId': Number(params.surveyId),
+      })
+    })
+
+    navigate('/web/');
+  }
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">당첨을 축하합니다!</h2>
-      <p id="simple-modal-description">{data[prizeNumber].option}</p>
-      <Login></Login>
+      {data.length > 0 ? <p id="simple-modal-description">{data[prizeNumber].option}</p> : <></>}
+      {
+        isLogin
+        ? <CustomButton onClick={saveMileage}>적립 받기</CustomButton>
+        : <Login></Login>
+      }
+    </div>
+  );
+
+  const already = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title">이미 참여한 설문입니다.</h2>
     </div>
   );
 
@@ -114,7 +158,7 @@ export default function Roulette() {
               handleOpen();
             }}
           />
-          <br/><br/><br/><br/><br/><br/>
+          <br/><br/><br/><br/><br/>
 
           <button 
             className="spinBtn" 
@@ -127,7 +171,11 @@ export default function Roulette() {
           </button>
 
           <Modal open={open} onClose={handleClose} className={classes.modal}>
-            {body}
+            {
+              isAlready
+              ? already 
+              : body
+            }
           </Modal>
         </div>
       </Wrapper>

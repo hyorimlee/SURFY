@@ -69,7 +69,34 @@ async function getStationByUid(arsId){
     })
     return data
 }
-
+async function getmapdata(){
+    console.log('hi')
+    const fs = require('fs');
+    const data = fs.readFileSync('../database.json')
+    console.log('여기는?-1')
+    const conf = JSON.parse(data)
+    const mysql = require('mysql')
+    console.log('여기는?')
+    const connection = mysql.createConnection({
+        host: conf.host,
+        user: conf.user,
+        password : conf.password,
+        port : conf.port,
+        database: conf.database 
+    })
+    console.log('여기는?2')
+    connection.connect();
+    console.log('여기는?3')
+    connection.query("SELECT * FROM maptest", (err, results,fields) =>{
+        if(!err){
+            console.log('ok')
+            console.log(results)
+            return results
+        } else {
+            console.log(err);
+        }
+    });
+}
 const output = {
     home : (req, res) => {
         res.render("index");
@@ -96,6 +123,15 @@ const output = {
         }
         catch(error){
             return res.json({error:error})
+        }
+    },
+    mapdata : async(req, res) =>{
+        try{
+            const data = await getmapdata()
+            return res.json(data)
+        }
+        catch(error){
+            return res.status(400).json({msg:"error"})
         }
     }
 }

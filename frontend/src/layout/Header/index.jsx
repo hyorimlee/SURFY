@@ -7,7 +7,6 @@ import { OuterGrid } from './styles';
 
 
 const Header = (props) => {
-  // const { isLogin } = props;
   let navigate = useNavigate();
 
   const [isLogin, setIsLogin] = useState('');
@@ -44,7 +43,7 @@ const Header = (props) => {
       })
     })
 
-  }, []);
+  });
 
   const history = () => {
     navigate('/web/mileagesave');

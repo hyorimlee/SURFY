@@ -62,7 +62,6 @@ const Survey = () => {
   const [voteData, setVoteData] = useState({});
   
   let { versusData, image } = useGetVersus(voted);
-  console.log(versusData);
 
   // 투표 실행
   const vote = async (event) => {
@@ -121,7 +120,7 @@ const Survey = () => {
     >
       {
         voted
-        ? !voteData || !timerDone ? <CustomCircularProgress size={130} /> : <Vote onTime={resetVote} voteData={voteData}></Vote>
+        ? !voteData || !timerDone ? <CustomCircularProgress size={130} /> : <Vote onTime={resetVote} voteData={voteData} surveyId={versusData.id}></Vote>
         : (
             <>
               <div className="qstn" >

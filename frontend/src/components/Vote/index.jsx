@@ -60,7 +60,7 @@ const VoteResult = (props) => {
 }
 
 const Vote = (props) => {
-  const { voteData, onTime } = props;
+  const { voteData, onTime, surveyId } = props;
   
   const webUrl = `http://localhost:3000/web?`;
   const qrcodeSize = 200;
