@@ -60,9 +60,9 @@ const VoteResult = (props) => {
 }
 
 const Vote = (props) => {
-  const { voteData, onTime } = props;
+  const { voteData, onTime, surveyId } = props;
   
-  const webUrl = `http://localhost:3000/web?`;
+  const webUrl = `http://i6a204.p.ssafy.io:3000/web/roulette/${surveyId}`;
   const qrcodeSize = 250;
   
   useEffect(() => {

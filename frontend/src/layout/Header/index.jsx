@@ -7,7 +7,6 @@ import { OuterGrid } from './styles';
 
 
 const Header = (props) => {
-  // const { isLogin } = props;
   let navigate = useNavigate();
 
   const [isLogin, setIsLogin] = useState('');
@@ -32,7 +31,8 @@ const Header = (props) => {
       return response.json();
     })
     .then(response => {
-      setNickname(response.name);
+      localStorage.setItem('pk', response.id);
+      setNickname(response.member_code);
 
       fetch(`http://i6a204.p.ssafy.io:8000/api/mileage/${response.id}`)
       .then(response => {
@@ -43,7 +43,7 @@ const Header = (props) => {
       })
     })
 
-  }, []);
+  });
 
   const history = () => {
     navigate('/web/mileagesave');
@@ -75,7 +75,7 @@ const Header = (props) => {
         isLogin
         ? (
           <div>
-            <p>{nickname} 님</p>
+            <p>{nickname.slice(0, 4)} 님</p>
             <p>{mileage} 마일리지</p>
             <MoreVert onClick={handleClick}/>
             <Menu
