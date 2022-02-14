@@ -15,7 +15,7 @@ const MileageSave = (props) => {
       return response.json();
     })
     .then(response => {
-      const query = { 'memberId': response.id, 'limit': 0 };
+      const query = { 'memberId': response.id, 'limit': 100 };
       const url = new URL('http://i6a204.p.ssafy.io:8000/api/mileage/history');
       Object.keys(query).forEach(q => {
         url.searchParams.append(q, query[q]);
@@ -27,12 +27,13 @@ const MileageSave = (props) => {
       })
       .then(response => {
         let items = [];
-        console.log(response);
 
         response.forEach(res => {
+          const date = new Date(res.timestamp);
           items.push(
-            <ListItem className="breakDown">
-              <ListItemText primary="1000 마일리지"/>
+            <ListItem key={res.id} className="breakDown">
+              <ListItemText primary={`${res.mileage} 마일리지 ${res.mileage >= 0 ? '적립' : '출금'}`}/>
+              <ListItemText primary={`${date.getFullYear()}년 ${date.getMonth()}월 ${date.getDate()}일`}/>
             </ListItem>
           );
         })

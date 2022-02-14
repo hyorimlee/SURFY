@@ -20,7 +20,7 @@ function App() {
         <Route path="/web" element={<Web />} />
         <Route path="/web/mileagesave" element={<MileageSave />} />
         <Route path="/web/mileagereturn" element={<MileageReturn />} />
-        <Route path="/web/roulette" element={<Roulette />} />
+        <Route path="/web/roulette/:surveyId" element={<Roulette />} />
         {/* <Route path="/web/signin" element={<Auth_SignIn/>}/>
         <Route path="/web/signup" element={<Auth_SignUp/>}/> */}
         {/* <Route path="/web/mypage" element={<UserInfo/>}/> */}
