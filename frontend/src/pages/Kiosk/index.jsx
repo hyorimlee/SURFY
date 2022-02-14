@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Grid } from '@material-ui/core';
 import axios from 'axios';
 
 import Layout from '../../layout/layout';
@@ -16,46 +15,32 @@ const Kiosk = () => {
   const [busStationId, setBusStationId] = useState('19005');
   const [busStationInfo, setBusStationInfo] = useState([{stNm: ''}]);           // 버스 정류장 정보 (초기값: stNm - 정류장 이름, getX - 정류장 경도, getY - 정류장 위도)
   const [busSoon, setBusSoon] = useState([]);
+  console.log(busStationInfo);
 
   // 서버로부터 버스 정보 수신 / 최초 1회 실행, 일정 시간마다 반복
   useEffect(() => {
-    axios({
-      method: 'GET',
-      url: `http://i6a204.p.ssafy.io:8000/api/businfo/${busStationId}`,
-    })
-    .then((response) => {
-      setBusStationInfo(response.data);
-      setBusSoon(() => {
-        return response.data.filter((bus) => {
-          return bus.arrmsg1 === '곧 도착';
+    const getBusStationInfo = setInterval(() => {
+      axios({
+        method: 'GET',
+        url: `http://i6a204.p.ssafy.io:8000/api/businfo/${busStationId}`,
+      })
+      .then((response) => {
+        console.log('good');
+        setBusStationInfo(response.data);
+        setBusSoon(() => {
+          return response.data.filter((bus) => {
+            return bus.arrmsg1 === '곧 도착';
+          })
         })
       })
-    })
-    .catch(() => {
-      console.error('버스 정보 수신 에러');
-    })
-    // const getBusStationInfo = setInterval(() => {
-    //   axios({
-    //     method: 'GET',
-    //     url: `http://i6a204.p.ssafy.io:8000/api/businfo/${busStationId}`,
-    //   })
-    //   .then((response) => {
-    //     console.log('good');
-    //     setBusStationInfo(response.data);
-    //     setBusSoon(() => {
-    //       return response.data.filter((bus) => {
-    //         return bus.arrmsg1 === '곧 도착';
-    //       })
-    //     })
-    //   })
-    //   .catch(() => {
-    //     console.error('버스 정보 수신 에러');
-    //   })
-    // }, 10000);
+      .catch(() => {
+        console.error('버스 정보 수신 에러');
+      })
+    }, 10000);
 
-    // return () => {
-    //   clearInterval(getBusStationInfo);
-    // }
+    return () => {
+      clearInterval(getBusStationInfo);
+    }
   }, [busStationId]);
 
   return (
