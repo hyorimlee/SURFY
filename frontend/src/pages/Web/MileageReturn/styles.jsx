@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Dialog, DialogTitle } from '@material-ui/core';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -21,9 +22,21 @@ const Wrapper = styled.div`
   .btnClick {
     width: 280px;
     height: 41px;
-
     background-color: #64AAFF;
   }
 `;
 
-export default Wrapper;
+const CustomDialog = styled(Dialog)`
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 100vw !important;
+  height: 100vh !important;
+`;
+
+const CustomDialogTitle = styled(DialogTitle)`
+`;
+
+
+
+export { Wrapper, CustomDialog, CustomDialogTitle };
