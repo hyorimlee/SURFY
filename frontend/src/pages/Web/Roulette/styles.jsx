@@ -39,5 +39,4 @@ const CustomButton = styled(Button)`
 `;
 
 export { CustomButton };
-
 export default Wrapper;

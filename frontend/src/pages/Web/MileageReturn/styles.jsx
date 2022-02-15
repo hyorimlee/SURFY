@@ -10,14 +10,11 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-<<<<<<< HEAD
-=======
   .coinImage {
     width: 90%;
     margin: 60px 0;
   }
   
->>>>>>> feature/mileage
   .selectBtn {
     width: 280px;
   }
