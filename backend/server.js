@@ -26,19 +26,6 @@ app.use(
     })
 );
 
-app.get('/data',(req,res) =>{
-    connection.query(
-        "SELECT * FROM maptest", (err, data) =>{
-            if(!err){
-                res.send(data);
-            } else {
-                console.log(err);
-                res.send(err);
-            }
-        });
-});
-// cors 오류 방지
-
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(express.static('./backend/src/images'))
