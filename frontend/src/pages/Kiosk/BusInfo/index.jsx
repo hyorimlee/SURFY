@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from 'react';
-
 import InfoList from '../../../components/Bus/InfoList/index';
-
 import 'swiper/css';
 import Wrapper, { InfoHeader, InfoContent } from './styles';
-
 
 
 const BusInfo = (props) => {
   const [showNumber, setShowNumber] = useState(6);
   const [showIdx, setShowIdx] = useState(0);
   const { busInfo } = props;
-
-
   let items = [];
   let idx = 0;
 

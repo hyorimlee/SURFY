@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
 import CardComponent from '../../../components/Card';
 import Vote from '../../../components/Vote/index';
-
 import { CustomGrid, CustomCircularProgress } from './styles';
 
 

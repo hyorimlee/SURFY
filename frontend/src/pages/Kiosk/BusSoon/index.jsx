@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
 import TextBoxList from '../../../components/Bus/TextBoxList/index';
-
 import 'swiper/css';
 import Wrapper from './styles';
 
@@ -9,7 +7,6 @@ import Wrapper from './styles';
 const BusSoon = (props) => {
   const [showNumber, setShowNumber] = useState(6);
   const [showIdx, setShowIdx] = useState(0);
-  // const [busSoon] = useState([{rtNm: '25안산'}, {rtNm: '20안산'}, {rtNm: '250안산'}, {rtNm: '2500안산'}, {rtNm: '2500안산'}, {rtNm: '2500안산'}, {rtNm: '25안산'}, {rtNm: '250안산'}, {rtNm: '2500안산'}])
   const { busSoon } = props;
 
   let items = [];

@@ -7,7 +7,6 @@ export default function CardComponent(props) {
 
   const vsStyle = {
     fontSize: "112px",
-    // justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#303841",
     color: "white",
@@ -31,12 +30,6 @@ export default function CardComponent(props) {
         </CardMedia>
       </Card> 
       <Card>
-        {/* <CardMedia
-          component="img"
-          height = "50"
-          image ="/images/vs.png"
-        >
-        </CardMedia> */}
         <p style={vsStyle}>vs</p>
       </Card>
       <Card>

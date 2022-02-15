@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { Wheel } from "react-custom-roulette";
+import Auth from '../../../components/Auth/index';
 import { makeStyles, Modal } from '@material-ui/core/';
 import { useNavigate, useParams } from 'react-router-dom';
-
 import Layout from '../../../layout/layout';
-import Login from '../../../components/Auth/Login/index';
 import Wrapper, { CustomButton } from './styles';
 import { useEffect } from 'react';
 
@@ -130,7 +129,7 @@ export default function Roulette() {
       {
         isLogin
         ? <CustomButton onClick={saveMileage}>적립 받기</CustomButton>
-        : <Login logined={saveMileage}></Login>
+        : <Auth logined={saveMileage}></Auth>
       }
     </div>
   );

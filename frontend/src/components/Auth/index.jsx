@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-
 import { CustomButton, CustomDialog, CustomDialogTitle, CustomDialogContent } from './styles';
-
-import kakao_img from '../../../images/kakao_login.png';
-import google_img from '../../../images/google_login.png';
+import kakao_img from '../../images/kakao_login.png';
+import google_img from '../../images/google_login.png';
 
 export default function AlertDialog(props) {
   const { logined } = props;

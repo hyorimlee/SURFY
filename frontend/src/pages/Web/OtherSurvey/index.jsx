@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { List, ListItem, ListItemText, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@material-ui/core/';
 import { useNavigate } from 'react-router-dom';
-
 import SurveyFormList from '../../../components/SurveyForm/SurveyFormList';
-
 import Wrapper from './styles';
 
 
