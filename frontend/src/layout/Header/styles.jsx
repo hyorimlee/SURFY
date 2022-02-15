@@ -1,10 +1,17 @@
 import styled from 'styled-components';
-
 import { Grid } from '@material-ui/core';
 
 const OuterGrid = styled(Grid)`
   height: 40px;
+<<<<<<< HEAD
+=======
   background-color: #64AAFF;
+>>>>>>> feature/mileage
+  background-color: rgb(139, 222, 255);
+
+  .logoImage {
+    height: 40px;
+  }
 
   & div {
     display: flex;

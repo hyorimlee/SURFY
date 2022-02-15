@@ -64,6 +64,7 @@ const Vote = (props) => {
   
   const webUrl = `http://i6a204.p.ssafy.io/web/roulette/${surveyId}`;
   const qrcodeSize = 200;
+
   
   useEffect(() => {
     const back = setTimeout(onTime, 7000);

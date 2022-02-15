@@ -71,7 +71,7 @@ const Header = (props) => {
       alignItems="center"
       className="header"
     > 
-      <Link to="/web">Home</Link>
+      <Link to="/web"><img className="logoImage" alt="logo" src="/images/SURFY.png"/></Link>
       {
         isLogin
         ? (
