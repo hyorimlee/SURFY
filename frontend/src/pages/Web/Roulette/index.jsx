@@ -129,7 +129,7 @@ export default function Roulette() {
       {
         isLogin
         ? <CustomButton onClick={saveMileage}>적립 받기</CustomButton>
-        : <Auth logined={saveMileage}></Auth>
+        : <Auth logined={saveMileage} btnText="상품 받기"></Auth>
       }
     </div>
   );
