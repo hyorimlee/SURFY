@@ -11,10 +11,10 @@ const StationNameWeather = (props) => {
 
   return (
     <Wrapper
-        container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
+      container
+      direction="row"
+      justifyContent="space-between"
+      alignItems="center"
     >
       <TimeInfo></TimeInfo>
       <TextBoxItem text={stationName} />

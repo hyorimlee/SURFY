@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
 
-  width: 1440px;
-  height: 770px;
+  width: 1080px;
+  height: 580px;
 
 `;
 

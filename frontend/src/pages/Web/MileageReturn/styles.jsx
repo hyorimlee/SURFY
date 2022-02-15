@@ -1,14 +1,19 @@
 import styled from 'styled-components';
+import { Dialog, DialogTitle } from '@material-ui/core';
 
 const Wrapper = styled.div`
-  width: 390px;
-  height: 844px;
+  width: 100%;
+  height: 100%;
   background-color: white;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 
+  .coinImage {
+    width: 90%;
+  }
+  
   .selectBtn {
     width: 280px;
   }
@@ -21,8 +26,21 @@ const Wrapper = styled.div`
   .btnClick {
     width: 280px;
     height: 41px;
-    background-color: #96E0CE;
+    background-color: #64AAFF;
   }
 `;
 
-export default Wrapper;
+const CustomDialog = styled(Dialog)`
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 100vw !important;
+  height: 100vh !important;
+`;
+
+const CustomDialogTitle = styled(DialogTitle)`
+`;
+
+
+
+export { Wrapper, CustomDialog, CustomDialogTitle };

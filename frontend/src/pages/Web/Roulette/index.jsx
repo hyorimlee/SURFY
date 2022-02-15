@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Wheel } from "react-custom-roulette";
 import Login from '../../../components/Auth/Login/index';
 import { makeStyles, Modal } from '@material-ui/core/';
+import Layout from '../../../layout/layout';
 import Wrapper from './styles';
 
 function rand() {
@@ -21,9 +22,11 @@ function getModalStyle() {
 
 const useStyles = makeStyles((theme) => ({
   modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
+    width: '100vw',
+    height: '100vh',
+    display: "flex !import",
+    alignItems: "center !important",
+    justifyContent: "center !important",
   },
 
   paper: {
@@ -47,12 +50,12 @@ const data = [
 ];
 
 export default function Roulette() {
+  const [isLogin, setIsLogin] = useState(localStorage.getItem('id') ? true : false);
   const classes = useStyles();
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(1);
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-  const [color, setColor] = useState('green');  
 
   const handleOpen = () => {
     setOpen(true);
@@ -68,9 +71,6 @@ export default function Roulette() {
     setMustSpin(true);
   };
 
-  const onClick = () => {
-    color === 'green' ? setColor('grey') : setColor('green');
-  };
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
@@ -81,56 +81,56 @@ export default function Roulette() {
   );
 
   return (
-    <Wrapper>
-      <div className='rHead' align="center">
-        <br/><br/><br/><br/><br/><br/><br/>
-        <h1>룰렛은 설문당 1번만 사용이 가능합니다.</h1>
-        <br/><br/>
-        <h2>마일리지 100% 당첨</h2>
-        <br/><br/><br/><br/><br/><br/><br/>
-        <Wheel
-          mustStartSpinning={mustSpin}
-          prizeNumber={prizeNumber}
-          data={data}
-          outerBorderColor={["#f2f2f2"]}
-          outerBorderWidth={[3]}
-          innerBorderColor={["#f2f2f2"]}
-          radiusLineColor={["#dedede"]}
-          radiusLineWidth={[3]}
-          textColors={["#ffffff"]}
-          fontSize={[15]}
-          textDistance={65}
-          perpendicularText={[true]}
-          backgroundColors={[
-            "#F22B35",
-            "#F99533",
-            "#24CA69",
-            "#514E50",
-            "#46AEFF",
-            "#9145B7"
-          ]}
-          onStopSpinning={() => {
-            setMustSpin(false);
-            handleOpen();
-          }}
-        />
-        <br/><br/><br/><br/><br/><br/><br/>
+    <Layout isLogin={isLogin}>
+      <Wrapper>
+        <div align="center">
+          <br/><br/><br/><br/>
+          <img className="rewardImage" alt="" src="/images/rewardimg.png"/>
+          <p className="rewardFont">※ 룰렛은 설문당 1번만 가능합니다.</p>
+          <br/><br/><br/><br/><br/>
+          <Wheel
+            mustStartSpinning={mustSpin}
+            prizeNumber={prizeNumber}
+            data={data}
+            outerBorderColor={["#f2f2f2"]}
+            outerBorderWidth={[3]}
+            innerBorderColor={["#f2f2f2"]}
+            radiusLineColor={["#dedede"]}
+            radiusLineWidth={[3]}
+            textColors={["#ffffff"]}
+            fontSize={[15]}
+            textDistance={65}
+            perpendicularText={[true]}
+            backgroundColors={[
+              "#F22B35",
+              "#F99533",
+              "#24CA69",
+              "#514E50",
+              "#46AEFF",
+              "#9145B7"
+            ]}
+            onStopSpinning={() => {
+              setMustSpin(false);
+              handleOpen();
+            }}
+          />
+          <br/><br/><br/><br/><br/><br/>
 
-        <button 
-          color={color}
-          className="spinBtn" 
-          onClick={(e) => {
-            handleSpinClick(e);
-            e.currentTarget.disabled = true;
-          }}
-        >
-          룰렛 돌리기
-        </button>
+          <button 
+            className="spinBtn" 
+            onClick={(e) => {
+              handleSpinClick(e);
+              e.currentTarget.disabled = true;
+            }}
+          >
+            마일리지 룰렛 돌리기
+          </button>
 
-        <Modal open={open} onClose={handleClose} className={classes.modal}>
-          {body}
-        </Modal>
-      </div>
-    </Wrapper>
+          <Modal open={open} onClose={handleClose} className={classes.modal}>
+            {body}
+          </Modal>
+        </div>
+      </Wrapper>
+    </Layout>
   );
 }

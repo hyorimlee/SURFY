@@ -1,22 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import Wrapper from './styles';
-import { Link } from 'react-router-dom';
 import { 
   Grid, 
-  Button, 
+  Button,
   FormHelperText, 
   InputLabel, 
-  MenuItem, 
-  FormControl, 
-  NativeSelect, 
   InputBase, 
-  makeStyles, 
-  withStyles 
-} 
-from '@material-ui/core/';
+  FormControl, 
+  NativeSelect,
+  Typography, 
+  makeStyles,
+  withStyles } 
+  from '@material-ui/core/';
+import MuiDialogContent from '@material-ui/core/DialogContent';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import { 
+  CustomDialog, 
+  CustomDialogTitle,    
+  Wrapper } from './styles';
 import Layout from '../../../layout/layout';
 
+
 const BootstrapInput = withStyles((theme) => ({
+  root: {
+    'label + &': {
+      marginTop: theme.spacing(3),
+    },
+  },
   input: {
     borderRadius: 4,
     position: 'relative',
@@ -25,18 +34,18 @@ const BootstrapInput = withStyles((theme) => ({
     fontSize: 16,
     padding: '10px 26px 10px 12px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
-    // fontFamily: [
-    //   '-apple-system',
-    //   'BlinkMacSystemFont',
-    //   '"Segoe UI"',
-    //   'Roboto',
-    //   '"Helvetica Neue"',
-    //   'Arial',
-    //   'sans-serif',
-    //   '"Apple Color Emoji"',
-    //   '"Segoe UI Emoji"',
-    //   '"Segoe UI Symbol"',
-    // ].join(','),
+    fontFamily: [
+      '-apple-system',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      'Roboto',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
     '&:focus': {
       borderRadius: 4,
       borderColor: '#80bdff',
@@ -51,13 +60,36 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const DialogActions = withStyles((theme) => ({
+  root: {
+    margin: 0,
+    padding: theme.spacing(1),
+  },
+}))(MuiDialogActions);
+
+const DialogContent = withStyles((theme) => ({
+  root: {
+    padding: theme.spacing(2),
+  },
+}))(MuiDialogContent);
+
 const MileageReturn = (props) => {
   const [isLogin, setIsLogin] = useState(localStorage.getItem('id') ? true : false);
   const classes = useStyles();
-  const [num, setNum] = React.useState('');
-  let [ value, setValue ] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const [number, setNumber] = React.useState('0');
+  let [value, setValue] = React.useState('');
+
   const handleChange = (event) => {
-    setNum(event.target.value);
+    setNumber(event.target.value);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -75,7 +107,7 @@ const MileageReturn = (props) => {
     num = num.toString()
 
     if ( num !== '0' && !num.includes('.')) {
-      num = num.replace(/[^0-9]/g,'')
+      num = num.replace(/^0+/g, '');
     }
 
     setValue(num)
@@ -90,16 +122,17 @@ const MileageReturn = (props) => {
           justifyContent="center"
           alignItems="center"
         >
+          <img className="coinImage" alt="" src="/images/coin.gif"/>
           <FormControl className={classes.margin}>
             <InputLabel htmlFor="demo-customized-select-native">은행</InputLabel>
             <NativeSelect
               id="demo-customized-select-native"
-              value={num}
+              value={number}
               onChange={handleChange}
               className="selectBtn"
               input={<BootstrapInput />}
             >
-              <option aria-label="은행선택" value="" />
+              <option aria-label="은행선택" value={0} />
               <option value={1}>카카오뱅크</option>
               <option value={2}>농협은행</option>
               <option value={3}>기업은행</option>
@@ -120,13 +153,27 @@ const MileageReturn = (props) => {
             />
             <FormHelperText>필수 입력</FormHelperText>
           </FormControl>
-          <Link to = "/" style={{textDecoration: 'none' }} className="lnk">
-            <Button variant="contained" size="medium" className="btnClick">
-              송금
-            </Button>        
-          </Link>
-        </Grid>
+          <Button variant="contained" size="medium" className="btnClick" onClick={handleClickOpen}>
+            송금
+          </Button>
+        </Grid>     
       </Wrapper>
+      <CustomDialog
+        open={open}
+        onClose={handleClose}
+      >
+        <CustomDialogTitle id="alert-dialog-title">알림</CustomDialogTitle>
+        <DialogContent dividers>
+          <Typography gutterBottom>
+            송금이 완료되었습니다.
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button autoFocus onClick={handleClose} color="primary">
+            확인
+          </Button>
+        </DialogActions>
+      </CustomDialog>
     </Layout>
   )
 }

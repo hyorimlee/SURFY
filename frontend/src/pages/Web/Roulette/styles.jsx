@@ -1,28 +1,29 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 390px;
-  height: 844px;
+  width: 100%;
+  height: 100%;
   background-color: white;
 
-  .rHead {
-    background-color: #65FFBA;
-    height: 40px;
-    font-size: 1.0em;
-    margin-bottom: 32px;
+  .rewardImage {
+    width: 90%;
   }
 
-  .btn {
-    display: flex;
-    justify-content: space-evenly;
+  .rewardFont {
+    font-family: monospace;
+  }
+
+  .rFont {
+    font-size: 48px;
   }
 
   .spinBtn {
-    background: #1AAB8A;
+    background: #64AAFF;
     color: #fff;
     border: none;
-    border-radius: 16px;
+    border-radius: 4px;
     position: relative;
+    width: 90%;
     height: 30px;
     font-size: 1.0em;
     padding: 0 1em;
