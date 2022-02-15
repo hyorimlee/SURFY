@@ -30,7 +30,6 @@ export default function AlertDialog(props) {
             handleClose();
             localStorage.setItem('id', `K${response.id}`);
             CustomLogin(response.kakao_account.profile.nickname);
-            logined();
           },
           fail: function(error) {
               alert('로그인 오류 발생');
@@ -63,7 +62,6 @@ export default function AlertDialog(props) {
         handleClose();
         localStorage.setItem('id', `G${result.user.uid}`);
         CustomLogin(result.user.displayName);
-        logined();
       })
   }
 
@@ -73,8 +71,6 @@ export default function AlertDialog(props) {
         return response.json();
       })
       .then(response => {
-        console.log(response);
-        
         if (!response) {
           fetch('http://i6a204.p.ssafy.io:8000/api/member/', {
             method: 'POST',
@@ -87,11 +83,15 @@ export default function AlertDialog(props) {
               'Content-Type': 'application/json'
             }
           })
+          .then(response => response.json())
           .then(response => {
-            return response.json()
+            localStorage.setItem('pk', response.id);
           })
-          .then(response => console.log(response))
+        } else {
+          localStorage.setItem('pk', response.id);
         }
+        
+        logined();
       })
   }
 

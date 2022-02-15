@@ -114,6 +114,9 @@ export default function Roulette() {
             'surveyId': Number(params.surveyId),
           })
         })
+        .then(() => console.log('saveMileage fetch Done'))
+        
+        handleClose();
         
         navigate('/web/');
       }
