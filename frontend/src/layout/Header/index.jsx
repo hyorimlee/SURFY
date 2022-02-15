@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
 import { MoreVert} from '@material-ui/icons';
-
 import { OuterGrid } from './styles';
 
 
 const Header = (props) => {
-  // const { isLogin } = props;
   let navigate = useNavigate();
 
   const [isLogin, setIsLogin] = useState('');
@@ -86,7 +84,6 @@ const Header = (props) => {
             >
               <MenuItem onClick={history}>마일리지 내역</MenuItem>
               <MenuItem onClick={withdraw}>마일리지 출금</MenuItem>
-              {/* <MenuItem onClick={logout}>로그아웃</MenuItem> */}
             </Menu>
           </div>
         )

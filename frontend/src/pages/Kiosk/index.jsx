@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Grid } from '@material-ui/core';
 import axios from 'axios';
-
 import Layout from '../../layout/layout';
 import BusInfo from './BusInfo/index';
 import BusSoon from './BusSoon/index';
 import GoogleMap from './GoogleMap/index';
 import StationNameWeather from './StaionNameWeather/index';
 import Survey from './Survey/index';
-
 import Wrapper from './styles';
 
 

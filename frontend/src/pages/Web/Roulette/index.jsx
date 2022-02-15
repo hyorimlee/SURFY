@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Wheel } from "react-custom-roulette";
-import Login from '../../../components/Auth/Login/index';
+import Auth from '../../../components/Auth/index';
 import { makeStyles, Modal } from '@material-ui/core/';
 import Layout from '../../../layout/layout';
 import Wrapper from './styles';
@@ -76,7 +76,7 @@ export default function Roulette() {
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">당첨을 축하합니다!</h2>
       <p id="simple-modal-description">{data[prizeNumber].option}</p>
-      <Login></Login>
+      <Auth></Auth>
     </div>
   );
 
