@@ -50,17 +50,22 @@ const OtherSurvey = () => {
     Object.keys(query).forEach(q => {
       url.searchParams.append(q, query[q]);
     })
-
-    fetch(url)
-    .then(response => response.json())
-    .then(response => {
-      if (response.surveyed === true) {
-        handleClickOpen();
-      } else {
-        setSelectedSurveyId(id);
-        setIsNowSurvey(1);
-      }
-    })
+    if (localStorage.getItem('pk') === null) {
+      setSelectedSurveyId(id);
+      setIsNowSurvey(1);
+    } else {
+      fetch(url)
+      .then(response => response.json())
+      .then(response => {
+        console.log('clickedSurvey', response)
+        if (response.surveyed === true) {
+          handleClickOpen();
+        } else {
+          setSelectedSurveyId(id);
+          setIsNowSurvey(1);
+        }
+      })
+    }
   }
 
   const endSurvey = () => {

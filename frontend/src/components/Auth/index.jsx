@@ -6,7 +6,7 @@ import kakao_img from '../../images/kakao_login.png';
 import google_img from '../../images/google_login.png';
 
 export default function AlertDialog(props) {
-  const { logined } = props;
+  const { logined, btnText, header } = props;
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -89,7 +89,11 @@ export default function AlertDialog(props) {
           localStorage.setItem('pk', response.id);
         }
         
-        logined();
+        if (logined) {
+          logined();
+        } else if (header) {
+          header();
+        }
       })
   }
 
@@ -97,7 +101,7 @@ export default function AlertDialog(props) {
   return (
     <div>
       <CustomButton onClick={handleClickOpen}>
-        상품 받기
+        {btnText}
       </CustomButton>
       <CustomDialog
         open={open}

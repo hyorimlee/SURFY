@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, MenuItem } from '@material-ui/core';
 import { MoreVert} from '@material-ui/icons';
-import { OuterGrid } from './styles';
+import { OuterGrid, CustomLoginBtn } from './styles';
 
 
 const Header = (props) => {
   let navigate = useNavigate();
-
+  
   const [isLogin, setIsLogin] = useState('');
   const [nickname, setNickname] = useState('');
   const [mileage, setMileage] = useState(0);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
+  const [anchorEl, setAnchorEl] = useState(null);
   
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -23,7 +22,7 @@ const Header = (props) => {
   };
   
   useEffect(() => {
-    setIsLogin(localStorage.getItem('id'));
+    setIsLogin(localStorage.getItem('id') ? true : false);
     
     if (localStorage.getItem('id')) {
       fetch(`http://i6a204.p.ssafy.io:8000/api/member/code/${localStorage.getItem('id')}`)
@@ -55,12 +54,17 @@ const Header = (props) => {
     handleClose();
   }
 
-  // const logout = () => {
-  //   localStorage.removeItem('id');
-  //   setNickname('');
-  //   setMileage(0);
-  //   handleClose();
-  // }
+  const logout = () => {
+    localStorage.clear();
+    setNickname('');
+    setMileage(0);
+    setIsLogin(false);
+    handleClose();
+  }
+
+  const toMain = () => {
+    navigate('/web/');
+  }
 
   return (
     <OuterGrid
@@ -86,10 +90,15 @@ const Header = (props) => {
             >
               <MenuItem onClick={history}>마일리지 내역</MenuItem>
               <MenuItem onClick={withdraw}>마일리지 출금</MenuItem>
+              <MenuItem onClick={logout}>로그아웃</MenuItem>
             </Menu>
           </div>
         )
-        : <></> 
+        : (
+          <>
+            <CustomLoginBtn btnText="로그인" header={toMain}></CustomLoginBtn>
+          </>
+        )
       }
     </OuterGrid>
   );
