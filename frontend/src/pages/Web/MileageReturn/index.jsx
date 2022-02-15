@@ -101,7 +101,7 @@ const MileageReturn = (props) => {
   }
 
   const numberCheck = (v) => {
-    let num = v || 0
+    let num = v || ''
 
     if (!isFinite(num)) return
     num = num.toString()

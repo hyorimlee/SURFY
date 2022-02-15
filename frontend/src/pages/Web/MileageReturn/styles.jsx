@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 
   .coinImage {
     width: 90%;
+    margin: 60px 0;
   }
   
   .selectBtn {
