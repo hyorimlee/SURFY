@@ -15,7 +15,6 @@ const Map = (props) => {
   };
   const [center, setCenter] = useState({ lat: 37.5160119113, lng: 126.9056181532 });
   const [zoom, setZoom] = useState(11);
-  const [markerdata, setmarkerdata] = useState(null);
   const [target, setTarget] = useState(null);
   
   const [mapdata, setmapdata] = useState([]);
@@ -49,15 +48,14 @@ const Map = (props) => {
       >
         {mapdata.map((data, index) => (
           <Marker 
-          key = {data.id}
+          key = {index}
           id = {data.id}
           lat = {data.x}
           lng = {data.y}
           text = {data.name}
           op_time = {data.operating_time}
           color = "blue"
-          target_v = {data.id == target}
-          img_path = {data.img_path}
+          target_v = {index == target}
           place={data}
           />
         ))}
