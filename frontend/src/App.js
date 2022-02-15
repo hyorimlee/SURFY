@@ -1,13 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import Kiosk from './pages/Kiosk/';
 import Web from './pages/Web';
 import NotFound from './pages/NotFound/'
-// import Auth_SignIn from './pages/Auth/SignIn'
-// import Auth_SignUp from './pages/Auth/SignUp'
-// import UserInfo from './pages/Web/UserInfo'
-// import PasswordEdit from './pages/Web/PasswordEdit'
-// import WithDraw from './pages/Web/Withdraw'
 import Roulette from './pages/Web/Roulette'
 import MileageSave from './pages/Web/MileageSave';
 import MileageReturn from './pages/Web/MileageReturn';
