@@ -101,7 +101,11 @@ const MileageReturn = (props) => {
   }
 
   const numberCheck = (v) => {
+<<<<<<< HEAD
     let num = v || 0
+=======
+    let num = v || ''
+>>>>>>> feature/mileage
 
     if (!isFinite(num)) return
     num = num.toString()
@@ -122,6 +126,10 @@ const MileageReturn = (props) => {
           justifyContent="center"
           alignItems="center"
         >
+<<<<<<< HEAD
+=======
+          <img className="coinImage" alt="" src="/images/coin.gif"/>
+>>>>>>> feature/mileage
           <FormControl className={classes.margin}>
             <InputLabel htmlFor="demo-customized-select-native">은행</InputLabel>
             <NativeSelect
