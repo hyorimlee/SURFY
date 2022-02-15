@@ -14,7 +14,15 @@ const TextBoxList = (props) => {
 
   item.push(
     items.map((e, idx) => {
-      return <CustomGrid item xs={2} key={e.rtNm}>{e.rtNm}</CustomGrid>
+      return (
+        <CustomGrid
+          item
+          xs={2}
+          key={e.rtNm}
+        >
+          {e.rtNm}
+        </CustomGrid>
+      )
     })
   )
 
