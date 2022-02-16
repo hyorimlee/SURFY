@@ -14,7 +14,7 @@ function App() {
         <Route path="/web" element={<Web />} />
         <Route path="/web/mileagesave" element={<MileageSave />} />
         <Route path="/web/mileagereturn" element={<MileageReturn />} />
-        <Route path="/web/roulette" element={<Roulette />} />
+        <Route path="/web/roulette/:surveyId" element={<Roulette />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

@@ -7,7 +7,8 @@ const CustomChip = styled(Chip)`
 
   background-color: #ffffff !important;
   border-radius: 40px !important;
-
+  padding: 7px !important;
+  
   font-size: 3.5rem !important;
   font-weight: 500;
 `;

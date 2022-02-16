@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import Header from './Header/index'
 import Wrapper from './styles';
 

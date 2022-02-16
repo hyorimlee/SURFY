@@ -12,14 +12,12 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const app = express();
-const port = 8000;        // 포트 번호
+const port = 8000;
 const morgan = require('morgan');//for log
 const {stream} = require("./src/config/winston.config")
 const routes = require('./src/routes');
 
-
-
-// app.use(morgan("conbined",{stream}));
+app.use(morgan("combined",{stream}));
 // cors 오류 방지
 app.use(
     cors({
@@ -27,14 +25,15 @@ app.use(
         optionsSuccessStatus: 200,
     })
 );
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-
+app.use(express.static('./backend/src/images'))
 
 //routes
 app.use('/', routes)
 
-
+app.on('error',function() {});
 
 
 app.listen(port, () => {

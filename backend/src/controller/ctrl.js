@@ -97,7 +97,7 @@ const output = {
         catch(error){
             return res.json({error:error})
         }
-    }
+    },
 }
 
 

@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
+  .infowindow{
+    position: relative;
+    z-index: 999;
+    background-color: white;
+    font-style: italic;
+  }
   .pin {
     width: 30px;
     height: 30px;
@@ -89,6 +95,7 @@ const Wrapper = styled.div`
       transform: translateY(0) rotate(-45deg);
     }
   }
+  
 `;
 
 export default Wrapper;

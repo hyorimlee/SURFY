@@ -1,0 +1,18 @@
+version: '3'
+services:
+  server:
+    container_name: back
+    build: 
+      context: ./backend
+    ports:
+      - "8000:8000"
+  
+  front:
+    container_name: front
+    build:
+      context: ./frontend
+    restart: always
+    depends_on:
+      - server
+    ports:
+      - "80:80"

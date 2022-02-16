@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Button, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
 
 const CustomButton = styled(Button)`
-  background-color: #64AAFF !important;
+  background-color: rgb(139,222,255) !important;
   border-radius: 10px !important;
 `;
 

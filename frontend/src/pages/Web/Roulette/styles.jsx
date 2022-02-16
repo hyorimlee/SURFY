@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '@material-ui/core';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -32,5 +33,10 @@ const Wrapper = styled.div`
   }
 `;
 
+const CustomButton = styled(Button)`
+  background-color: #64AAFF !important;
+  border-radius: 10px !important;
+`;
 
+export { CustomButton };
 export default Wrapper;

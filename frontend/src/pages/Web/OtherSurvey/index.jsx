@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { List, ListItem, ListItemText } from '@material-ui/core/';
+import { List, ListItem, ListItemText, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@material-ui/core/';
 import { useNavigate } from 'react-router-dom';
 import SurveyFormList from '../../../components/SurveyForm/SurveyFormList';
 import Wrapper from './styles';
@@ -12,6 +12,7 @@ const OtherSurvey = () => {
   const [isNowSurvey, setIsNowSurvey] = useState(0);
   const [selectedSurveyId, setSelectedSurveyId] = useState('0');
   const [answers, setAnswers] = useState({});
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const query = { 'versus': 0, 'count': 100 }
@@ -41,19 +42,45 @@ const OtherSurvey = () => {
 
       setSurveys(items);
     })
-    console.log('inner')
   }, [])
   
   const clickedSurvey = (id) => () => {
-    setIsNowSurvey(1);
-    setSelectedSurveyId(id);
+    const query = { 'surveyId': id, 'memberId': localStorage.getItem('pk') };
+    const url = new URL('http://i6a204.p.ssafy.io:8000/api/survey/member');
+    Object.keys(query).forEach(q => {
+      url.searchParams.append(q, query[q]);
+    })
+    if (localStorage.getItem('pk') === null) {
+      setSelectedSurveyId(id);
+      setIsNowSurvey(1);
+    } else {
+      fetch(url)
+      .then(response => response.json())
+      .then(response => {
+        console.log('clickedSurvey', response)
+        if (response.surveyed === true) {
+          handleClickOpen();
+        } else {
+          setSelectedSurveyId(id);
+          setIsNowSurvey(1);
+        }
+      })
+    }
   }
 
   const endSurvey = () => {
+    navigate(`roulette/${selectedSurveyId}`);
     setIsNowSurvey(0);
     setSelectedSurveyId(0);
-    navigate('roulette');
   }
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 
   return (
@@ -73,6 +100,24 @@ const OtherSurvey = () => {
             </List>
           )
         }
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">이미 참여한 설문입니다.</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              이미 참여한 설문입니다.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary" autoFocus>
+              확인
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     </Wrapper>
   )

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
+import Auth from '../../components/Auth/index';
 
 const OuterGrid = styled(Grid)`
   height: 40px;
-  background-color: #64AAFF;
   background-color: rgb(139, 222, 255);
 
   .logoImage {
@@ -22,4 +22,8 @@ const OuterGrid = styled(Grid)`
   }
 `;
 
-export { OuterGrid };
+const CustomLoginBtn = styled(Auth)`
+  
+`;
+
+export { OuterGrid, CustomLoginBtn };

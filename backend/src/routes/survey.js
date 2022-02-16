@@ -4,8 +4,25 @@ const app = express.Router()
 const db = require('../models')
 const fs = require('fs');
 const {verifyToken} = require('../utils/jwt');
+const { getSurveyed } = require('./functions');
 
-
+app.get('/member',async(req,res)=>{
+    try {
+        const {surveyId,memberId} = req.query
+        const result = await db['roulette_result'].findOne({
+            where:{
+                fk_surveys:surveyId,
+                fk_members:memberId
+            }
+        })
+        if(result==null) return res.json({surveyed:false});
+        return res.json({surveyed:true});
+    } catch (error) {
+        console.log(error)
+        return res.status(400).json(error)
+        return res.status(400).json({msg:"error"})
+    }
+})
 
 //모든 설문조사 조회(랜덤 조회)
 app.get('/',async(req,res)=>{
@@ -66,6 +83,11 @@ app.get('/:surveyId',async(req,res)=>{
                     'remain',
                     'cnt'
                 ]
+            },{
+                model : db['roulette_result'],
+                attributes: [
+                    ["fk_members","memberId"],
+                ],
             }],
             where:{
                 id : surveyId,
@@ -75,16 +97,11 @@ app.get('/:surveyId',async(req,res)=>{
 
         for(let i = 0; i<result['questions'].length;i++){
             for(let k=0;k<result['questions'][i]['options'].length;k++){
-                
                 if(result['questions'][i]['options'][k]['img_path']){
                     result['questions'][i]['options'][k]['img_path'] = "exist"
                 }
             }
         }
-
-        
-
-
         return res.json(result)
     }
     catch(error){
@@ -127,10 +144,7 @@ app.get('/reward/:surveyId',async(req,res)=>{
             },
             attributes :[
                 'id',
-                'probability',
                 'reward',
-                'remain',
-                'cnt'
             ]
         })
         
@@ -152,15 +166,15 @@ app.get('/image/:optionId', async(req,res)=>{
         if(optionImage&&optionImage['img_path']){
             res.set('Content-Disposition',`inline; filename=profile.png`);
             res.set('Content-Type',`image/*`);
-            const file = fs.createReadStream(`./src/images/${optionImage['img_path']}`)
+            const file = fs.createReadStream(`${__dirname}/../images/${optionImage['img_path']}`)
             return file.pipe(res)
         }
         else{
-            return res.status(400).json({msg:"error"})
+            return res.status(400).json({msg:"no img"})
         }
     }
     catch(error){
-        return res.status(404).json({msg:"error"})
+        return res.status(404).json({msg:"error on get api/survey/image/:optionId"})
     }
 })
 
@@ -197,7 +211,7 @@ app.get('/option/:questionId',async(req,res)=>{
         return res.json(result)
     }
     catch{
-        return res.status(400).json({msg:"error"})
+        return res.status(400).json({msg:"error on /option/:questionId"})
     }
 })
 

@@ -8,7 +8,9 @@ const Wrapper = styled.div`
 `;
 
 const CustomGrid = styled(Grid)`
-  font-size: ${ props => props.children.length >= 5 ? "2rem" : "2.4rem" };
+  padding: 7px !important;
+  text-align: center !important;
+  font-size: ${ props => props.children.length >= 5 ? "1.7rem" : "1.9rem" };
 `;
 
 export { CustomGrid };

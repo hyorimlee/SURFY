@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import { CustomButton, CustomDialog, CustomDialogTitle, CustomDialogContent } from './styles';
 import kakao_img from '../../images/kakao_login.png';
 import google_img from '../../images/google_login.png';
 
-export default function AlertDialog() {
+export default function AlertDialog(props) {
+  const { logined, btnText, header } = props;
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -68,8 +69,6 @@ export default function AlertDialog() {
         return response.json();
       })
       .then(response => {
-        console.log(response);
-        
         if (!response) {
           fetch('http://i6a204.p.ssafy.io:8000/api/member/', {
             method: 'POST',
@@ -82,10 +81,18 @@ export default function AlertDialog() {
               'Content-Type': 'application/json'
             }
           })
+          .then(response => response.json())
           .then(response => {
-            return response.json()
+            localStorage.setItem('pk', response.id);
           })
-          .then(response => console.log(response))
+        } else {
+          localStorage.setItem('pk', response.id);
+        }
+        
+        if (logined) {
+          logined();
+        } else if (header) {
+          header();
         }
       })
   }
@@ -94,7 +101,7 @@ export default function AlertDialog() {
   return (
     <div>
       <CustomButton onClick={handleClickOpen}>
-        상품 받기
+        {btnText}
       </CustomButton>
       <CustomDialog
         open={open}
