@@ -7,10 +7,12 @@ import {
   InputBase, 
   FormControl, 
   NativeSelect,
-  Typography, 
+  InputAdornment,
+  TextField,
   makeStyles,
   withStyles } 
   from '@material-ui/core/';
+import ClearIcon from '@material-ui/icons/Clear';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogActions from '@material-ui/core/DialogActions';
 import { 
@@ -58,6 +60,13 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     margin: theme.spacing(1),
   },
+
+  root: {
+    '& > *': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
+  },
 }));
 
 const DialogActions = withStyles((theme) => ({
@@ -78,13 +87,26 @@ const MileageReturn = (props) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [number, setNumber] = React.useState('0');
+  const [buttonColor, setButtonColor] = useState('lightgrey');
+  const [amount, setAmount] = useState('');
   let [value, setValue] = React.useState('');
+
+  function onAmount(e) {
+    const re = /^[0-9\b]+$/;
+    if (e.target.value === "" || re.test(e.target.value)) {
+      setAmount(e.target.value);
+    }
+  }
+  
+  const handleChangeButtonColor = () => { 
+  };
 
   const handleChange = (event) => {
     setNumber(event.target.value);
   };
 
   const handleClickOpen = () => {
+    handleChangeButtonColor();
     setOpen(true);
   };
 
@@ -92,13 +114,17 @@ const MileageReturn = (props) => {
     setOpen(false);
   };
 
+  const resetInputField = () => {
+  }
+
   useEffect(() => {
     numberCheck(value)
-  }, [value])
+  }, [{value}])
 
   const onChange = e => {
     numberCheck(e.target.value)
   }
+
 
   const numberCheck = (v) => {
 
@@ -113,6 +139,7 @@ const MileageReturn = (props) => {
 
     setValue(num)
   }
+
 
   return (
     <Layout isLogin={isLogin}>
@@ -151,11 +178,27 @@ const MileageReturn = (props) => {
               placeholder="계좌번호 입력"
               value={value}
               onChange={onChange}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <ClearIcon 
+                      onClick={() => setAmount(() => '')}
+                    />
+                  </InputAdornment>
+                )
+              }}
+
             />
             <FormHelperText>필수 입력</FormHelperText>
           </FormControl>
-          <Button variant="contained" size="medium" className="btnClick" onClick={handleClickOpen}>
-            송금
+          <Button 
+            disabled={number === '0' || value === '' ? true : false}
+            grey={number === '0' || value === '' ? true.toString() : false.toString()}
+            variant="contained" 
+            size="medium" 
+            className="btnClick"
+            onClick={(handleClickOpen)}>
+            확인
           </Button>
         </Grid>     
       </Wrapper>
@@ -163,15 +206,36 @@ const MileageReturn = (props) => {
         open={open}
         onClose={handleClose}
       >
-        <CustomDialogTitle id="alert-dialog-title">알림</CustomDialogTitle>
+        <CustomDialogTitle id="alert-dialog-title">계좌송금</CustomDialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            송금이 완료되었습니다.
-          </Typography>
+          <TextField 
+            label="보낼금액(원)"
+            value={amount}
+            onChange={onAmount}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <ClearIcon 
+                    onClick={() => setAmount(() => '')}
+                  />
+                </InputAdornment>
+              )
+            }}
+          />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
-            확인
+          <Button 
+            autoFocus
+            disabled={amount === '' ? true : false}
+            grey={amount === '' ? true.toString() : false.toString()}
+            variant="contained"
+            size="medium"
+            onClick={handleClose}
+            style={{
+              backgroundColor: "#64AAFF"
+            }}
+          >
+            송금하기
           </Button>
         </DialogActions>
       </CustomDialog>
@@ -180,3 +244,4 @@ const MileageReturn = (props) => {
 }
 
 export default MileageReturn;
+
