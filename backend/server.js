@@ -17,6 +17,34 @@ const morgan = require('morgan');//for log
 const {stream} = require("./src/config/winston.config")
 const routes = require('./src/routes');
 
+// admin
+const AdminBro = require('admin-bro')
+const AdminBroExpress = require('@admin-bro/express')
+const AdminBroSequelize = require('admin-bro-sequelizejs')
+AdminBro.registerAdapter(AdminBroSequelize)
+const db = require('./src/models');
+
+const adminBro = new AdminBro({
+  databases: [db],
+})
+
+const {admin} = require('./src/config/config.json');
+
+const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
+  cookieName: 'adminBro',
+  cookiePassword: 'testtest',
+  authenticate: async (email, password) => {
+    if (admin.password === password && admin.email === email) {
+      return admin
+    }
+      return null
+    }, 
+  }, null, {
+      resave : false,
+      saveUninitialized: true,
+});
+app.use(adminBro.options.rootPath, router)
+
 app.use(morgan("combined",{stream}));
 // cors 오류 방지
 app.use(

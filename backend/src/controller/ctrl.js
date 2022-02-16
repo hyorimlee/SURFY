@@ -6,7 +6,7 @@ async function getCurrentWeather(lat, lon) {
     // 인코딩 인증키
     const Key = "eGOWobdvhiVbILb3e0GemxAvUi5XzyZE71h6PpAppFBb8hoZGxne6NW7vtUMMSAvwXx1Aib28LVoF6PdEHTgyQ%3D%3D";
     // 디코딩 인증키
-    const serviceKey = 'Agmjdb9CJQ53dFTE4ZgjsZx8zErTIab4IngbZMso8ZNGPZxt5cx0qPWuxgdrTP/rH0kP9Ro0fw03/Yqny+p2Sg=='
+    const serviceKey = 'eGOWobdvhiVbILb3e0GemxAvUi5XzyZE71h6PpAppFBb8hoZGxne6NW7vtUMMSAvwXx1Aib28LVoF6PdEHTgyQ=='
     var now = new Date();
 
     // 현재 날짜 가져오기
