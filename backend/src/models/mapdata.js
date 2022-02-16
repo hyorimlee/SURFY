@@ -17,11 +17,11 @@ module.exports = (sequelize, DataTypes) => {
     name : DataTypes.STRING,
     x : DataTypes.STRING,
     y : DataTypes.STRING,
-    number : DataTypes.STRING,
     operating_time : DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'mapdata',
+    timestamps: false,
   });
   return mapdata;
 };

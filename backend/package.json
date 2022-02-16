@@ -10,9 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@admin-bro/express": "^3.1.0",
+    "admin-bro": "^4.0.1",
+    "admin-bro-sequelizejs": "^0.5.1",
     "axios": "^0.24.0",
     "cors": "^2.8.5",
     "express": "^4.17.2",
+    "express-formidable": "^1.2.0",
+    "express-session": "^1.17.2",
     "fs": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
@@ -23,6 +28,7 @@
     "package.json": "^2.0.1",
     "sequelize": "^6.13.0",
     "sequelize-cli": "^6.4.1",
+    "tslib": "^2.3.1",
     "winston": "^3.4.0",
     "winston-daily-rotate-file": "^4.5.5"
   }
