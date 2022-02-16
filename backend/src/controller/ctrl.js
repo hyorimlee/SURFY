@@ -60,7 +60,7 @@ async function getStationByUid(arsId){
     const url = 'http://ws.bus.go.kr/api/rest/stationinfo/getStationByUid'
     const serviceKey = 'Agmjdb9CJQ53dFTE4ZgjsZx8zErTIab4IngbZMso8ZNGPZxt5cx0qPWuxgdrTP/rH0kP9Ro0fw03/Yqny+p2Sg=='
     const resultType = 'json'
-    const data = axios.get(url,{
+    const data = await axios.get(url,{
         params:{
             ServiceKey : serviceKey,
             arsId : arsId,
