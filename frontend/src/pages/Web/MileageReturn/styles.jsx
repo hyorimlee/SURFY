@@ -21,13 +21,18 @@ const Wrapper = styled.div`
 
   .inputLabel {
     width: 280px;
-    height: 41px; !important
+    height: 41px !important;
   }
 
   .btnClick {
     width: 280px;
     height: 41px;
-    background-color: #64AAFF;
+    margin-top: 8px;
+    background-color: ${props => {
+      console.log(props.children.props.children[3].props.grey)
+      return props.children.props.children[3].props.grey !== "true" ? "#64AAFF" : "lightgrey"
+      }
+    };
   }
 `;
 
@@ -40,6 +45,7 @@ const CustomDialog = styled(Dialog)`
 `;
 
 const CustomDialogTitle = styled(DialogTitle)`
+  text-align: center !important;
 `;
 
 
