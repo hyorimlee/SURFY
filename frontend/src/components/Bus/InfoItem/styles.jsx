@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   border-radius: 15px;
 
   & .header, .remain, .locate, .full {
-    width: 60px;
+    width: 100px;
     height: 29px;
     font-size: 0.8rem;
     text-align: center;
@@ -18,24 +18,24 @@ const Wrapper = styled.div`
   }
 
   & .remain {
-    width: 85px;
+    width: 120px;
     // margin-right: 30px;
     // margin-left: 30px;
   }
 
   & .locate {
-    width: 90px;
-    // margin-right: 50px;
-    // margin-left: 50px;
+    width: 150px;
+    margin-left: 10px;
+
   }
 
   & .full {
     width: 70px;
-    // margin-left: 50px;
+    margin-left: 30px;
 
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
   }
 `;
