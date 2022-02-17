@@ -56,7 +56,7 @@ app.use(
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(express.static('./backend/src/images'))
+app.use(express.static(__dirname + '/src/images'))
 
 //routes
 app.use('/', routes)
