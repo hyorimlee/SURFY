@@ -40,8 +40,8 @@ const VoteResult = (props) => {
       }
     },
     chart: {
-      width: 320,
-      height: 320,
+      width: 200,
+      height: 200,
     },
 
     exportMenu: {
@@ -63,7 +63,7 @@ const Vote = (props) => {
   const { voteData, onTime, surveyId } = props;
   
   const webUrl = `http://i6a204.p.ssafy.io/web/roulette/${surveyId}`;
-  const qrcodeSize = 200;
+  const qrcodeSize = 75;
 
   
   useEffect(() => {

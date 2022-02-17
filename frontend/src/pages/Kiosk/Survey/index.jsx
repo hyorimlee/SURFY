@@ -123,7 +123,7 @@ const Survey = () => {
             <>
               <div className="qstn" >
                 <p>{versusData.questions[0].content}</p>
-                <p>당신의 선택은?!</p>
+                {/* <p>당신의 선택은?!</p> */}
               </div>
               <CardComponent onVote={vote} surveyContent={[versusData.questions[0].options[0].id, versusData.questions[0].options[1].id]} image={image} />
             </>

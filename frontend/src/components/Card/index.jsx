@@ -6,7 +6,7 @@ export default function CardComponent(props) {
   const { onVote, surveyContent, image } = props;
 
   const vsStyle = {
-    fontSize: "112px",
+    fontSize: "34px",
     alignItems: "center",
     backgroundColor: "#303841",
     color: "white",
@@ -22,7 +22,7 @@ export default function CardComponent(props) {
       <Card>
         <CardMedia
           component="img"
-          height = "188"
+          height = "57"
           image = {image[0] || "/images/민초.JPG"}
           name={surveyContent[0]}
           onClick={onVote}
@@ -35,7 +35,7 @@ export default function CardComponent(props) {
       <Card>
         <CardMedia
           component="img"
-          height = "188"
+          height = "57"
           image = {image[1] || "/images/반민초.JPG"}
           name={surveyContent[1]}
           onClick={onVote}
