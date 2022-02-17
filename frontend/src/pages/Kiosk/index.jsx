@@ -8,9 +8,10 @@ import StationNameWeather from './StaionNameWeather/index';
 import Survey from './Survey/index';
 import Wrapper from './styles';
 
+const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
 
 const Kiosk = () => {
-  const [busStationId, setBusStationId] = useState('19005');
+  const [busStationId, setBusStationId] = useState(process.env.REACT_APP_BUS_STOP_ID);
   const [busStationInfo, setBusStationInfo] = useState([{stNm: ''}]);           // 버스 정류장 정보 (초기값: stNm - 정류장 이름, getX - 정류장 경도, getY - 정류장 위도)
   const [busSoon, setBusSoon] = useState([]);
 
@@ -19,7 +20,7 @@ const Kiosk = () => {
     const getBusStationInfo = setInterval(() => {
       axios({
         method: 'GET',
-        url: `http://i6a204.p.ssafy.io:8000/api/businfo/${busStationId}`,
+        url: `${SERVER_BASE_URL}/api/businfo/${busStationId}`,
       })
       .then((response) => {
         if (response.data) {
