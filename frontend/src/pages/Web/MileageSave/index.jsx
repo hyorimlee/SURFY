@@ -32,7 +32,7 @@ const MileageSave = (props) => {
           const date = new Date(res.timestamp);
           items.push(
             <ListItem key={res.id} className="breakDown">
-              <ListItemText primary={`${res.amount} 마일리지 ${res.mileage >= 0 ? '적립' : '출금'}`}/>
+              <ListItemText primary={`${res.amount >= 0 ? res.amount : -res.amount} 마일리지 ${res.amount >= 0 ? '적립' : '출금'}`}/>
               <ListItemText primary={`${date.getFullYear()}년 ${date.getMonth()}월 ${date.getDate()}일`}/>
             </ListItem>
           );

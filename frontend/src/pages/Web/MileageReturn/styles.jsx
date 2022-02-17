@@ -28,11 +28,7 @@ const Wrapper = styled.div`
     width: 280px;
     height: 41px;
     margin-top: 8px;
-    background-color: ${props => {
-      console.log(props.children.props.children[3].props.grey)
-      return props.children.props.children[3].props.grey !== "true" ? "#64AAFF" : "lightgrey"
-      }
-    };
+    background-color: ${props => props.children.props.children[3].props.grey !== "true" ? "#64AAFF" : "lightgrey"};
   }
 `;
 
