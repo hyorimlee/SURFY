@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import { Grid, CircularProgress } from '@material-ui/core';
 
 const CustomGrid = styled(Grid)`
-  height: 300px;
+  height: 130px;
 
   .qstn {
     color: white;
-    font-size: 2.5rem;
+    font-size: 1rem;
     margin: 10px 0;
     text-align: center;
   }

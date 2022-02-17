@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 22vw;
-  height: 6vh;
+  width: 35px;
+  height: 20px;
 
   display: flex;
   flex-direction: row;
@@ -11,11 +11,11 @@ const Wrapper = styled.div`
 `;
 
 const WeatherIcon = styled.div`
-  font-size: 5rem;
+  font-size: 1.5rem;
 `;
 
 const WeatherTemperature = styled.div`
-  font-size: 2.5rem;
+  font-size: 0.8rem;
   
   display: flex;
   flex-direction: column;
