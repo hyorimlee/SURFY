@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText, Button, Grid } from '@material-ui/core/';
 import Layout from '../../../layout/layout';
-import Wrapper, { CustomGrid } from './styles';
+import Wrapper, { CustomGrid, CustomListItem } from './styles';
 
 const MileageSave = (props) => {
   const [isLogin, setIsLogin] = useState(localStorage.getItem('id') ? true : false);
@@ -29,13 +29,18 @@ const MileageSave = (props) => {
         let items = [];
 
         response.forEach(res => {
-          const date = new Date(res.timestamp);
-          items.push(
-            <ListItem key={res.id} className="breakDown">
-              <ListItemText primary={`${res.amount >= 0 ? res.amount : -res.amount} 마일리지 ${res.amount >= 0 ? '적립' : '출금'}`}/>
-              <ListItemText primary={`${date.getFullYear()}년 ${date.getMonth()}월 ${date.getDate()}일`}/>
-            </ListItem>
-          );
+          if (res.amount !== 0) {
+            const date = new Date(res.timestamp);
+            items.push(
+              <CustomListItem key={res.id} className="breakDown">
+                <ListItemText className="title" primary={`[${res.amount >= 0 ? '적립' : '출금'}]`}/>
+                <div className="content">
+                  <ListItemText primary={`${res.amount >= 0 ? res.amount : -res.amount} 마일리지`} color={res.amount > 0 ? '#c8c8ff' : '#e9b1f3'}/>
+                  <ListItemText primary={`${date.getFullYear()}년 ${date.getMonth()}월 ${date.getDate()}일`}/>
+                </div>
+              </CustomListItem>
+            );
+          }
         })
 
         setMileageHistory(items);

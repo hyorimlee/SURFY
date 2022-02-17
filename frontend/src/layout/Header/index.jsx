@@ -60,6 +60,7 @@ const Header = (props) => {
     setMileage(0);
     setIsLogin(false);
     handleClose();
+    navigate('/web/');
   }
 
   const toMain = () => {
