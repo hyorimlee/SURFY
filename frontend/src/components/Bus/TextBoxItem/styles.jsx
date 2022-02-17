@@ -2,14 +2,13 @@ import styled from 'styled-components';
 import { Chip } from '@material-ui/core';
 
 const CustomChip = styled(Chip)`
-  width: 420px;
-  height: 100px !important;
+  width: 35vw;
+  height: 6vh !important;
 
   background-color: #ffffff !important;
   border-radius: 40px !important;
-  padding: 7px !important;
   
-  font-size: 3.5rem !important;
+  font-size: 3.2rem !important;
   font-weight: 500;
 `;
 
