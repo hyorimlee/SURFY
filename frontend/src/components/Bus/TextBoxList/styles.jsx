@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 
 const Wrapper = styled.div`
-  width: 100%;
+  width: 100vw;
   color: black;
   padding: 30px;
 `;
