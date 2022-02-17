@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
+import { Button, Dialog, DialogTitle, DialogContent, TextField } from '@material-ui/core';
 
 const CustomButton = styled(Button)`
   background-color: rgb(139,222,255) !important;
@@ -16,12 +16,44 @@ const CustomDialog = styled(Dialog)`
 `;
 
 const CustomDialogTitle = styled(DialogTitle)`
+  text-align: center;
 `;
 
 const CustomDialogContent = styled(DialogContent)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+
+  & img {
+    width: 97%;
+  }
 `;
 
-export { CustomButton, CustomDialog, CustomDialogTitle, CustomDialogContent };
+const TestLoginBox = styled.div`
+  width: 100%;
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > p {
+    margin-top: 15px;
+    font-size: 1.25rem;
+  }
+`;
+
+const CustomTextField = styled(TextField)`
+  width: 92%;
+  padding: 10px 0 !important;
+`;
+
+const TestLoginBtn = styled(Button)`
+  width: 92%;
+  height: 50px;
+  margin-top: 10px !important;
+  border-radius: 10px !important;
+`
+
+export { CustomButton, CustomDialog, CustomDialogTitle, CustomDialogContent, TestLoginBox, TestLoginBtn, CustomTextField };
