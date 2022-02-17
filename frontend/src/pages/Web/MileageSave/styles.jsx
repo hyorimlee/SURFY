@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Grid } from '@material-ui/core';
+import { Grid, ListItem } from '@material-ui/core';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -43,5 +43,31 @@ const CustomGrid = styled(Grid)`
     text-align: center;
   }
 `
-export { CustomGrid };
+
+const CustomListItem = styled(ListItem)`
+  background-color: ${props => props.children[1].props.children[0].props.color} !important;
+  border-radius: 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between !important;
+  align-items: flex-start !important;
+
+  & .title > span {
+    font-size: 1.25rem !important;
+    font-weight: 500 !important;
+  }
+
+  & .content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    
+    & > div {
+      text-align: center;
+    }
+  }
+`;
+
+export { CustomGrid, CustomListItem };
 export default Wrapper;

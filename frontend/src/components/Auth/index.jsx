@@ -115,6 +115,7 @@ export default function AlertDialog(props) {
     fetch(url).then(response => response.json()).then(response => {
       localStorage.setItem('pk', response.member_pk);
       localStorage.setItem('id', testID);
+      CustomLogin(testID);
       handleClose();
       navigate('/web/');
     });
