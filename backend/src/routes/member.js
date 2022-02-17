@@ -5,6 +5,19 @@ const db = require('../models')
 const fs = require('fs');
 const {verifyToken} = require('../utils/jwt');
 // const { DATE } = require('sequelize/dist');
+app.get('/login',async(req,res)=>{
+    try {
+        const {memberCode,password} = req.query
+        const result = await db['member'].findOne({
+            where:{'member_code':memberCode},
+        })
+        if(result.password == password) return res.json({status:"true",member_pk:result.id})
+        return res.json({status:"false",member_pk:result.id})
+    } catch (error) {
+        console.log(error)
+        return res.status(400,json({mas:error}))
+    }
+})
 app.get('/survey/:memberId',async(req,res)=>{
     try {
         const {memberId} = req.params
