@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
-import { CustomButton, CustomDialog, CustomDialogTitle, CustomDialogContent } from './styles';
+import { CustomButton, CustomDialog, CustomDialogTitle, CustomDialogContent, TestLoginBox, TestLoginBtn, CustomTextField } from './styles';
 import kakao_img from '../../images/kakao_login.png';
 import google_img from '../../images/google_login.png';
 
+const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
+
 export default function AlertDialog(props) {
   const { logined, btnText, header } = props;
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [isTest, setIsTest] = useState(false);
+  const [testID, setTestID] = useState('');
+  const [testPWD, setTestPWD] = useState('');
+  let navigate = useNavigate();
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setIsTest(false);
     setOpen(false);
   };
 
@@ -97,6 +105,21 @@ export default function AlertDialog(props) {
       })
   }
 
+  const testLogin = () => {
+    const query = { 'memberCode': testID, 'password': testPWD };
+    const url = new URL(`${SERVER_BASE_URL}/api/member/login`);
+    Object.keys(query).forEach(k => {
+      url.searchParams.append(k, query[k]);
+    })
+
+    fetch(url).then(response => response.json()).then(response => {
+      localStorage.setItem('pk', response.member_pk);
+      localStorage.setItem('id', testID);
+      handleClose();
+      navigate('/web/');
+    });
+  }
+
 
   return (
     <div>
@@ -111,6 +134,19 @@ export default function AlertDialog(props) {
         <CustomDialogContent>
           <img src={google_img} alt="구글 로그인" onClick={googleLogin} />
           <img src={kakao_img} alt="카카오 로그인" onClick={kakaoLogin} />
+          {
+            isTest
+            ?
+              (
+                <TestLoginBox>
+                  <p>테스트 계정 로그인</p>
+                  <CustomTextField id="outlined-basic" label="아이디" variant="outlined" value={testID} onChange={(e) => setTestID(e.target.value)} />
+                  <CustomTextField id="filled-password-input" label="비밀번호" type="password" variant="outlined" value={testPWD} onChange={(e) => setTestPWD(e.target.value)} />
+                  <TestLoginBtn variant="contained" color="primary" onClick={testLogin}>로그인</TestLoginBtn>
+                </TestLoginBox>
+              )
+            : <TestLoginBtn variant="contained" color="primary" onClick={() => setIsTest(true)}>테스트 계정 로그인</TestLoginBtn>
+          }
         </CustomDialogContent>
       </CustomDialog>
     </div>

@@ -145,7 +145,7 @@ const MileageReturn = (props) => {
       fetch(`${SERVER_BASE_URL}/api/mileage/${localStorage.getItem('pk')}`).then(response => response.json())
       .then(response => {
         console.log(response);
-        if (response >= mileage) {
+        if (response >= mileage && response > 0) {
           fetch(`${SERVER_BASE_URL}/api/mileage/refund`, {
             method: 'POST',
             headers: {
