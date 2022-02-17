@@ -73,10 +73,10 @@ app.post('/save',async(req,res)=>{
 
 app.post('/refund',async(req,res)=>{
     try {
-        let {amount, memberId} = req.body
+        let {amount, memberId,accountNumber,bank} = req.body
         let mileage = Number(await getMileage(memberId));
         const record = await enrollMileage(memberId,-amount,mileage,0);
-        return res.json({msg:"success",mileage:record.mileage})
+        return res.json({msg:"success",state:`${amount} is transfered to [${bank}]${accountNumber}`})
     } catch (error) {
         console.log(error)
         return res.status(400).json({msg:"error"})
