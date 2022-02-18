@@ -19,11 +19,11 @@ const VoteResult = (props) => {
         },
         dataLabels: {
           callout: {
-            lineWidth: 5,
+            lineWidth: 3,
           },
           pieSeriesName: {
             useSeriesColor: false,
-            fontSize: 10,
+            fontSize: 25,
             color: '#ffffff',
           }
         },
@@ -40,8 +40,8 @@ const VoteResult = (props) => {
       }
     },
     chart: {
-      width: 250,
-      height: 250,
+      width: 320,
+      height: 320,
     },
 
     exportMenu: {
@@ -60,10 +60,10 @@ const VoteResult = (props) => {
 }
 
 const Vote = (props) => {
-  const { voteData, onTime, surveyId } = props;
+  const { surveyId, voteData, onTime } = props;
   
-  const webUrl = `http://i6a204.p.ssafy.io/web/roulette/${surveyId}`;
-  const qrcodeSize = 120;
+  const webUrl = `http://i6a204.p.ssafy.io:3000/web/roulette/${surveyId}`;
+  const qrcodeSize = 200;
 
   
   useEffect(() => {

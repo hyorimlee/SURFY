@@ -2,40 +2,41 @@ import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 
 const Wrapper = styled.div`
-  height: 40px;
+  height: 96px;
   margin: 0 0 10px 0;
   background-color: #ffffff;
   border-radius: 15px;
 
   & .header, .remain, .locate, .full {
-    width: 70px;
-    height: 29px;
-    font-size: 1.2rem;
+    width: 200px;
+    height: 96px;
+    font-size: 2.5rem;
     text-align: center;
-    line-height: 32px;
+    line-height: 100px;
     background-color: #ffffff;
     border-radius: 15px;
+    // margin-left: 30px;
   }
 
   & .remain {
-    width: 100px;
+    width: 220px;
     margin-right: 30px;
     margin-left: 40px;
   }
 
   & .locate {
-    width: 100px;
-    margin-left: 10px;
-
+    width: 220px;
+    margin-right: 50px;
+    margin-left: 50px;
   }
 
   & .full {
-    width: 70px;
-    margin-left: 40px;
+    width: 180px;
+    margin-left: 36px;
 
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
   }
 `;
@@ -45,8 +46,8 @@ const CustomGrid = styled(Grid)`
 `;
 
 const IsFullImg = styled.div`
-  width: 15px;
-  height: 15px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   box-shadow: 1.5px 1.5px 3px #777777;
   background-color: ${props => props.color ? '#325EFB' : '#FB3232'}
