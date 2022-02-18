@@ -1,21 +1,21 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  width: 35px;
-  height: 20px;
+  width: 220px;
+  height: 130px;
 
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
 `;
 
 const WeatherIcon = styled.div`
-  font-size: 1.5rem;
+  font-size: 5rem;
 `;
 
 const WeatherTemperature = styled.div`
-  font-size: 0.8rem;
+  font-size: 2.5rem;
   
   display: flex;
   flex-direction: column;

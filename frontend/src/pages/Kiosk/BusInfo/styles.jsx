@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   border-top: 2px solid #bbbbbb;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  padding-top: 5px;
+  padding-top: 15px;
 
   display: flex;
   flex-direction: column;
@@ -18,9 +18,9 @@ const Wrapper = styled.div`
 
 const InfoHeader = styled.div`
   width: 100%;
-  font-size: 1.2rem;
+  font-size: 2.5rem;
   color: white;
-  margin: 0 0 10px 0;
+  margin: 10px 0 20px 0;
 
   display: flex;
   flex-direction: row;
@@ -28,13 +28,13 @@ const InfoHeader = styled.div`
   align-items: center;
 
   & p {
-    padding: 0 5px;
+    padding: 0 30px;
   }
 `;
 
 const InfoContent = styled.div`
   width: 100%;
-  height: 300px;
+  height: 640px;
 `;
 
 export { InfoHeader, InfoContent }

@@ -2,15 +2,13 @@ import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 
 const Wrapper = styled.div`
-  width: 280px !important;
+  width: 100%;
   color: black;
-  padding: 5px;
+  padding: 30px;
 `;
 
 const CustomGrid = styled(Grid)`
-  padding: 2px !important;
-  text-align: center !important;
-  font-size: ${ props => props.children.length >= 5 ? "1rem" : "1.2rem" };
+  font-size: ${ props => props.children.length >= 5 ? "2rem" : "2.4rem" };
 `;
 
 export { CustomGrid };
