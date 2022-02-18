@@ -17,7 +17,7 @@ const TextBoxList = (props) => {
       return (
         <CustomGrid
           item
-          xs={2}
+          xs={3}
           key={e.rtNm}
         >
           {e.rtNm}
@@ -30,7 +30,7 @@ const TextBoxList = (props) => {
     <Wrapper>
       <Grid
         container
-        spacing={3}
+        spacing={2}
         direction="row"
         justifyContent="flex-start"
         alignItems="center"
