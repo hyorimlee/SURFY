@@ -36,7 +36,7 @@ const MileageSave = (props) => {
                 <ListItemText className="title" primary={`[${res.amount >= 0 ? '적립' : '출금'}]`}/>
                 <div className="content">
                   <ListItemText primary={`${res.amount >= 0 ? res.amount : -res.amount} 마일리지`} color={res.amount > 0 ? '#c8c8ff' : '#e9b1f3'}/>
-                  <ListItemText primary={`${date.getFullYear()}년 ${date.getMonth()}월 ${date.getDate()}일`}/>
+                  <ListItemText primary={`${date.getFullYear()}년 ${date.getMonth()+1}월 ${date.getDate()}일`}/>
                 </div>
               </CustomListItem>
             );
