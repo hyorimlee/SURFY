@@ -2,15 +2,15 @@ import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 
 const Wrapper = styled.div`
-  height: 29px;
+  height: 40px;
   margin: 0 0 10px 0;
   background-color: #ffffff;
   border-radius: 15px;
 
   & .header, .remain, .locate, .full {
-    width: 100px;
+    width: 70px;
     height: 29px;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     text-align: center;
     line-height: 32px;
     background-color: #ffffff;
@@ -18,20 +18,20 @@ const Wrapper = styled.div`
   }
 
   & .remain {
-    width: 120px;
-    // margin-right: 30px;
-    // margin-left: 30px;
+    width: 100px;
+    margin-right: 30px;
+    margin-left: 40px;
   }
 
   & .locate {
-    width: 150px;
+    width: 100px;
     margin-left: 10px;
 
   }
 
   & .full {
     width: 70px;
-    margin-left: 30px;
+    margin-left: 40px;
 
     display: flex;
     flex-direction: row;

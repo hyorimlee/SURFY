@@ -18,7 +18,7 @@ const Wrapper = styled.div`
 
 const InfoHeader = styled.div`
   width: 100%;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   color: white;
   margin: 0 0 10px 0;
 
@@ -34,7 +34,7 @@ const InfoHeader = styled.div`
 
 const InfoContent = styled.div`
   width: 100%;
-  height: 230px;
+  height: 300px;
 `;
 
 export { InfoHeader, InfoContent }

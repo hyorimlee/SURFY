@@ -22,7 +22,7 @@ export default function CardComponent(props) {
       <Card>
         <CardMedia
           component="img"
-          height = "70"
+          height = "130"
           image = {image[0] || "/images/민초.JPG"}
           name={surveyContent[0]}
           onClick={onVote}
@@ -35,7 +35,7 @@ export default function CardComponent(props) {
       <Card>
         <CardMedia
           component="img"
-          height = "70"
+          height = "130"
           image = {image[1] || "/images/반민초.JPG"}
           name={surveyContent[1]}
           onClick={onVote}
